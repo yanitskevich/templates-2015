@@ -1,0 +1,9 @@
+<div class="article-item">
+	<div class="article-item-inner">
+		{if sizeof($content.images)>0}<a href="{$item.vlink}">{foreach from=$content.images item="im"}<img src="/{image src=$im.path height=$GLOBS.img_height|default:250 folder=$GLOBS.img_height|default:"250" crop=true}" alt="{$im.name}" />{break}{/foreach}</a>{/if}
+		<div class="caption">
+			<h5><a href="{$item.vlink}">{$content.name}</a></h5>
+			{if $content.annotate}<p class="description">{$content.annotate}</p>{else if $content.text}{$content.text|strip_tags|truncate:300}{/if}
+		</div>
+	</div>
+</div>

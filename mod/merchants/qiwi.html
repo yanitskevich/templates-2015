@@ -1,0 +1,38 @@
+<a class="btn btn-large fancybox" href="#QiwiPayForm{$order_id}" style="margin-right:5px;" title="Оплатить из QIWI кошелька">
+<img src="/media0/img/merchants/QIWI.png" alt="QIWI" width="150" />
+</a>
+<div class="hide" id="QiwiPayForm{$order_id}">
+<div style="margin:0 auto; padding:5px; width:350px; border:1px solid #ddd; background:#fff; border-radius: 7px; -webkit-border-radius: 7px; -moz-border-radius: 7px; font:normal 14px/14px Geneva,Verdana,Arial,Helvetica,Tahoma,sans-serif;">
+	<form action="https://w.qiwi.com/order/external/create.action" method="POST" accept-charset="UTF-8">
+	 	<!-- {$summ}/{$GLOBS.allcurrencies.RUB.course} -->
+		<input type="hidden" name="from" value="{$GLOBS.merchants.qiwi.shop_id}"/>
+		<input type="hidden" name="lifetime" value="1080.0"/>
+    	<input type="hidden" name="txn_id" value="{$order_id}"/>
+    	<input type="hidden" name="summ" value="{$summ|price:false:false}" />
+    	<input type="hidden" name="currency" value="{$GLOBS.currency.code|replace:'RUR':'RUB'}" />
+    	<input type="hidden" name="successUrl" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" />
+    	<input type="hidden" name="failUrl" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" />
+
+		<p style="text-align:center; color:#006699; padding:20px 0px; background:url(https://ishop.qiwi.ru/img/button/logo_31x50.jpg) no-repeat 10px 50%;">Выставить счёт за покупку</p>
+		<table style="border-collapse:collapse;width:100%;">
+			<tr style="background:#f1f5fa;">
+				<td style="color:#a3b52d; width:45%; text-align:center; padding:10px 0px;">Мобильный телефон<br/><small>(пример: +79057772233)</small></td>
+				<td style="padding:10px">
+					<input type="text" name="to" style="width:155px; border: 1px inset #555;" placeholder="+79057772233" value="{$GLOBS.userdata.phone|regex_replace:'/^8/':'+7'|regex_replace:'/[^\d]+/':''}" />
+    			</td>
+			</tr>
+		</table>
+		<p style="text-align:center;"><input type="submit" value="Выставить счёт" style=" padding:10px 0;border:none; background:url(https://ishop.qiwi.ru/img/button/superBtBlue.jpg) no-repeat 0 50%; color:#fff; width:300px;"/></p>
+	</form>
+</div>
+<!--form method="POST" action="https://w.qiwi.ru/setInetBill_utf.do" target="iframeName">
+	<input type="hidden" name="from" value="{$GLOBS.merchants.qiwi.id}">
+	<input name="to" value="" placeholder="Ваш номер телефона">
+	<input type="hidden" name="summ" value="{$summ}">
+	<input type="hidden" name="txn_id" value="{$order_id}">
+	<input type="hidden" name="lifetime" value="720"/>
+	{ if $GLOBS.merchants.qiwi.com }<input  type="hidden" name="com" value="{ $GLOBS.merchants.qiwi.com }">{ /if }
+	<input type="hidden" name="check_agt" value="{$GLOBS.merchants.qiwi.check_agt}">
+	<button type=submit class="btn">{ $GLOBS.merchants.qiwi.btn|default:'Оплатить через QIWI' }</button>
+</form-->
+</div>

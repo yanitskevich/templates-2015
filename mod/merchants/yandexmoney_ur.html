@@ -1,0 +1,143 @@
+{*
+<!-- Значения всех полей условны и приведены исключительно для примера --> 
+<form action="https://money.yandex.ru/eshop.xml" method="post"> 
+  
+<!-- Обязательные поля --> 
+<input name="shopId" value="1234" type="hidden"/> 
+<input name="scid" value="4321" type="hidden"/> 
+<input name="sum" value="100.50" type="hidden"> 
+<input name="customerNumber" value="abc000" type="hidden"/> 
+  
+<!-- Необязательные поля --> 
+<input name="shopArticleId" value="567890" type="hidden"/> 
+<input name="paymentType" value="AC" type="hidden"/> 
+<input name="orderNumber" value="abc1111111" type="hidden"/> 
+<input name="cps_phone" value="79110000000" type="hidden"/> 
+<input name="cps_email" value="user@domain.com" type="hidden"/> 
+  
+<input type="submit" value="Заплатить"/> 
+</form>
+*}
+{if $GLOBS.currency.code neq 'RUR' && $GLOBS.currency.code neq 'RUB'}
+{assign var=summ value=ceil($summ/$GLOBS.allcurrencies.RUB.course)}
+{/if}
+{if $GLOBS.merchants.yandexmoney_ur['PC']}
+<form action="https://{if $GLOBS.merchants.yandexmoney_ur['test'] eq 'true'}demomoney{else}money{/if}.yandex.ru/eshop.xml" method="post" class="payment-form">
+<input type="hidden" name="cms_name" value="difocus">
+<input name="shopId" value="{$GLOBS.merchants.yandexmoney_ur.uid}" type="hidden"/> 
+<input name="scid" value="{$GLOBS.merchants.yandexmoney_ur.scid}" type="hidden"/>
+<input name="sum" value="{$summ}" type="hidden"> 
+<input name="customerNumber" value="{if $GLOBS.userdata.login neq 'guest'}{$GLOBS.userdata.login}{else}{$order_id}{/if}" type="hidden"/>
+
+<input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden"/>
+<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden"/> 
+
+<input name="paymentType" value="PC" type="hidden"/> 
+<input name="orderNumber" value="{$order_id}" type="hidden"/>
+<input name="cps_phone" value="{$order_content.phone}" type="hidden"/> 
+<input name="cps_email" value="{$order_content.email}" type="hidden"/>
+<input name="orderDetails" value="{$GLOBS.SITENAME|escape}: {$GLOBS.merchants.yandexmoney_ur.serviceName|default:'Оплата заказа №'}{$order_id}" type="hidden"/>
+<button type="submit" name="submit-button" class="btn btn-large" title="Оплатить через Яндекс.Деньги" rel="tooltip"><img src="/media0/img/merchants/Yandex.png" width="150" /></button>
+</form>
+{/if}
+
+{if $GLOBS.merchants.yandexmoney_ur['AC']}
+<form action="https://{if $GLOBS.merchants.yandexmoney_ur['test'] eq 'true'}demomoney{else}money{/if}.yandex.ru/eshop.xml" method="post" class="payment-form">
+<input type="hidden" name="cms_name" value="difocus">
+<input name="shopId" value="{$GLOBS.merchants.yandexmoney_ur.uid}" type="hidden"/> 
+<input name="scid" value="{$GLOBS.merchants.yandexmoney_ur.scid}" type="hidden"/> 
+<input name="sum" value="{$summ}" type="hidden"> 
+<input name="customerNumber" value="{if $GLOBS.userdata.login neq 'guest'}{$GLOBS.userdata.login}{else}{$order_id}{/if}" type="hidden"/>
+
+<input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
+<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
+
+<input name="paymentType" value="AC" type="hidden"/> 
+<input name="orderNumber" value="{$order_id}" type="hidden"/>
+<input name="cps_phone" value="{$order_content.phone}" type="hidden"/> 
+<input name="cps_email" value="{$order_content.email}" type="hidden"/>
+<input name="orderDetails" value="{$GLOBS.SITENAME|escape}: {$GLOBS.merchants.yandexmoney_ur.serviceName|default:'Оплата заказа №'}{$order_id}" type="hidden"/>
+<button type="submit" name="submit-button" class="btn btn-large" title="Оплатить через Visa или MasterCard" rel="tooltip"><img src="/media0/img/merchants/VisaMasterYandex.png" alt="Visa и MasterCard" width="150" /></button>
+</form>
+{/if}
+
+{if $GLOBS.merchants.yandexmoney_ur['MC']}
+<!-- Со счета мобильного телефона -->
+<form action="https://{if $GLOBS.merchants.yandexmoney_ur['test'] eq 'true'}demomoney{else}money{/if}.yandex.ru/eshop.xml" method="post" class="payment-form">
+<input type="hidden" name="cms_name" value="difocus">
+<input name="shopId" value="{$GLOBS.merchants.yandexmoney_ur.uid}" type="hidden"/> 
+<input name="scid" value="{$GLOBS.merchants.yandexmoney_ur.scid}" type="hidden"/> 
+<input name="sum" value="{$summ}" type="hidden"> 
+<input name="customerNumber" value="{if $GLOBS.userdata.login neq 'guest'}{$GLOBS.userdata.login}{else}{$order_id}{/if}" type="hidden"/>
+
+<input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
+<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
+
+<input name="paymentType" value="MC" type="hidden"/> 
+<input name="orderNumber" value="{$order_id}" type="hidden"/>
+<input name="cps_phone" value="{$order_content.phone}" type="hidden"/> 
+<input name="cps_email" value="{$order_content.email}" type="hidden"/>
+<input name="orderDetails" value="{$GLOBS.SITENAME|escape}: {$GLOBS.merchants.yandexmoney_ur.serviceName|default:'Оплата заказа №'}{$order_id}" type="hidden"/>
+<button type="submit" name="submit-button" class="btn btn-large" title="Со счета мобильного телефона" rel="tooltip"><img src="/media0/img/merchants/Mobile.png" width="150" /></button>
+</form>
+{/if}
+{if $GLOBS.merchants.yandexmoney_ur['GP']}
+<!-- Наличными через кассы и терминалы -->
+<form action="https://{if $GLOBS.merchants.yandexmoney_ur['test'] eq 'true'}demomoney{else}money{/if}.yandex.ru/eshop.xml" method="post" class="payment-form">
+<input type="hidden" name="cms_name" value="difocus">
+<input name="shopId" value="{$GLOBS.merchants.yandexmoney_ur.uid}" type="hidden"/> 
+<input name="scid" value="{$GLOBS.merchants.yandexmoney_ur.scid}" type="hidden"/> 
+<input name="sum" value="{$summ}" type="hidden"> 
+<input name="customerNumber" value="{if $GLOBS.userdata.login neq 'guest'}{$GLOBS.userdata.login}{else}{$order_id}{/if}" type="hidden"/>
+
+<input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
+<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/cabinet/history.html" type="hidden"/> 
+
+<input name="paymentType" value="GP" type="hidden"/> 
+<input name="orderNumber" value="{$order_id}" type="hidden"/>
+<input name="cps_phone" value="{$order_content.phone}" type="hidden"/> 
+<input name="cps_email" value="{$order_content.email}" type="hidden"/>
+<input name="orderDetails" value="{$GLOBS.SITENAME|escape}: {$GLOBS.merchants.yandexmoney_ur.serviceName|default:'Оплата заказа №'}{$order_id}" type="hidden"/>
+<button type="submit" name="submit-button" class="btn btn-large" title="Наличными через кассы и терминалы" rel="tooltip"><img src="/media0/img/merchants/Kassa.png" width="150" /></button>
+</form>
+{/if}
+{if $GLOBS.merchants.yandexmoney_ur['WM']}
+<!-- Из кошелька в системе WebMoney -->
+<form action="https://{if $GLOBS.merchants.yandexmoney_ur['test'] eq 'true'}demomoney{else}money{/if}.yandex.ru/eshop.xml" method="post" class="payment-form">
+<input type="hidden" name="cms_name" value="difocus">
+<input name="shopId" value="{$GLOBS.merchants.yandexmoney_ur.uid}" type="hidden"/> 
+<input name="scid" value="{$GLOBS.merchants.yandexmoney_ur.scid}" type="hidden"/> 
+<input name="sum" value="{$summ}" type="hidden"> 
+<input name="customerNumber" value="{if $GLOBS.userdata.login neq 'guest'}{$GLOBS.userdata.login}{else}{$order_id}{/if}" type="hidden"/>
+
+<input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
+<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
+
+<input name="paymentType" value="WM" type="hidden"/> 
+<input name="orderNumber" value="{$order_id}" type="hidden"/>
+<input name="cps_phone" value="{$order_content.phone}" type="hidden"/> 
+<input name="cps_email" value="{$order_content.email}" type="hidden"/>
+<input name="orderDetails" value="{$GLOBS.SITENAME|escape}: {$GLOBS.merchants.yandexmoney_ur.serviceName|default:'Оплата заказа №'}{$order_id}" type="hidden"/>
+<button type="submit" name="submit-button" class="btn btn-large" title="Из кошелька в системе WebMoney" rel="tooltip"><img src="/media0/img/merchants/Webmoney.png" alt="Webmoney" width="150" /></button>
+</form>
+{/if}
+{if $GLOBS.merchants.yandexmoney_ur['SB']}
+<!-- Через Сбербанк Онлайн -->
+<form action="https://{if $GLOBS.merchants.yandexmoney_ur['test'] eq 'true'}demomoney{else}money{/if}.yandex.ru/eshop.xml" method="post" class="payment-form">
+<input type="hidden" name="cms_name" value="difocus">
+<input name="shopId" value="{$GLOBS.merchants.yandexmoney_ur.uid}" type="hidden"/> 
+<input name="scid" value="{$GLOBS.merchants.yandexmoney_ur.scid}" type="hidden"/> 
+<input name="sum" value="{$summ}" type="hidden"> 
+<input name="customerNumber" value="{if $GLOBS.userdata.login neq 'guest'}{$GLOBS.userdata.login}{else}{$order_id}{/if}" type="hidden"/>
+
+<input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
+<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
+
+<input name="paymentType" value="SB" type="hidden"/> 
+<input name="orderNumber" value="{$order_id}" type="hidden"/>
+<input name="cps_phone" value="{$order_content.phone}" type="hidden"/> 
+<input name="cps_email" value="{$order_content.email}" type="hidden"/>
+<input name="orderDetails" value="{$GLOBS.SITENAME|escape}: {$GLOBS.merchants.yandexmoney_ur.serviceName|default:'Оплата заказа №'}{$order_id}" type="hidden"/>
+<button type="submit" name="submit-button" class="btn btn-large" title="Через Сбербанк Онлайн" rel="tooltip"><img src="/media0/img/merchants/Sberbank.png" width="150" /></button>
+</form>
+{/if}

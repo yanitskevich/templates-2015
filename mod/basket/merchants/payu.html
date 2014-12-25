@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="PAYU"> {$GLOBS.merchants.payu.btn|default:'Оплатить через PayU'}
+		<p class="help-block">Оплата через сервис PayU. Пластиковые карты, WebMoney, Яндекс.Деньги и другие способы оплаты.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="PAYU">{$GLOBS.merchants.privat24.btn|default:'Оплатить через PayU'}</option>
+{/if}

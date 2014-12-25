@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+{include file="$TMPL_FOLDER/inc/head.html"}
+<body>
+	{include file="$TMPL_FOLDER/inc/design-ui.html"}
+	<div class="wrapper">
+		{include file="$TMPL_FOLDER/inc/topnav.html"}
+		{include file="$TMPL_FOLDER/inc/header.html"}
+		{include file="$TMPL_FOLDER/mod/Menu.html"}
+
+		<div class="container">
+			{include file="$TMPL_FOLDER/mod/Pathline.html"}
+			{include file="$TMPL_FOLDER/mod/Anonces.html"}
+			<h1 align="center">Номер вашего заказа <a href="/basket/?{$order_id}%7C{$order_hash}" title="Постоянный адрес заказа №{$order_id}" rel="tooltip">{$order_id}</a></h1>
+			{$text}
+			<div class="content wide">
+			<table class="table table-striped">
+			<thead>
+			  <tr>
+			    <th></th>
+			    <th>Товар</th>
+			    <th nowrap="nowrap">Кол-во</th>
+			    <th>Цена</th>
+			    <!--th>Скидка (%)</th-->
+			    <!--th>Цена со скидкой</th-->
+			    <th>Всего</th>
+			    <!--th>Всего со скидкой</th-->
+			  </tr>
+			</thead>
+			<tbody>
+
+			{foreach from=$basketdata item=item}
+				<tr class="basket-item inbasket-item" id="product{$item.oid}">
+				<td style="max-width:100px;">
+					  	<a class="thumbnail" href="{$item.vlink}">{assign var="im_showed" value=0}{if sizeof($item.params)>0}{foreach from=$item.params key=key item=value}{foreach from=$item.content.images item="im"}{if $item.content[$key][$value]['name'] eq $im.name}<img src="/{image src=$im.path width=160 folder=".160"}" alt="{$im.name}">{assign var="im_showed" value="1"}{break}{/if}{/foreach}{/foreach}{/if}{if empty($im_showed)}{foreach from=$item.content.images item="im"}<img src="/{image src=$im.path width=160 folder=".160"}" alt="{$im.name}">{break}{/foreach}{/if}</a>
+				</td>
+				<td>
+				    <h4><a href="{$item.vlink}">{$item.content.name}</a></h4>
+				
+				    {if sizeof($item.params)>0}
+				    <p><b>Опции : </b>
+				    <small>
+				    {foreach from=$item.params key=key item=value}
+				    <br />
+				    &mdash;
+				    {$GLOBS.fieldnames[7][$key]}:
+				    {$item.content[$key][$value]['name']}
+				    {if $item.content[$key][$value]['price']} - <b>{$item.content[$key][$value]['price']}{$GLOBS.currency.shortname}</b>{/if}
+				    {/foreach}
+				    </small>
+				    </p>
+				    {/if}
+				</td>
+				<td nowrap="nowrap">{$item.count} {numeral number=$item.count ends=$item.content.units|default:'шт.,шт.,шт.'}{if $item.content.weight}<br>Вес: <span class="weight">{$item.content.weight} {numeral number=$item.content.weight|price:false ends='грамм,грамма,грамм'}</span>{/if}</td>
+				<td nowrap="nowrap">{$item.content.price|price:false} {$GLOBS.currency.shortname}</td>
+				<td nowrap="nowrap">{($item.content.price*$item.count)|price:false} {$GLOBS.currency.shortname}</td>
+				</tr>
+			{/foreach}
+			</tbody>
+			</table>
+			<table class="table table-striped">
+			<tbody>
+			{if $order_content.discount}
+			<tr>
+				<td class="text-right" width="50%">Накопительная скидка</td>
+				<td class="text-left" width="50%"><b>{$order_content.discount.human}</b></td>
+			</tr>
+			{/if}
+			{if $order_content.delivery_id}
+			<tr>
+				<td class="text-right" width="50%">Доставка</td>
+				<td class="text-left" width="50%"><b>{$order_content.delivery}</b>{if $order_content.delivery_price} - {$order_content.delivery_price} {numeral number=$order_content.delivery_price ends=$GLOBS.currency.name}{/if}</td>
+			</tr>
+			{/if}
+			{if $order_content.coupon}
+			<tr>
+				<td class="text-right" width="50%">Использован купон на скидку</td>
+				<td class="text-left" width="50%"><b>{$order_content.coupon.human}</b></td>
+			</tr>
+			{/if}
+			<tr>
+				<td class="text-right" width="50%"><big>Сумма вашего заказа</big></td>
+				<td class="text-left" width="50%"><big><b>{$order_total|price:false} {numeral number=$order_total ends=$GLOBS.currency.name}</b></big></td>
+			</tr>
+			</tbody>
+			</table>
+			</div>
+			{if $GLOBS.merchants}
+			{if $order_content.pay_status eq 'FP'}
+				<h1 align="center">Заказ полностью оплачен</h1>
+			{else if $order_content.pay_status eq 'HP'}
+				{if $order_content.pay_method eq 'KUPIVKREDIT'}
+				<h1 align="center">Кредит одобрен</h1>
+				<p align="center">Пожалуйста, подождите. Наш менеджер свяжется с вами.</p>
+				{else}
+				<h1 align="center">Заказ оплачен не полностью</h1>
+				{/if}
+			{else}
+				<h1 align="center">Оплатить заказ</h1>
+			{/if}
+			{if $order_content.pay_method && $order_content.pay_method neq 'NON' && $order_content.pay_status neq 'FP'}
+				<!-- p align="center">{$GLOBS.pay_methods[$order_content.pay_method]}</p -->
+				{assign var=merchant value=$order_content.pay_method|lower}
+				<div class="text-center">{include file="$TMPL_FOLDER/mod/merchants/$merchant.html" shipping_price=$order_content.delivery_price summ=$order_total order_id=$order_id currency=$GLOBS.allcurrencies[$order_content.currency] order_content=$order_content}</div>
+				<p class="clearfix"></p>
+				<script>
+				!function ($) {
+					$(function(){
+						$('#change_merchant').click(function()
+						{
+							if($('#merchants').is(':visible')) $('#merchants').slideUp('fast');
+							else $('#merchants').slideDown('fast');
+							
+							return false;
+						});
+					});
+				}(window.jQuery);
+				</script>
+				<p align="center"><a href="#" id="change_merchant">Показать все способы оплаты</a></p>
+
+				<div class="hide text-center" id="merchants">{include file="$TMPL_FOLDER/mod/merchants/merchant.html" shipping_price=$order_content.delivery_price summ=$order_total order_id=$order_id currency=$GLOBS.allcurrencies[$order_content.currency]}</div>
+			{/if}
+			{/if}
+
+			{if $orderduplicate}
+				<script>
+				var duplicateOrder = function (order_id, order_hash)
+				{
+					if(confirm('Добавить товары из заказа №'+order_id+' в текущий заказ?\nТовары, которых нет в наличии, добавлены не будут.'))
+					{
+						$.basket.to('/basket/?action=duplicate&order_id=' + order_id + '&oh=' + order_hash, 'abs', function(html)
+						{
+							$('#absbasket-box').html(html);
+							$('#absbasket-box').modal('show');
+							$('.basket-item').ProductCalculator();
+						});
+					}
+					return false;
+				}
+				</script>
+				<form class="form-horizontal" action="/basket/?action=duplicate" method="post">
+					<input name="order_id" type="hidden" value="{$order_id}" />
+					<input name="oh" type="hidden" value="{$order_hash}" />
+					<fieldset>
+						<div class="form-actions">
+							<span class="help-inline">{$orderduplicate}</span>
+							<button type="submit" class="btn btn-primary" onclick="duplicateOrder('{$order_id}', '{$order_hash}');return false;">Повторить заказ</button>
+						</div>
+					</fieldset>
+				</form>
+				{/if}
+
+		</div>
+	</div>
+	{include file="$TMPL_FOLDER/inc/scripts.html"}
+	{include file="$TMPL_FOLDER/inc/footer.html"}
+</body>
+</html>

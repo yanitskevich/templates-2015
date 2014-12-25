@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="PAYPAL"> {$GLOBS.merchants.paypal.btn|default:'Оплатить через PayPal'}
+		<p class="help-block">Оплата заказа через аккаунт PayPal.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="PAYPAL">{$GLOBS.merchants.paypal.btn|default:'Оплатить через PayPal'}</option>
+{/if}

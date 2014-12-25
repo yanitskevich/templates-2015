@@ -1,0 +1,14 @@
+{if sizeof($cabinetbookmarks_pubs)>0}
+<section class="products">
+	{foreach from=$cabinetbookmarks_pubs item="item" name="cat"}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{/foreach}
+</section>
+{else}
+	{if $text}
+	{$text}
+	{else}
+    	<div class="well">
+    		<h3>Ваш список избранного пуст</h3>
+    		<p>Добавляйте товары из каталога на любой странице магазина в избранное или сравнивайте!</p>
+    	</div>
+	{/if}
+{/if}

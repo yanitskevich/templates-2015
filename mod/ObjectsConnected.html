@@ -1,0 +1,8 @@
+{if $ext_objectsconnected && sizeof($objectsconnected_objects)}
+
+{if $objectsconnected_name}
+<h3>{$objectsconnected_name}</h3>
+{/if}
+
+<section class="products objectsconnected">{foreach from=$objectsconnected_objects item="item" name=cat}{if $item.type eq 7}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{else}{include file="$TMPL_FOLDER/inc/article-item.html" content=$item.content oid=$oid}{/if}{/foreach}</section>
+{/if}

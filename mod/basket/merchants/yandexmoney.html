@@ -1,0 +1,25 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="YANDEXMONEY"> {$GLOBS.merchants.yandexmoney.btn|default:'Яндекс.Деньги'}
+		<p class="help-block">Оплата заказа Яндекс.Деньгами со своего счета.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="YANDEXMONEY">{$GLOBS.merchants.yandexmoney.btn|default:'Яндекс.Деньги'}</option>
+{/if}
+
+{if $GLOBS.merchants.yandexmoney.bcard}
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="YANDEXBCARD"> Банковская карта
+		<p class="help-block">Оплатить заказ картой Visa (включая Electron), MasterCard или Maestro.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="YANDEXBCARD">Банковская карта Visa (включая Electron), MasterCard или Maestro</option>
+{/if}
+{/if}

@@ -1,0 +1,22 @@
+{if $type eq 'radio'}
+{if $GLOBS.userdata.points < $GLOBS.merchants.points.min}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="POINTS" disabled="disabled"> Оплатить часть заказа баллами
+		<p class="help-block">Минимальная сумма оплаты {$GLOBS.merchants.points.min} {numeral number=$GLOBS.merchants.points.min ends="бонус, бонуса, бонусов"}. У вас {$GLOBS.userdata.points} бонусных баллов.</p>
+	</label>
+</div>
+{else}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="POINTS"> Оплатить часть заказа баллами
+		<p class="help-block">У вас {$GLOBS.userdata.points|price:false} {numeral number=$GLOBS.userdata.points ends="бонусный балл, бонусных балла, бонусных баллов"}. {if $GLOBS.merchants.points.max}Максимальная сумма списания {$GLOBS.merchants.points.max}% от стоимости заказа.{/if}</p>
+	</label>
+</div>
+{/if}
+{/if}
+{if $type eq 'option'}
+{if $GLOBS.userdata.points >= $GLOBS.merchants.points.min}
+<option value="POINTS">{$GLOBS.merchants.points.btn|default:'Оплатить баллами'}, у вас {$GLOBS.userdata.points}{if $GLOBS.merchants.points.max}.Максимальная сумма {$GLOBS.merchants.points.max}% от стоимости заказа.{/if}</option>
+{/if}
+{/if}

@@ -1,0 +1,36 @@
+<form action="https://api.privatbank.ua/p24api/ishop" method="POST" class="payment-form">
+    <input type="hidden" name="amt" value="{$summ}"/>
+    <input type="hidden" name="ccy" value="{if $GLOBS.merchants.privat24.currency}{$GLOBS.merchants.privat24.currency}{$GLOBS.currency.code}{/if}" />{*валюта (UAH / USD / EUR)*}
+    <input type="hidden" name="merchant" value="{$GLOBS.merchants.privat24.id}" />
+    <input type="hidden" name="order" value="{$order_id}" />
+    <input type="hidden" name="details" value="{$GLOBS.merchants.privat24.details|default:'Заказ №'}{$order_id}" />
+    <input type="hidden" name="ext_details" value="" />
+    <input type="hidden" name="pay_way" value="privat24" />
+    <input type="hidden" name="return_url" value="/cabinet/pay.html" />
+    <input type="hidden" name="server_url" value="/cabinet/pay.html" />
+    <!-- button type=submit class="btn">{$GLOBS.merchants.privat24.btn|default:'Оплатить через Приват24'}</button-->
+    <button type=submit class="btn btn-large" title="{$GLOBS.merchants.privat24.btn|default:'Оплатить через Приват24'}" rel="tooltip"><img src="/media0/img/merchants/privat24.png" alt="privat24" width="150" /></button>
+</form>
+
+{*
+
+По адресу, указанному в поле return_url должен работать скрипт, который примет ответ сервера, содержащий результат транзакции в POST - переменной payment и цифровую подпись - в переменной signature. Этот скрипт должен сгенерировать цифровуб подпись согласно алгоритму (PHP):
+
+$signature = sha1(md5($payment.$pass));
+
+где $pass - пароль мерчанта, $payment - содержимое POST-переменной payment. 
+
+Затем рассчитанная сигнатура сверяется с полученной в ответе, и только в случае их совпадения данным ответа можно доверять.
+
+Скрипт должен вывести клиенту страницу с результатом.
+
+Для случаев, когда возврат клиента с платёжной страницы почему-либо не произошёл используется server_url.
+
+На него после выполнения платежа прийдёт POST-запрос аналогичный тому, с которым вернулся бы клиент на return_url. Если сайт продавца по этому адресу по какой-либо причине не ответил, запрос будет повторяться 10 раз с интервалом в 5 секунд. Ответом считается ответ сервера (статус 200).
+
+Если сервис продавца не использует server_url, соответствующее поле в форме должно присутствовать с пустым значением.
+
+Внимание! Для мерчантов, работающих в тестовом режиме платежи реально выполняться не будут. Статус в случае успешного платежа будет test, референс "test payment"
+
+Кодировка страницы, с которой уходит запрос должна быть "UTF-8".
+*}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+{include file="$TMPL_FOLDER/inc/head.html"}
+<body>
+	{include file="$TMPL_FOLDER/inc/design-ui.html"}
+	<div class="wrapper">
+		{include file="$TMPL_FOLDER/inc/topnav.html"}
+		{include file="$TMPL_FOLDER/inc/header.html"}
+		{include file="$TMPL_FOLDER/mod/Menu.html"}
+
+		<div class="container">
+			{include file="$TMPL_FOLDER/mod/Pathline.html"}
+			<h1>{$name}</h1>
+			<div class="content wide">
+				{include file="$TMPL_FOLDER/mod/ShopExpressCountDown.html"}
+				{include file="$TMPL_FOLDER/mod/Anonces.html"}
+				<article class="register">
+					{$text}
+					{include file="$TMPL_FOLDER/mod/cabinet/userform.html"}
+				</article>
+			</div>
+		</div>
+	</div>
+	{include file="$TMPL_FOLDER/inc/footer.html"}
+</body>
+{include file="$TMPL_FOLDER/inc/scripts.html"}
+</html>

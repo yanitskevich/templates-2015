@@ -1,0 +1,66 @@
+{if $GLOBS.merchants.kupivkredit.test eq 'true'}
+<script src="https://kupivkredit-test-fe.tcsbank.ru/widget/vkredit.js"></script>
+{else}
+<script src="https://www.kupivkredit.ru/widget/vkredit.js"></script>
+{/if}
+<script>
+$(function(){
+    var callback_close = function(decision) {
+        var result = '';
+        switch(decision) {
+            case 'ver':
+                result = 'Ваша заявка предварительно одобрена.';
+                break;
+            case 'agr':
+                result = 'Ваша заявка одобрена! Поздравляем!';
+                //console.log(result);
+                location.href = '/cabinet/pay.html?order_id={$order_content.order_id}&provider=vkredit';
+                break;
+            case 'rej':
+                result = 'К сожалению, заявка отклонена банком.';
+                break;
+            case '':
+                result = 'Вы не заполнили заявку до конца';
+                break;
+            default:
+                //result = 'Ваша заявка находится на рассмотрении';
+                break;
+        }
+        $('#result').html(result);
+    };
+
+    var callback_decision = function(decision) {
+        //alert('Пришел статус: ' + decision);
+    };
+
+    var callback_before_close = function(wantClose) {
+        //alert('Клиент нажал крестик, потом (1-Да, 0-Нет): ' + wantClose);
+    };
+
+    var callback_form_complete = function(value) {
+        //alert('Клиент заполнил форму');
+    };
+
+    var callback_accept = function(value) {
+        //alert('Клиент принял решение по заявке: ' + value);
+    };          
+            
+    vkredit = new VkreditWidget(1,144574, {
+        {kupivkredit order=$order_content basket=$basketdata}
+        callbackUrl: window.location.href,                    
+        onClose: callback_close,
+        onDecision: callback_decision,
+        onBeforeClose: callback_before_close,
+        onFormComplete: callback_form_complete,
+        onAccept: callback_accept
+    });
+});
+</script>
+<p class="payment-form">
+	{if $order_content.pay_status eq 'HP' && $order_content.pay_method eq 'KUPIVKREDIT'}
+	<a class="btn btn-large" rel="tooltip"><img src="/media0/img/merchants/KupiVkredit.png" alt="КупиВкредит" width="150"  onclick="alert('Ваш кредит уже одобрен.');" /></a>
+	{else}
+	<a class="btn btn-large" rel="tooltip"><img src="/media0/img/merchants/KupiVkredit.png" alt="КупиВкредит" width="150"  onclick="vkredit.openWidget();" /></a>
+	{/if}
+	<!--br><a href="/cabinet/pay.html?order_id={$order_content.order_id}&provider=vkredit">Проверить статус кредита</a-->
+</p>

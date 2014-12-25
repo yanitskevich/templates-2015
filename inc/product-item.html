@@ -1,0 +1,94 @@
+<div class="product-item inbasket-item">
+	<div class="product-item-inner">
+		{if $content.product_flags}<span class="productflag-block">{$GLOBS.product_flags[$content.product_flags]}</span>{/if}
+		{if $content.discount.percent}<span class="discount-block">-{$content.discount.percent}%</span>{/if}
+		{if $content.discount.money}<span class="discount-block">-{$content.discount.money|price}</span>{/if}
+		
+		<a href="{$item.vlink}">{if sizeof($content.images)>0}{foreach from=$content.images item="im"}<img data-original="/{image src=$im.path height=$GLOBS.img_height|default:150 folder=$GLOBS.img_height|default:"150" crop=true}" alt="{$im.name}" height="150" /><noscript><img src="/{image src=$im.path height=$GLOBS.img_height|default:150 folder=$GLOBS.img_height|default:"150" crop=true}" height="150"></noscript>{break}{/foreach}{else}<img src="/media0/img/no-image.png" alt="Нет изображения" />{/if}</a>
+		
+		<div class="caption">
+			<h5><a href="{$item.vlink}">{$content.name}</a></h5>
+			
+			{if $content.ratingaverage}
+			<p class="product-rating">{section name=poprank loop=$content.ratingaverage step=1}<i class="star-rating star-rating-on"></i>{/section}{section name=poprank loop=5-$content.ratingaverage step=1}<i class="star-rating"></i>{/section}</p>
+			{/if}
+			
+			{if $content.available eq 'no' || isset($content.quantity) && $content.quantity <= 0}<p class="label label-danger">Продано</p>{/if}
+			<p class="description">{$content.annotate}</p>
+
+			{if $content.price}
+			<div class="price-block short">
+				{if $content.minprice}
+					<span>{if $content.minprice < $content.maxprice} от{else}{/if} {$content.minprice|discount:$content.discount|price}</span>
+					{if $content.discount}
+					<span class="price-old">{if $content.minprice < $content.maxprice} от {$content.minprice|price}{else}: {$content.old_price|price}{/if}</span>
+					{/if}
+				{else}
+					<span>{$content.price|discount:$content.discount|price}</span>
+					{if $content.discount}
+					<span class="price-old">{$content.price|price}</span>
+					{else if $content.old_price}
+					<span class="price-old">{$content.old_price|price}</span>
+					{/if}
+				{/if}
+			</div>
+			<div class="price-block long">
+				{if $content.minprice}
+					<span>Цена{if $content.minprice < $content.maxprice} от{else}:{/if} {$content.minprice|discount:$content.discount|price}</span>
+					{if $content.discount}
+					<span class="price-old">{if $content.minprice < $content.maxprice} от {$content.minprice|price}{else}: {$content.old_price|price}{/if}</span>
+					{/if}
+				{else}
+					<span>Цена: {$content.price|discount:$content.discount|price}</span>
+					{if $content.discount}
+					<span class="price-old">{$content.price|price}</span>
+					{else if $content.old_price}
+					<span class="price-old">{$content.old_price|price}</span>
+					{/if}
+				{/if}
+			</div>
+			{/if}
+			{if isset($content.quantity) && $content.quantity <= 0}
+				<!-- продано, поэтому кнопку нет -->
+			{else}
+			
+				{if $content.price}
+					{if $ext_basketextendedhelpers && $basketextendedhelpers_pageBtn}
+					{if $basketextendedhelpers_sectionBtn eq 1}
+					<a href="/basket/?action=add&oid={$oid}&time={$smarty.now}" class="btn-buy inbasket" rel="nofollow">Купить</a>
+					<a href="/basket/?action=add&oid={$oid}&time={$smarty.now}" class="btn-buyoneclick inbasket" rel="nofollow" data-tmpl="fast">Купить в один клик</a>
+					{elseif $basketextendedhelpers_sectionBtn eq 2}
+					<a href="/basket/?action=add&oid={$oid}&time={$smarty.now}" class="btn-buyoneclick inbasket" rel="nofollow" data-tmpl="fast">Купить в один клик</a>
+					{else}
+					<a href="/basket/?action=add&oid={$oid}&time={$smarty.now}" class="btn-buy inbasket" rel="nofollow">Купить</a>
+					{/if}
+					{else}
+					<a href="/basket/?action=add&oid={$oid}&time={$smarty.now}" class="btn-buy inbasket" rel="nofollow">Купить</a>
+					{/if}
+				{/if}
+			
+			{/if}
+			
+			{if $ext_productscompared || $ext_bookmarked}<ul class="bookmark-list-unstyled">{/if}
+			
+			{if $ext_bookmarked}
+			{if $bookmarks[$oid]}
+			<li><a class="btn-bookmark active" href="/favorites/?{$oid}&time={$smarty.now}" title="Убрать&nbsp;из избранного" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
+			{else}
+			<li><a class="btn-bookmark" href="/favorites/?{$oid}&time={$smarty.now}" title="Добавить&nbsp;в избранное" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
+			{/if}
+			{/if}
+		
+			{if $ext_productscompared}
+			{if $smarty.session.ProductsCompare[$oid]}
+			<li><a class="btn-compare active" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="Убрать&nbsp;из сравнения" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
+			{else}
+			<li><a class="btn-compare" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="Добавить&nbsp;к сравнению" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
+			{/if}
+			{/if}
+			
+			{if $ext_productscompared || $ext_bookmarked}</ul>{/if}
+		<div class="clearfix"></div>
+		</div>
+	</div>
+</div>

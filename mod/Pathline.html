@@ -1,0 +1,26 @@
+{if $ext_pathline}
+{if sizeof($apathline)>0}
+<ol class="breadcrumb">
+<li><i class="icon-home icon-black"></i> <a href="/">Главная</a></li>
+{foreach from=$apathline item=item name=pathlineff}
+	{if $smarty.foreach.pathlineff.iteration!=$smarty.foreach.pathlineff.last}
+	<li><a href="{$item.vlink}">{$item.name}</a></li>
+	{else}
+	{if $allocate eq 'link'}
+	<li class="active"><a href="{$item.vlink}">{$item.name}</a></li>
+	{/if}
+	{if $allocate eq 'hide'}
+
+	{/if}
+	{if empty($allocate)}
+	<li class="active">{$item.name}</li>
+	{/if}
+	{/if}
+{/foreach}
+</ol>
+{/if}
+{/if}
+
+{*if $ext_menu}
+<a href="/">Главная</a> {foreach from=$menu item=item}{if $item.opened}	&rarr; <a href="{$item.vlink}">{$item.content.name}</a>	{/if}{/foreach}
+{/if*}

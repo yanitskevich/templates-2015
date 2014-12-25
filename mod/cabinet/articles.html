@@ -1,0 +1,104 @@
+{$text}
+
+{if sizeof($cabinetarticles_pubs)>0}
+<p><a href="?act=new" class="btn btn-primary">Добавить новую статью</a></p>
+{include file="$TMPL_FOLDER/mod/paging.html" pagekey="page" pages=$cabinetarticles_paging page=$cabinetarticles_current}
+<ul class="thumbnails">
+{foreach from=$cabinetarticles_pubs item="item" key=key}
+<li class="span4">
+  <div class="thumbnail">
+    {foreach from=$item.content.images item="im"}<img src="/{image src=$im.path width=360 height=268 folder=".360x268"}" alt="{$im.name}">{break}{/foreach}
+    <div class="caption">
+      <h5>{$item.content.name}</h5>
+      <p><a href="?act=edit&oid={$key}" class="btn" title="Редактировать статью"><i class="icon-black icon-pencil"></i></a> <a href="?act=del&oid={$key}" class="btn btn-danger deletepub" title="Удалить статью &quot;{$item.content.name|escape}&quot;"><i class="icon-white icon-remove"></i></a></p>
+    </div>
+  </div>
+</li>
+{/foreach}
+</ul>
+{include file="$TMPL_FOLDER/mod/paging.html" pagekey="page" pages=$cabinetarticles_paging page=$cabinetarticles_current}
+{else}
+<script type="text/javascript" src="/media0/js/tiny_mce/jquery.tinymce.js"></script>
+<script src="/media0/js/html5uploader.js"></script>
+<script type="text/javascript">
+	$().ready(function() {
+
+	    var uploader = new Uploader({
+		    'target' : '/adm/uploadfile.php?oid={$content_oid}&width=138&height=90',
+		    'dropBox' : '#added-photos',
+		    'fileInput' : '#fileField',
+		    
+		    'imageTpl' : '<img src="/media0/img/loading.gif" width="138" height="90" />',
+		    'itemTpl' : '<li class="span2 thumbnail" />',
+		    'itemTplAfterUpload' : ''
+	    });
+		
+		$('textarea.tinymce').tinymce({
+			script_url : '/media0/js/tiny_mce/tiny_mce.js',
+			theme : "advanced",
+			language : "ru",
+			plugins : "contextmenu,paste,directionality,inlinepopups", 
+			// Theme options
+			theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,outdent,indent,blockquote,|,formatselect",
+			theme_advanced_buttons2 : "paste,pastetext,pasteword,bullist,numlist,|,undo,redo,|,link,unlink,cleanup,code,|,insertdate,inserttime,preview",
+			theme_advanced_buttons3 : "",
+			theme_advanced_toolbar_location : "top",
+			theme_advanced_toolbar_align : "left",
+			theme_advanced_statusbar_location : "bottom",
+			theme_advanced_resizing : false,
+
+
+		});
+	});
+</script>
+<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+<fieldset>
+  <div class="control-group">
+    <label class="control-label" for="inputTitle">Заголовок статьи</label>
+    <div class="controls">
+      <input type="text" style="width:85%;" name="content[name]" value="{$content.name|escape}" id="inputTitle">
+      <p class="help-block">Используйте осмысленные названия, которые помогут ориентироваться другим посетителям.</p>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputText">Текст статьи</label>
+    <div class="controls">
+      <textarea style="width:85%;height:480px;" name="content[text]" class="tinymce" id="inputText" rows="3">{$content.text}</textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="fileField">Добавление фото</label>
+    <div class="controls">
+      <input class="input-file" id="fileField" type="file" name="files[]" multiple="true">
+    </div>
+  </div>
+  <input type="hidden" name="content[active_image]" id="active_image" value="{$content.active_image}"/>
+  <div class="control-group">
+    <div class="controls">
+		<ul class="added-photos thumbnails" id="added-photos">
+			{foreach from=$content.images item=item key=key}
+		    <li class="span2 thumbnail {if $content.active_image eq $key} active{/if}">
+		        <img src="/{image src=$item.path width=138 height=90 folder=".138x90"}" id="{$key}" />
+		        <div class="caption" align="center">
+		          <a href="#" class="btn btn-mini action-active" title="Сделать изображение главным для статьи"><i class="icon-black icon-eye-open"></i></a>
+		          <a href="#" class="btn btn-mini" title="Вставить изображение в текст на месте курсора" onclick="tinyMCE.execCommand('mceInsertContent',false,'<img src={$item.path} />');return false;"><i class="icon-black icon-align-center"></i></a>
+		          <a href="/adm/uploadfile.php?act=delete&oid={$content_oid}&path={$item.path}" class="btn btn-danger btn-mini action-delete" title="Удалить изображение"><i class="icon-black icon-remove"></i></a>
+		        </div>
+		    </li>
+			{/foreach}
+		</ul>
+		<p class="help-block">Вы можете добавить фото (jpg, gif), каждое размером до 600 Кб и не более 2000 пикселей в ширину.<br />
+		После добавления фото, вы сможете вставить его в статью. Для этого - наведите мышку на выбранное место для изображения, нажмите левую кнопку мыши, затем наведите на изображение и нажмите на кнопку "Вставить в текст".
+		</p>
+    </div>
+  </div>
+  <div class="form-actions">
+	<input type="hidden" name="submit" value="1" />
+	<input type="hidden" name="act" value="{if $content_oid}edit{else}new{/if}" />
+	<input type="hidden" name="oid" value="{$content_oid}" />
+	<button type="submit" class="btn btn-primary">{if $content_oid}Сохранить изменения{else}Создать статью{/if}</button>
+    <button class="btn" onclick="window.history.back();">Отмена</button>
+  </div>
+</fieldset>
+</form>
+{/if}

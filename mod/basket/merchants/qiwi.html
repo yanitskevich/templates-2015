@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="QIWI"> {$GLOBS.merchants.qiwi.btn|default:'Оплатить через QIWI'}
+		<p class="help-block">Оплатить из QIWI кошелька через интернет или терминалы комании QIWI.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="QIWI">{$GLOBS.merchants.qiwi.btn|default:'Оплатить через QIWI'}</option>
+{/if}

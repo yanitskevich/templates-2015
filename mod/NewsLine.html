@@ -1,0 +1,25 @@
+{if $ext_newsline}
+<!-- newsline -->
+<div class="LastPublish">
+{foreach from=$newsline_folders item="folder" key="key"}
+	{if sizeof($newsline_pubs[$key])}
+	{if $folder.content.name}<h3>{$folder.content.name}</h3>{/if}
+	{foreach from=$newsline_pubs[$key] item="item"}<div class="LastPublish-item">
+		<h5>
+			<small style="font-size:10px;">{$item.created|date_format:"%d %B %Y"}</small>
+			<a href="{$item.content.vlink}">{$item.content.name}</a>
+		</h5>
+		<div class="row">
+		<div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+			{if $item.content.images[0].path}
+			<a href="{$item.content.vlink}" class="thumbnail"><img src="/{image src=$item.content.images[0].path width=250 height=150 folder=".250x150"}" class="img-responsive" /></a>
+			{/if}
+		</div>
+		<div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+			<p>{if $item.content.annotate}{$item.content.annotate}{else}{$item.content.text|strip_tags|truncate:100}{/if}</p>
+		</div>
+		</div>
+	</div>{/foreach}{/if}
+{/foreach}
+</div>
+{/if}

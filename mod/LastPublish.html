@@ -1,0 +1,13 @@
+{if sizeof($lastpublish_pubs)>0}
+<div class="LastPublish">
+{if $lastpublish_name}<h3>{$lastpublish_name}</h3>{/if}
+	{foreach from=$lastpublish_pubs item="item"}{if $item.content.name}<div class="LastPublish-item">
+		<h5>
+			<small><em class="glyphicon glyphicon-calendar"></em> {$item.created|date_format:"%d %B %Y"}</small>
+			<a href="{$item.content.vlink}">{$item.content.name}</a>{* <small> из <a href="{$item.parent.vlink}">{$item.parent.name}</a></small> *}
+		</h5>
+		{if $item.content.images[0].path}<a href="{$item.content.vlink}"><img src="/{image src=$item.content.images[0].path width=250 height=150 folder=".250x150"}" /></a>{/if}
+		<p>{if $item.content.annotate}{$item.content.annotate}{else}{$item.content.text|strip_tags|truncate:100}{/if}</p>
+	</div>{/if}{/foreach}
+</div>
+{/if}

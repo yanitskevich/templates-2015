@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="KUPIVKREDIT"> КупиВкредит {* от {math equation="ceil(total/y)" total=$total y=10} руб/мес.*} <a href="{$GLOBS.merchants.kupivkredit.url}" title="Подробная информация о кредитовании" rel="tooltip" target="_blank"><i class="glyphicon glyphicon-info-sign"></i></a>
+		<p class="help-block">Кредит оформляется онлайн. Мы сами привезем вам документы, без визита в банк.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="KUPIVKREDIT">КупиВкредит. Система онлайн-кредитования.</option>
+{/if}

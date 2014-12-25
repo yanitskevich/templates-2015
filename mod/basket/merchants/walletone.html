@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="WALLETONE"> {$GLOBS.merchants.walletone.btn|default:'Единая касса WalletOne'}
+		<p class="help-block">Более ста способов приема платежей</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="WALLETONE">{$GLOBS.merchants.yandexmoney.btn|default:'Единая касса WalletOne - Более ста способов приема платежей'}</option>
+{/if}

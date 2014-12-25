@@ -1,0 +1,7 @@
+{if $ext_productmostpopular && sizeof($productmostpopular_products)}
+<!-- productdiscount -->
+{if $productmostpopular_name}
+<h3>{$productmostpopular_name}</h3>
+{/if}
+<section class="products products-mostpopular">{foreach from=$productmostpopular_products item="item" key="oid" name=cat}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$oid}{/foreach}</section>
+{/if}

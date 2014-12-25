@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+{include file="$TMPL_FOLDER/inc/head.html"}
+<body>
+	{include file="$TMPL_FOLDER/inc/design-ui.html"}
+	<div class="wrapper">
+		{include file="$TMPL_FOLDER/inc/topnav.html"}
+		{include file="$TMPL_FOLDER/inc/header.html"}
+		{include file="$TMPL_FOLDER/mod/Menu.html"}
+
+		<div class="container">
+			{include file="$TMPL_FOLDER/mod/Pathline.html"}
+			{include file="$TMPL_FOLDER/mod/ShopExpressCountDown.html"}
+			{include file="$TMPL_FOLDER/mod/Anonces.html"}
+			<h1>{$name}</h1>
+			{if sizeof($basketdata)}
+			<div class="basket-content content wide">
+				{if $coupon.coupon_id}
+				<div class="coupon-alert alert {if !$coupon.status}alert-error{else}hide{/if}">
+					{if !$coupon.statuses.date}<li>Время купона истекло.{/if}
+					{if !$coupon.statuses.price}<li>Сумма заказа не подходит. {/if}
+					{if !$coupon.statuses.count}<li>Количество товаров слишком мало. {/if}
+					{if !$coupon.statuses.used}<li>Купон уже использовали максимальное количество раз. {/if}
+					{if !$coupon.statuses.self_used}<li>Вы активировали купон ранее. {/if}
+				</div>
+				
+				<div class="alert alert-success">
+					Вы активировали купон <b>{$coupon.name}</b> на скидку в {if $coupon.percent} <b>{$coupon.percent}%</b> {if $coupon.money} и {/if}{/if} {if $coupon.money} <b>{$coupon.money} {numeral number=$coupon.money ends=$GLOBS.currency.name}</b>{/if} <br>
+					{if $coupon.count_from || $coupon.count_to || $coupon.price_from || $coupon.price_to}
+					При покупке
+					{if $coupon.count_from} <u>от {$coupon.count_from} {numeral number=$coupon.count_from ends="вещи, вещей, вещей"}</u>{/if}
+					{if $coupon.count_to} до {$coupon.count_to} {numeral number=$coupon.count_from ends="вещи, вещей, вещей"}{/if}
+					{if $coupon.price_from || $coupon.price_to} на общую сумму {/if}
+					{if $coupon.price_from} <u>от {$coupon.price_from} {numeral number=$coupon.price_from|price:false ends=$GLOBS.currency.name}</u>{/if}
+					{if $coupon.price_to} до {$coupon.price_to} {numeral number=$coupon.price_to|price:false ends=$GLOBS.currency.name}{/if}.
+					{/if}
+					Время действия до {$coupon.date_to|date_format:"%d %B"}.
+					<a href="?coupon_destroy">Не использовать купон в этом заказе.</a>
+				</div>
+				
+				{/if}
+				
+				<table class="table table-striped">
+				<thead>
+				  <tr>
+				    <th></th>
+				    <th>Товар</th>
+				    <th nowrap="nowrap">Кол-во</th>
+				    <th>Цена</th>
+				    <!--th>Скидка (%)</th-->
+				    <!--th>Цена со скидкой</th-->
+				    <th>Всего</th>
+				    <!--th>Всего со скидкой</th-->
+				    <th></th>
+				  </tr>
+				</thead>
+				<tbody>
+
+				{foreach from=$basketdata item=item}
+				{include file="$TMPL_FOLDER/mod/basket/basket-item.html"}
+				{/foreach}
+				
+				</tbody>
+				</table>
+				
+				{* вывод сразу всех накопительных скидок *}
+				{if sizeof($discounts)}
+				<script>
+				var totalUserSpent = {$totalUserSpent|default:0};
+				var totalUserCount = {$totalUserCount|default:0};
+				var moneyRound = {$GLOBS.currency.round|default:0};
+				var GlobalCurrency = '{$GLOBS.currency.name|default:''}';
+				var discounts = [];
+				{foreach from=$discounts item=discount}discounts.push( { 'percent' : {$discount.percent|default:0}, 'money' : {$discount.money|default:0}, 'price_from' : {$discount.price_from}, 'price_to' : {$discount.price_to}, 'count_from' : {$discount.count_from}, 'count_to' : {$discount.count_to}, 'date_to_seconds' : {$discount.date_to_seconds}, 'date_from_seconds' : {$discount.date_from_seconds}, 'type': '{$discount.type}' } );{/foreach}
+				{if $mintotal}var minTotal = '{$mintotal}';{/if}
+				</script>
+				{/if}
+				<script>var eShopPostIndex = '{$postindex}';</script>
+				<p class="order-total">
+					<span id="basketCount">{$count}</span> шт. на сумму: <b><span id="basketTotal">{$total|price:false}</span> {numeral number=$total|price:false ends=$GLOBS.currency.name}</b>
+					<small class="label label-success {if !$basketdiscount}hide{/if}">Ваша скидка: <span id="basketDiscount">{$basketdiscount.human}</span></small>
+					<small {if $oldtotal eq  $total}class="hide"{/if}><br />Сумма без скидки: <span id="basketOldTotal">{$oldtotal|price:false}</span> {numeral number=$oldtotal|price:false ends=$GLOBS.currency.name}<br /></small>
+					{if $totalweight}<small>Вес заказа: <span id="totalWeight">{$totalweight}</span>  {numeral number=$totalweight|price:false ends='грамм,грамма,грамм'}</small>{/if}
+				</p>
+
+				{if !$coupon.coupon_id && $coupons_enable}
+				<form action="/basket/" method="post" class="pull-right col-lg-4 col-md-5 col-sm-6 col-xs-6">
+				<div class="input-group">
+					<input type="text" class="form-control" id="inputCoupon" name="coupon" autocomplete=off value="">
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-coupon">Использовать купон</button>
+					</span>
+				</div>
+				</form>
+				<br clear="all" />
+				{/if}
+
+				{if $mintotal}
+				<div class="well mintotal {if $mintotal <= $oldtotal}hide{/if}">
+					<h4 align="center">Минимальная сумма заказа {$mintotal|price}</h4>
+				</div>
+				{/if}
+			</div>
+			<div class="content wide orderform-content{if $mintotal && $mintotal > $oldtotal} hide{/if}">
+				<a name="order-form"></a>
+				<h1>Оформление заказа</h1>
+				{include file="$TMPL_FOLDER/mod/basket/order-form.html"}
+			</div>
+		{else}
+			<div class="basket-content content wide">
+				<p align="center">У вас нет отложенных в корзину товаров.</p>
+			</div>
+		{/if}
+			<div class="content wide">
+				{include file="$TMPL_FOLDER/mod/ObjectsConnected.html"}
+				{include file="$TMPL_FOLDER/mod/ObjectsAttached.html"}
+				{include file="$TMPL_FOLDER/mod/BasketBuyedWith.html"}
+				{include file="$TMPL_FOLDER/mod/ProductPurchased.html"}
+				{include file="$TMPL_FOLDER/mod/ProductDiscount.html"}
+				{include file="$TMPL_FOLDER/mod/ProductMostPopular.html"}
+				{include file="$TMPL_FOLDER/mod/ProductChecked.html"}
+				{include file="$TMPL_FOLDER/mod/ProductLast.html"}
+			</div>
+		</div>
+	</div>
+	{include file="$TMPL_FOLDER/inc/footer.html"}
+</body>
+{include file="$TMPL_FOLDER/inc/scripts.html"}
+</html>

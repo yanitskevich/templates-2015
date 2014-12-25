@@ -1,0 +1,34 @@
+{if $tmpl eq 'short'}
+<script>$.fancybox.close();window.location.href="/cabinet/";</script>
+{else}
+<!DOCTYPE html>
+<html lang="ru">
+{include file="$TMPL_FOLDER/inc/head.html"}
+<body>
+	{include file="$TMPL_FOLDER/inc/design-ui.html"}
+	<div class="wrapper">
+		{include file="$TMPL_FOLDER/inc/topnav.html"}
+		{include file="$TMPL_FOLDER/inc/header.html"}
+		{include file="$TMPL_FOLDER/mod/Menu.html"}
+
+		<div class="container">
+			{include file="$TMPL_FOLDER/mod/Pathline.html"}
+			{include file="$TMPL_FOLDER/mod/ShopExpressCountDown.html"}
+			{include file="$TMPL_FOLDER/mod/Anonces.html"}
+			<h1>{$name}</h1>
+			<aside>
+				{include file="$TMPL_FOLDER/mod/cabinet/menu.html"}
+			</aside>
+			<div class="content">
+				<article>
+					{$text}
+				</article>
+				{if $inner_tpl}{include file="$TMPL_FOLDER/mod/cabinet/$inner_tpl"}{/if}
+			</div>
+		</div>
+	</div>
+	{include file="$TMPL_FOLDER/inc/footer.html"}
+</body>
+{include file="$TMPL_FOLDER/inc/scripts.html"}
+</html>
+{/if}

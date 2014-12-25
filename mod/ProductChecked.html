@@ -1,0 +1,8 @@
+{if $ext_productchecked && sizeof($productchecked_products)}
+
+<!-- productchecked -->
+{if $productchecked_name}
+<h3>{$productchecked_name}</h3>
+{/if}
+<section class="products products-checked">{foreach from=$productchecked_products item="item" key="oid" name=cat}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item oid=$oid}{/foreach}</section>
+{/if}

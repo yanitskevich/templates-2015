@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY"> {$GLOBS.merchants.intellectmoney.btn|default:'Оплатить через IntellectMoney'}
+		<p class="help-block">Оплата заказа через сервис IntellectMoney. Пластиковые карты, WebMoney, Яндекс.Деньги и другие способы оплаты.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="INTELLECTMONEY">{$GLOBS.merchants.intellectmoney.btn|default:'Оплатить через IntellectMoney'}</option>
+{/if}

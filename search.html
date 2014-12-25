@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+{include file="$TMPL_FOLDER/inc/head.html"}
+<body>
+	{include file="$TMPL_FOLDER/inc/design-ui.html"}
+	<div class="wrapper">
+		{include file="$TMPL_FOLDER/inc/topnav.html"}
+		{include file="$TMPL_FOLDER/inc/header.html"}
+		{include file="$TMPL_FOLDER/mod/Menu.html"}
+
+		<div class="container">
+			{include file="$TMPL_FOLDER/mod/Pathline.html"}
+			<h1>{$name}</h1>
+			<aside>{include file="$TMPL_FOLDER/mod/Directories.html"}</aside>
+			<div class="content">
+				{include file="$TMPL_FOLDER/mod/ShopExpressCountDown.html"}
+				{include file="$TMPL_FOLDER/mod/Anonces.html"}
+				<article>
+					{$text}
+				</article>
+			    {if sizeof($search_pubs) > 0 }
+				<section class="products">
+				{foreach from=$search_pubs item="item" name="cat"}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{/foreach}
+				</section>
+			    {elseif sizeof($search_folders)>0}
+				<div class="categories">
+					<div class="categories-inner">
+					{foreach from=$search_folders item=item name=categs}
+						<div class="categories-item">
+							<a href="{$item.vlink}?q={$search_query}" title="{$item.content.name}" class="categories-item-inner">
+								{if $item.content.images[0].path}<img src="/{image src=$item.content.images[0].path width=260 height=180 crop=true forder=".260x180"}" />{/if}
+								<div class="caption">
+									<h3>{$item.content.name}</h3>
+									<p>&mdash; {$item.count} {numeral number=$item.count ends="товар найден, товара найдено, товаров найдено"}</p>
+								</div>
+							</a>
+						</div>
+					{/foreach}
+					</div>
+				</div>
+			    {else}
+		    	<div class="well">
+		    		<h2>Нет результатов</h2>
+			    	<p>По заданным параметрам товаров не найдено.</p>
+		    	</div>
+			    {/if}
+			</div>
+		</div>
+	</div>
+	{include file="$TMPL_FOLDER/inc/footer.html"}
+</body>
+{include file="$TMPL_FOLDER/inc/scripts.html"}
+</html>

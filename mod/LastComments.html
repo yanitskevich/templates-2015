@@ -1,0 +1,10 @@
+{if $ext_lastcomments && sizeof($lastcomments_items)>0}
+<div class="LastComments">
+{if $lastcomments_name}<h3>{$lastcomments_name}</h3>{/if}
+{foreach from=$lastcomments_items item=item}<div class="LastComments-item">
+	<small class="text-nowrap"><em class="glyphicon glyphicon-calendar"></em> {$item.created|date_format:"%d %B %Y в %H:%M"}</small><br/><b>{$item.login}</b> <a href="{$item.content.vlink}#message{$item.coid}" title="Комментарий к {$item.content.name|escape}"><em class="glyphicon glyphicon-comment"></em></a>
+	{$item.txt|truncate:400}
+</div>{/foreach}
+<div class="clearfix"></div>
+</div>
+{/if}

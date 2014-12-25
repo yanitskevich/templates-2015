@@ -1,0 +1,10 @@
+{if $GLOBS.userdata.points < $GLOBS.merchants.points.min}
+<div class="payment-form">
+	<button type=button class="btn btn-large" rel="tooltip" title="Минимальное количество бонусов для оплаты {$GLOBS.merchants.points.min} {numeral number=$GLOBS.merchants.points.min ends="бонус, бонуса, бонусов"}. У вас {$GLOBS.userdata.points} бонусных баллов." disabled><img src="/media0/img/merchants/points.png" alt="Бонусные баллы" width="150" /></button>
+</div>
+{else if $GLOBS.userdata.points}
+<form method="post" action="/cabinet/pay.html?provider=points" class="payment-form">
+	<input type="hidden" value="{$order_id}" name="order_id" />
+	<button type=submit class="btn btn-large" rel=tooltip title="У вас {$GLOBS.userdata.points|price:false} бонусных баллов.{if $GLOBS.merchants.points.max}Максимальная сумма списания {$GLOBS.merchants.points.max}% от стоимости заказа. {/if}{$GLOBS.merchants.points.btn|default:'Оплатить баллами'}."><img src="/media0/img/merchants/points.png" alt="Бонусные баллы" width="150" /></button>
+</form>
+{/if}

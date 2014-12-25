@@ -1,0 +1,93 @@
+{if $GLOBS.user_id eq 6}
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-body">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
+			<div class="row" style="margin-bottom:0;margin:0;">
+				<div class="col-md-6">
+					<div id="forgotBox" class="hide">
+						<h4>Восстановление пароля</h4>
+						<form action="/cabinet/reg.html" method="GET">
+							<!--div class="alert alert-info">Введите адрес электронной почты, который Вы указывали при регистрации.</div-->
+							<input type="text" class="form-control text-center" name="fog_login" id="inputEmail" placeholder="Введите адрес электронной почты" autocomplete=off value="" required /><br />
+							<button type="submit" class="btn btn-success">Восстановить</button> &mdash; <a href="#loginBox" data-hide="#forgotBox" rel="nofollow" class="BoxHandler">Я вспомнил!</a>
+						</form>
+					</div>
+					<div id="loginBoxError" class="hide">
+						<h4>Я уже зарегистрирован</h4>
+						<div class="alert alert-warning">
+							Логин или пароль введены неверно. Чтобы восстановить доступ к регистрационной записи, вы можете <a href="#forgotBox" data-hide="#loginBoxError" rel="nofollow" class="BoxHandler">восстановить пароль</a> или <a href="#loginBox" data-hide="#loginBoxError" rel="nofollow" class="BoxHandler">ввести другой пароль</a>.
+						</div>
+					</div>
+					<div id="loginBox">
+						<h4>Я уже зарегистрирован</h4>
+						<form action="" method="POST">
+							<input type="text" class="form-control" placeholder="Электронная почта" name="login" required /><br />
+							<input type="password" class="form-control" placeholder="Пароль" name="password" required /><br />
+							<button type="submit" class="btn btn-success">Войти</button> &mdash; <a href="#forgotBox" data-hide="#loginBox" rel="nofollow" class="BoxHandler">Восстановить пароль</a>
+						</form>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<h4>Я новый покупатель</h4>
+					<form action="/cabinet/reg.html" method="POST" style="margin-bottom:10px;">
+					  <div class="control-group" style="margin:0;">
+						  <div class="controls">
+							  <input type="text" class="form-control" placeholder="Введите адрес электронной почты" name="regdata[email]" id="regdata_email" /><br />
+							  <script> $('#regdata_email').validator('email'); </script>
+						  </div>
+					  </div>
+					  <input type="hidden" name="fast" value="1" />
+					  <button type="submit" class="btn btn-info">Зарегистрироваться</button>
+					</form>
+					<p><small>Сделайте покупки удобнее.<br />Это просто и займет всего минуту.</small></p>
+				</div>
+			</div>
+			<script>
+				$('.BoxHandler').click(function(){
+					$($(this).attr('href')).slideDown();
+					$($(this).data('hide')).slideUp();
+					return false;
+				});
+				
+				$('#loginBox form').on('submit', function(){
+					$.ajax(
+					{
+						type: "POST",
+						url : '/cabinet/',
+						data : $(this).serialize(),
+
+						success : function(res)
+						{
+							location.reload();
+						},
+						error : function()
+						{
+							$('#loginBox').slideUp();//.delay(2000).show();
+							$('#loginBoxError').slideDown();//.delay(2000).hide();
+						}
+					});
+					return false;
+				});
+			</script>
+
+			{if $ext_authsocial}
+			<div class="modal-footer">
+				<h4 align="center">Или войдите, через социальную сеть</h4>
+				<p align="center">
+					{if $authsocial_facebook}<a href="/cabinet/?provider=facebook&r={$authsocial_comebackurl|escape:url}" class="social-font-facebook" rel="tooltip" title="Facebook"><i class="icon-facebook"></i></a>{/if}
+					{if $authsocial_twitter}<a href="/cabinet/?provider=twitter&r={$authsocial_comebackurl|escape:url}" class="social-font-twitter" rel="tooltip" title="Twitter"><i class="icon-twitter"></i></a>{/if}
+					{if $authsocial_google}<a href="/cabinet/?provider=google&r={$authsocial_comebackurl|escape:url}" class="social-font-google" rel="tooltip" title="Google"><i class="icon-google"></i></a>{/if}
+					{if $authsocial_vkontakte}<a href="/cabinet/?provider=vkontakte&r={$authsocial_comebackurl|escape:url}" class="social-font-vkontakte" rel="tooltip" title="Вконтакте"><i class="icon-vkontakte"></i></a>{/if}
+					{if $authsocial_yandex}<a href="/cabinet/?provider=yandex&r={$authsocial_comebackurl|escape:url}" class="social-font-yandex" rel="tooltip" title="Яндекс"><i class="icon-yandex"></i></a>{/if}
+					{if $authsocial_mailru}<a href="/cabinet/?provider=mailru&r={$authsocial_comebackurl|escape:url}" class="social-font-mailru" rel="tooltip" title="Mail.Ru"><i class="icon-mailru"></i></a>{/if}
+				</p>
+			</div>
+			{/if}
+		</div>
+	</div>
+</div>
+{else}
+Вы уже авторизованы
+{/if}
+

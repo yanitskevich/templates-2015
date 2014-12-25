@@ -1,0 +1,8 @@
+{if $ext_productmostpurchased && sizeof($productmostpurchased_products)}
+{if $productmostpurchased_name}
+
+<h3>{$productmostpurchased_name}</h3>
+
+{/if}
+<section class="products products-purchased">{foreach from=$productmostpurchased_products item="item" key="oid" name=cat}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item oid=$oid}{/foreach}</section>
+{/if}

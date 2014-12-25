@@ -1,0 +1,8 @@
+{if $ext_productbuyedwith && sizeof($productbuyedwith_products)}
+
+<!-- productbuyedwith -->
+{if $productbuyedwith_name}
+<h3>{$productbuyedwith_name}</h3>
+{/if}
+<section class="products products-buyedwith">{foreach from=$productbuyedwith_products item="item" key="oid" name=cat}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item oid=$oid}{/foreach}</section>
+{/if}

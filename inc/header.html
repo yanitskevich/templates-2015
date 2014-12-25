@@ -1,0 +1,23 @@
+<header>
+	<div class="container">
+		<div class="header-inner">
+			<div class="brand">
+				{if is_array($GLOBS.LOGO)}<a href="/"><img src="{$GLOBS.LOGO[0].path}" ></a>{else if $GLOBS.LOGO}<a href="/"><img src="{$GLOBS.LOGO}" ></a>{else}<a href="/">{$GLOBS.SITENAME}<small>{$GLOBS.SITEDESCRIPTION}</small></a>{/if}
+				
+			</div>
+			<div class="contacts">
+				{if $GLOBS.PHONE}<big>{$GLOBS.PHONE}</big>{/if}
+				{if $GLOBS.PHONES}<small>{$GLOBS.PHONES}</small><br />{/if}
+				{if $GLOBS.MAIL}<a href="mailto:{$GLOBS.MAIL}">{$GLOBS.MAIL}</a><br />{/if}
+			</div>
+			{if $ext_livesearch}
+			<form class="form-search" role="search" action="/search/">
+			<div class="input-group"><input type="text" placeholder="Введите слово для поиска по сайту" name="q" value="{$searchquery}" class="search-query form-control"><span class="input-group-btn"><button type="submit" class="btn btn-search"><span class="glyphicon glyphicon-search"></span> Поиск</button></span></div>
+			</form>
+			<script src="/media0/js/jquery.autocomplete.js"></script>
+			<script src="/media0/js/jquery.highlight.js"></script>
+			<script>$('.search-query').AutoCompleter();</script>
+			{/if}
+		</div>
+	</div>
+</header>

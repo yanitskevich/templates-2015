@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+{include file="$TMPL_FOLDER/inc/head.thm"}
+<body>
+	<div class="wrap">
+		<div class="header">
+		{include file="$TMPL_FOLDER/inc/menu.thm"}
+		<a href="/" class="logo png"></a>
+		{include file="$TMPL_FOLDER/inc/login.thm"}
+		
+		</div>
+		<div class="content png">
+			<div class="slices">
+				<em class="t png"></em>
+				<em class="b png"></em>
+			</div>
+			
+			
+			<div class="block-in png content-padding">
+				<big class="content-title">Пополнение счёта</big>
+				<div class="about">
+{if $GLOBS.user_id neq 6}
+	<h1>Пополнение счёта на {$money} руб.</h1>
+		<table>
+			{if $pay_method eq 1}
+			<tr><td>Пополнение через:</td><td>IntellectMoney</td></tr>
+			<tr><td>&nbsp;</td><td>банковской картой (VISA, MasterCard)</td></tr>
+			{elseif $pay_method eq 2}
+			<tr><td>Пополнение через:</td><td>IntellectMoney</td></tr>
+			<tr><td>&nbsp;</td><td>платежные терминалы, банк</td></tr>
+			{elseif $pay_method eq 3}
+			<tr><td>Пополнение через:</td><td>IntellectMoney</td></tr>
+			<tr><td>&nbsp;</td><td>электронными деньгами (Webmoney, Яндекс.Деньги и т.д.)</td></tr>
+			{/if}
+		</table>
+	<br /><br />
+	   <form action="https://merchant.intellectmoney.ru/ru/" name="pay" method="POST">
+	   <input type="hidden" name="eshopId" value="432365">
+	   <input type="hidden" name="orderId" value="{$orderId}">
+	   <input type="hidden" name="userEmail" value="{$GLOBS.userdata.email}">
+	   
+	   <input type="hidden" name="serviceName" value="онКупон : Пополнение счёта">
+	   <input type="hidden" name="recipientAmount" value="{$money}">
+	   <input type="hidden" name="recipientCurrency" value="RUR">
+	   {*<input type="hidden" name="recipientCurrency" value="TST">*}
+
+	   <input type="hidden" name="hash" value="{$hash}">
+	   <input type="hidden" name="email" value="{$GLOBS.userdata.email}">
+	   {if $pay_method eq 1}
+	   <input type="hidden" name="preference" value="bankCard">
+	   {elseif $pay_method eq 2}
+	   <input type="hidden" name="preference" value="inner,terminals,bank,transfers">
+	   {elseif $pay_method eq 3}
+	   <input type="hidden" name="preference" value="exchangers">
+	   {/if}
+	   <input type="hidden" name="successUrl" value="http://www.limonkupon.ru/basket/?action=order&order_id={$orderId}&pay_method={$pay_method}">
+	   <input type="hidden" name="failUrl" value="http://www.limonkupon.ru/basket/?action=order&order_id={$orderId}&pay_method={$pay_method}">
+
+	   <input type="image" src="/media/img/pay_next.png" width="125" height="27" value="Оплатить заказ"/>
+	</form>
+
+{else}
+<h1>Необходима авторизация</h1>
+<p>Для того что бы покупать купоны, вам необходимо <a href="/cabinet/reg.html">зарегистрироваться</a> и пройти процедуру авторизации</p>
+{/if}
+
+				</div>
+			</div>
+		</div>
+		<div class="news">
+			{foreach from=$news item=item}
+			<div class="news-box">
+				<span>{$item.date.d} {$item.date.M}</span>
+				<p><a href="{$item.content.vlink}">{$item.content.annotate}</a></p>
+			</div>
+			{/foreach}
+		</div>
+		{include file="$TMPL_FOLDER/inc/footer.thm"}
+	</div>
+</body>
+</html>

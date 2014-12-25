@@ -1,0 +1,58 @@
+{if $type eq 'radio'}
+
+{if $GLOBS.merchants.yandexmoney_ur['PC']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="YANDEXKASSA_PC"> {$GLOBS.merchants.yandexmoney.btn|default:'Яндекс.Деньги'}
+		<p class="help-block">Оплата заказа Яндекс.Деньгами со своего счета.</p>
+	</label>
+</div>
+{/if}
+{if $GLOBS.merchants.yandexmoney_ur['AC']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="YANDEXKASSA_AC"> Банковская карта
+		<p class="help-block">Оплата заказа картой Visa (включая Electron), MasterCard или Maestro.</p>
+	</label>
+</div>
+{/if}
+{if $GLOBS.merchants.yandexmoney_ur['MC']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="YANDEXKASSA_MC"> Со счета мобильного телефона
+		<p class="help-block">Оплата заказа с баланса мобильного номера Билайн, МегаФон, МТС, TELE2 или Ростелеком.</p>
+	</label>
+</div>
+{/if}
+{if $GLOBS.merchants.yandexmoney_ur['GP']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="YANDEXKASSA_GP"> Наличными через кассы и терминалы
+		<p class="help-block">Оплата заказа через терминалы и кассы салонов связи — более 170 тысяч пунктов.</p>
+	</label>
+</div>
+{/if}
+{if $GLOBS.merchants.yandexmoney_ur['WM']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="YANDEXKASSA_WM"> WebMoney
+		<p class="help-block">Оплата заказа из кошелька популярной системы международных расчетов WebMoney.</p>
+	</label>
+</div>
+{/if}
+{if $GLOBS.merchants.yandexmoney_ur['SB']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="YANDEXKASSA_SB"> Через Сбербанк Онлайн
+	</label>
+</div>
+{/if}
+{/if}
+{if $type eq 'option'}
+{if $GLOBS.merchants.yandexmoney_ur['PC']}<option value="YANDEXKASSA_PC">{$GLOBS.merchants.yandexmoney.btn|default:'Яндекс.Деньги'}</option>{/if}
+{if $GLOBS.merchants.yandexmoney_ur['AC']}<option value="YANDEXKASSA_AC">Банковской картой Visa (включая Electron), MasterCard или Maestro</option>{/if}
+{if $GLOBS.merchants.yandexmoney_ur['MC']}<option value="YANDEXKASSA_MC">С баланса мобильного номера Билайн, МегаФон, МТС, TELE2 или Ростелеком</option>{/if}
+{if $GLOBS.merchants.yandexmoney_ur['GP']}<option value="YANDEXKASSA_GP">Наличными через кассы и терминалы</option>{/if}
+{if $GLOBS.merchants.yandexmoney_ur['WM']}<option value="YANDEXKASSA_WM">WebMoney</option>{/if}
+{if $GLOBS.merchants.yandexmoney_ur['SB']}<option value="YANDEXKASSA_SB">Через Сбербанк Онлайн</option>{/if}
+{/if}

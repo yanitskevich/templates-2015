@@ -1,0 +1,40 @@
+<div class="comment-item" style="margin-left:{$comment.level*20}px;" data-level="{$comment.level}" data-coid="{$comment.coid}">
+	<a name="message{$comment.coid}"></a>
+	<p class="head">
+		{if $comment.userdata.userpic}<img src="{$comment.userdata.userpic}" width=16 height=16 class="userpic" />{/if}
+		<a href="#message" rel="answer" data-coid="{$comment.coid}">{$comment.login}</a> <small>{$comment.created|date_format:" %d %b %Y в %H:%M"|lower}</small>
+		{if $comment.userdata.facebook_profileURL}<a href="{$comment.userdata.facebook_profileURL}" title="Перейти к профилю социальной сети" target="_blank"><i class="social-16-facebook"></i></a>{/if}
+		{if $comment.userdata.twitter_profileURL}<a href="{$comment.userdata.twitter_profileURL}" title="Перейти к профилю социальной сети" target="_blank"><i class="social-16-twitter"></i></a>{/if}
+		{if $comment.userdata.google_profileURL}<a href="{$comment.userdata.google_profileURL}" title="Перейти к профилю социальной сети" target="_blank"><i class="social-16-google"></i></a>{/if}
+		{if $comment.userdata.vkontakte_profileURL}<a href="{$comment.userdata.vkontakte_profileURL}" title="Перейти к профилю социальной сети" target="_blank"><i class="social-16-vkontakte"></i></a>{/if}
+		{if $comment.userdata.yandex_profileURL}<a href="{$comment.userdata.yandex_profileURL}" title="Перейти к профилю социальной сети" target="_blank"><i class="social-16-yandex"></i></a>{/if}
+		{if $comment.userdata.mailru_profileURL}<a href="{$comment.userdata.mailru_profileURL}" title="Перейти к профилю социальной сети" target="_blank"><i class="social-16-mailru"></i></a>{/if}
+	</p>
+	{if $comment.opros}
+	<ul class="opros">
+		{foreach from=$comment.opros item=opros_rank key=key}
+		<li><span>{$comment_args.opros[$key]}</span> {section name=poprank loop=$opros_rank step=1}<i class="star-rating star-rating-on"></i>{/section}{section name=poprank loop=5-$opros_rank step=1}<i class="star-rating"></i>{/section}</li>
+		{/foreach}
+	</ul>
+	{/if}
+	
+	<p>{$comment.txt}</p>
+	
+	{if $authOnly && $GLOBS.user_id eq 6}
+		{*<a href="/cabinet/?tmpl=short&r={$vpath|escape:url}" class="btn btn-success" class="btn btn-primary" rel="nofollow" data-toggle="modal" data-target="#login-box"><i class="glyphicon glyphicon-user"></i> Войти</a>*}
+	{else}
+		<div class="controls">
+			<div class="controls-group">
+				{if $comment.voted}
+				<a class="btn btn-thumb-up {if $comment.up}active{else}disabled{/if}" rel="tooltip" title="Вы уже проголосовали"><i class="thumb up"></i></a>
+				<a class="btn btn-thumb-down {if $comment.down}active{else}disabled{/if}" rel="tooltip" title="Вы уже проголосовали"><i class="thumb down" /></i></a>
+				{else}
+				<a class="btn btn-thumb-up" rel="thumb" href="?thumb-up={$comment.coid}" data-coid="{$comment.coid}"><i class="thumb up"></i></a>
+				<a class="btn btn-thumb-down" rel="thumb" href="?thumb-down={$comment.coid}" data-coid="{$comment.coid}"><i class="thumb down" /></i></a>
+				{/if}
+				<a class="btn-answer" href="#message" rel="answer" data-coid="{$comment.coid}">Ответить</a>
+				{if $GLOBS.group_id eq 2}<a href="#delete" class="btn btn-delete" rel="delete" data-coid="{$comment.coid}">Удалить</a>{/if}
+			</div>
+		</div>
+	{/if}
+</div>

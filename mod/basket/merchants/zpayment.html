@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="ZPAYMENT"> {$GLOBS.merchants.zpayment.btn|default:'Оплатить через Z-Payment'}
+		<p class="help-block">Оплата через сервис Z-Payment. Пластиковые карты, WebMoney, Яндекс.Деньги и другие способы оплаты.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="ZPAYMENT">{$GLOBS.merchants.zpayment.btn|default:'Оплатить через Z-Payment'}</option>
+{/if}

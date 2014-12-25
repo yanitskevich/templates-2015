@@ -1,0 +1,72 @@
+{if $ext_shopexpresscountdown}
+<div class="countdown well" data-date="{$shopexpresscountdown_end}" onclick="location.href='{$shopexpresscountdown_link.vlink}';">
+	<h4><a href="{$shopexpresscountdown_link.vlink}">{$shopexpresscountdown_link.name}</a></h4>
+	<p>{$shopexpresscountdown_link.annotate}</p>
+</div>
+<script src="/media0/js/jquery.countdown.js"></script>
+{literal}<script>$('.countdown').countdown( { tmpl : '<div class="years">{%=years%}<span class="text">{%=years_text%}</span></div><div class="months">{%=months%}<span class="text">{%=months_text%}</span></div><div class="days">{%=days%}<span class="text">{%=days_text%}</span></div><div class="hours">{%=hours%}<span class="text">{%=hours_text%}</span></div><div class="minutes">{%=minutes%}<span class="text">{%=minutes_text%}</span></div><div class="seconds">{%=seconds%}<span class="text">{%=seconds_text%}</span></div>' } );</script>{/literal}
+
+<style>
+@import url(http://fonts.googleapis.com/css?family=Gafata);
+.countdown {
+	width: 100%;
+	/* background: rgba(96,96,96,0.29); */
+	/* border-radius: 15px; */
+	padding: 10px 0;
+	margin: 10px 0;
+	text-align: center;
+	cursor: pointer;
+}
+.countdown h4
+{
+	margin: 5px auto;
+	padding: 0;
+	font-size: 36px;
+}
+.countdown p{
+	line-height: 18px;
+	font-size: 18px;
+	margin-top: 18px;
+}
+.countdown > div
+{
+	margin-right: 15px;
+	font-size: 72px;
+	line-height: 72px;
+	min-width: 80px;
+	display: inline-block;
+
+	text-align: center;
+
+	font-weight: bold;
+	font-family: "Open Sans Condensed", sans-serif;
+}
+.countdown > div .text
+{
+	font-size: 14px;
+	display: block;
+	margin: 0 auto;
+	line-height: 14px;
+	font-weight: normal;
+	padding-left: 0;
+	text-align: center;
+}
+.countdown > div.seconds:before{
+	content: ':';
+	padding-right: 15px;
+}
+.countdown > div.minutes:before{
+	content: ':';
+	padding-right: 15px;
+}
+
+.countdown > div.hours{
+	padding-left: 30px;
+}
+
+.countdown > div.seconds .text,
+.countdown > div.minutes .text {
+	padding-left: 35px;
+}
+</style>
+{/if}

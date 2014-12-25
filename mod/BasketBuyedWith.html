@@ -1,0 +1,7 @@
+{if $ext_basketextendedbuyedwith && sizeof($basketextendedbuyedwith_products)}
+<!-- basketextendedbuyedwith -->
+{if $basketextendedbuyedwith_name}
+<h3>{$basketextendedbuyedwith_name}</h3>
+{/if}
+<section class="products products-buyedwith">{foreach from=$basketextendedbuyedwith_products item="item" key="oid" name=cat}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item oid=$oid}{/foreach}</section>
+{/if}

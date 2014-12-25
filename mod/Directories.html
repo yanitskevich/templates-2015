@@ -1,0 +1,29 @@
+{if sizeof($directories_folders)>0}
+{foreach from=$directories_folders item=item}
+	{if $item.level>=$directories_prevlevel}</li>{/if}
+	
+	{if $item.level>$directories_prevlevel}
+	{section name=levelup start=$directories_prevlevel loop=$item.level step=1}</ul></li>{/section}
+	{/if}
+	
+	{if $item.level<$directories_prevlevel}
+	{if $directories_prevlevel eq $directories_level}{* первый ul *}
+	<ul class="nav nav-list">
+	{else}
+	<ul{if !$prevopened && $directories_onlyopened} class=hide{/if}>
+	{/if}
+	{/if}
+	
+	{assign var="directories_prevlevel" value=$item.level}
+	
+	{if $item.level<$directories_prevlevel}
+	<ul{if $prevopened} {/if}>
+	{/if}
+	
+	<li class="{if $item.opened}active{/if}">{if $item.content.name}<a href="{$item.vlink}">{if $item.countchilds>0}<span class="badge pull-right">{$item.countchilds}</span>{/if}{$item.content.name}</a>{/if}
+	
+	{assign var="prevopened" value=$item.opened}
+	{assign var="prevcountchilds" value=$item.countchilds}
+{/foreach}
+{section name=levelup start=$directories_prevlevel loop=$directories_level step=1}</li></ul>{/section}
+{/if}

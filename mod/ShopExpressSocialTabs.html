@@ -1,0 +1,39 @@
+{if $shopexpresssocialtabs_vk}
+<div class="widget vk">
+	<div class="flag social-font-vkontakte"><i class="icon-vkontakte"></i></div>
+	<script type="text/javascript" src="//vk.com/js/api/openapi.js?101"></script>
+	<!-- VK Widget -->
+	<div id="vk_groups"></div>
+	<script type="text/javascript">
+	VK.Widgets.Group("vk_groups", { mode: 0, width: "400", height: "400", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6' }, {$shopexpresssocialtabs_vk});
+	</script>
+</div>
+{/if}
+{if $shopexpresssocialtabs_fb}
+<div class="widget facebook">
+	<div class="flag social-font-facebook"><i class="icon-facebook"></i></div>
+	<div class="fb-like-box" data-href="https://www.facebook.com/{$shopexpresssocialtabs_fb}" data-width="400" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+</div>
+{/if}
+{if $shopexpresssocialtabs_twitter}
+<div class="widget twitter">
+	<div class="flag social-font-twitter"><i class="icon-twitter"></i></div>
+	{$shopexpresssocialtabs_twitter}
+<script>!function(d,s,id){ var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){ js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs); } }(document,"script","twitter-wjs");</script>
+</div>
+{/if}
+
+{if $shopexpresssocialtabs_ok}
+<div class="widget odkl">
+	<div class="flag social-font-odnoklassniki"><i class="icon-odnoklassniki"></i></div>
+	<div id="ok_group_widget"></div>
+</div>
+{/if}
+{if $shopexpresssocialtabs_map}
+<div class="widget map">
+	<div class="flag social-font-map"><i class="icon-map"></i></div>
+	{$shopexpresssocialtabs_map}
+</div>
+{/if}

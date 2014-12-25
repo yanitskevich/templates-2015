@@ -1,0 +1,20 @@
+{if sizeof($images)>0}
+<div class="thumbnails">
+	<a class="thumbnail col-sm-12">
+		<img src="/{image src=$images[0].path width=400 folder=".400"}" data-zoom-image="{if $watermark[0].path}{watermark src=$images[0].path watermark=$watermark[0].path}{else}{$images[0].path}{/if}" id="mimage" itemprop="image" />
+	</a>
+</div>
+{/if}
+{if sizeof($images)>1}
+<hr />
+<div class="row">
+{foreach from=$images item="im" name='itemcounter'}
+	<div class="col-lg-3 col-md-3 col-sm-3 col-sx-6">
+	<a href="{if $watermark[0].path}{watermark src=$im.path watermark=$watermark[0].path}{else}{$im.path}{/if}" itemprop="image" class="thumbnail fancybox" title="{$im.name}" data-image="/{image src=$im.path width=400 folder=".400"}" data-zoom-image="{$im.path}" rel="group">
+		<img src="/{image src=$im.path width=150 height=150 folder=".150x150" crop=true}" alt="{$im.name}">
+		<center class="hide">{$im.name}</center>
+	</a>
+	</div>
+{/foreach}
+</div>
+{/if}

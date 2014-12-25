@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+{include file="$TMPL_FOLDER/inc/head.html"}
+<body>
+	{include file="$TMPL_FOLDER/inc/design-ui.html"}
+	<div class="wrapper">
+		{include file="$TMPL_FOLDER/inc/topnav.html"}
+		{include file="$TMPL_FOLDER/inc/header.html"}
+		{include file="$TMPL_FOLDER/mod/Menu.html"}
+
+		<div class="container">
+			{include file="$TMPL_FOLDER/mod/Pathline.html"}
+			<h1>{$name}</h1>
+			<aside>
+				{include file="$TMPL_FOLDER/mod/cabinet/menu.html"}
+			</aside>
+			<div class="content">
+				{include file="$TMPL_FOLDER/mod/ShopExpressCountDown.html"}
+				{include file="$TMPL_FOLDER/mod/Anonces.html"}
+				<article>
+					{$text}
+				</article>
+			    {if sizeof($ProductsCompare)>0}
+			    <div class="compare-wrapper">
+				<table class="table table-hover">
+				<thead>
+					<tr>
+					<th></th>
+					{foreach from=$ProductsCompare item="item" name="cat"}
+						<th style="min-width:130px;">
+						<a href="{$item.vlink}" target="_blank" class="thumbnail">{if sizeof($item.content.images)>0}{foreach from=$item.content.images item="im"}<img src="/{image src=$im.path height=$GLOBS.img_height|default:150 folder=$GLOBS.img_height|default:"150" crop=true}" alt="{$im.name}" />{break}{/foreach}{else}<img src="/media0/img/no-image.png" alt="Нет изображения" />{/if}</a>
+						</th>
+					{/foreach}
+					</tr>
+					<tr>
+					<th></th>
+					{foreach from=$ProductsCompare item="item" name="cat"}
+						<th><p align="center"><a href="{$item.vlink}" target="_blank">{$item.content.name}</a></p></th>
+					{/foreach}
+					</tr>
+				</thead>
+	
+				<tbody>
+					<tr>
+						<td style="line-height:35px;">{$GLOBS.fieldnames[7]['price']}</td>
+						{foreach from=$ProductsCompare item="item" name="cat"}
+						<td style="line-height:35px;text-align:center;"><big>
+						{if $item.content.minprice}
+							{if $item.content.minprice < $item.content.maxprice}от{/if}
+							{$item.content.minprice|discount:$item.content.discount|price}
+							{if $item.content.discount}<s>{if $item.content.minprice < $item.content.maxprice}от{/if} {$item.content.minprice|price}</s>{else if $item.content.old_price}<s>{$item.content.old_price|price}</s>{/if}
+						{else}
+							{$item.content.price|discount:$item.content.discount|price}
+							{if $item.content.discount}<s>{$item.content.price|price}</s>{else if $item.content.old_price}<s>{$item.content.old_price|price}</s>{/if}
+						{/if}
+						</big>
+						</td>
+						{/foreach}
+					</tr>
+					{foreach from=$productscompare_fields item="fieldname"}
+					<tr>
+						<td>{$GLOBS.fieldnames[7][$fieldname]}</th>
+						{foreach from=$ProductsCompare item="item" name="cat"}
+						<td>
+						{if $fieldname eq 'discount' && $item.content.discount}
+						<span class="badge badge-success">{$item.content.discount.human}</span>
+						{elseif $fieldname eq 'product_flags' && $item.content.product_flags}
+						<span class="badge badge-warning">{$GLOBS.product_flags[$item.content.product_flags]}</span>
+						{elseif $fieldname eq 'available' && $item.content.available}
+						{$GLOBS.available[$item.content.available]}
+						{else}
+						{$item.content[$fieldname]|default:'&mdash;'}
+						{/if}
+						</td>
+						{/foreach}
+					</tr>
+					{/foreach}
+					<tr class="inbasket-item">
+						<td></td>
+						{foreach from=$ProductsCompare item="item" name="cat"}
+						<td>
+						<p align="center">
+							<a href="/basket/?action=add&oid={$item.oid}&time={$smarty.now}" class="btn-buy inbasket">Купить</a>			
+						</p>
+						<p align="center">
+							{if $ext_bookmarked}
+							{if $bookmarks[$oid]}
+							<li><a class="btn-bookmark active" href="/favorites/?{$oid}&time={$smarty.now}" title="Убрать&nbsp;из избранного" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
+							{else}
+							<li><a class="btn-bookmark" href="/favorites/?{$oid}&time={$smarty.now}" title="Добавить&nbsp;в избранное" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
+							{/if}
+							{/if}
+						
+							{if $ext_productscompared}
+							{if $smarty.session.ProductsCompare[$oid]}
+							<li><a class="btn-compare active" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="Убрать&nbsp;из сравнения" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
+							{else}
+							<li><a class="btn-compare" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="Добавить&nbsp;к сравнению" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
+							{/if}
+							{/if}
+						</p>
+						</td>
+						{/foreach}
+					</tr>
+				<tbody>			
+				</table>
+				</div>
+			    {else}
+			    	<div class="well">
+			    		<h3>Ваш список для сравнения пуст</h3>
+			    		<p>Добавляйте товары из каталога на любой странице магазина в избранное или сравнивайте!</p>
+			    	</div>
+			    {/if}
+
+			</div>
+		</div>
+	</div>
+	{include file="$TMPL_FOLDER/inc/footer.html"}
+</body>
+{include file="$TMPL_FOLDER/inc/scripts.html"}
+</html>

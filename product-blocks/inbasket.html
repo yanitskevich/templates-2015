@@ -1,0 +1,125 @@
+<form class="basket-form inbasket" action="/basket/" method=post role="form">
+	{if sizeof($basketparams_fields)>0}
+	<fieldset>
+		{foreach from=$basketparams_fields item=field key=field_name}
+		{if $field.values|editable_count}
+		<div class="form-group">
+			<label class="control-label" for="selectParams_{$field_name}">
+				{$GLOBS.fieldnames[$objinfo.type][$field_name]}
+			</label>
+			<select class="form-control" name="params[{$oid}][{$field_name}]" id="selectParams_{$field_name}">
+			{foreach from=$field.values item=item key=key}
+			{if $item.editable eq 'true'}
+			<option value="{$key}" data-price="{$item.price|discount:$discount}" data-oldprice="{$item.price}" data-type="{$item.type}" data-name="{$item.name}" {if $smarty.get.$field_name eq $item.name}selected{/if}>
+				{$item.name}
+				
+				{if $item.price && $item.type eq 'plus'},
+				дополнительно {$item.price|discount:$discount|price:false} {numeral number=$item.price|discount:$discount|price:false ends=$GLOBS.currency.name}
+				{elseif $item.price}
+				, цена {$item.price|discount:$discount|price:false} {numeral number=$item.price|discount:$discount|price:false ends=$GLOBS.currency.name}
+				{else}
+				{/if}
+			</option>
+			{/if}
+			{/foreach}
+			</select>
+		</div>
+		{/if}
+		{/foreach}
+	</fieldset>
+	{/if}
+	<script>
+		$(document).ready(function ()
+		{
+		    $("#mimage").elevateZoom(
+		    	{
+		    		cursor: 'pointer',
+		    		imageCrossfade: true,
+		    		borderSize:1,
+		    		zoomWindowWidth: 350,
+		    		zoomWindowHeight: 350,
+		    		loadingIcon: '/media0/img/loading.gif'
+		    	}
+		    );
+		    var $elevate = $('#mimage').data('elevateZoom');
+
+			var params_images = [];
+			$('article .thumbnail.fancybox').each(function()
+			{
+				if($(this).children('img').attr('alt'))
+					params_images.push({
+						'name' : $(this).children('img').attr('alt'),
+						'image' : $(this).data('image'),
+						'zoom-image' : $(this).data('zoom-image')
+					});
+			});
+
+			var SelectImage = function(param_name)
+			{
+				for(var i=0;i<params_images.length;i++)
+				{
+					if( params_images[i]['name'] == param_name )
+					{
+						$elevate.zoomImagePre = params_images[i]['zoom-image'];
+						$elevate.swaptheimage(params_images[i]['image'], $elevate.zoomImagePre, $elevate);
+						break;
+					}
+				}
+			};
+			
+			$(".inbasket select").change(function()
+			{
+				var param_name = $(this).children(":selected").data('name');
+				SelectImage(param_name);
+			});
+			
+			$(".inbasket select option:selected").each(function()
+			{
+				var param_name = $(this).data('name');
+				SelectImage(param_name);
+			});
+
+		});
+	</script>
+	
+	{*
+	<!-- Раскомментировать, чтобы указать количество товаров до добавления в корзину -->
+	Сумма товара со скидкой <span class="total"></span> р.<br>
+	Сумма товара без скидки <span class="oldtotal"></span> р.<br>
+	<!-- можно использовать стрелки на клавиатуре, чтобы указать менять количество -->
+	<input type="number" name="count" class="count" value="1" step="0.5"/><br>
+	*}
+
+	
+	<input type="hidden" name="action" value="add" />
+	<input type="hidden" name="count" class="count" value="1" />
+	<input type="hidden" name="oid" value="{$oid}" />
+	<input type="hidden" name="time" value="{$smarty.now}" />
+
+	{if $price}
+	{if $ext_basketextendedhelpers && $basketextendedhelpers_pageBtn}
+	{if $basketextendedhelpers_pageBtn eq 1}
+	<button type="submit" class="btn-buy" {if isset($quantity) && $quantity <= 0}disabled{/if}>В корзину</button> или 
+	<button type="button" class="btn-buyoneclick inbasket" {if isset($quantity) && $quantity <= 0}disabled{/if}>Купить в один клик</button>
+	{elseif $basketextendedhelpers_pageBtn eq 2}
+	<button type="button" class="btn-buyoneclick inbasket" {if isset($quantity) && $quantity <= 0}disabled{/if}>Купить в один клик</button>
+	{/if}
+	{else}
+	<button type="submit" class="btn-buy" {if isset($quantity) && $quantity <= 0}disabled{/if}>Купить</button>
+	{/if}
+	{/if}
+		
+	{if $ext_bookmarked}
+	<a class="btn-bookmark {if $bookmarked}active{/if}" href="/favorites/?{$oid}&time={$smarty.now}" title="{if $bookmarked}Убрать&nbsp;из избранного{else}Добавить&nbsp;в избранное{/if}" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a>
+	{/if}
+
+	{if $ext_productscompared}
+	<a class="btn-compare {if $smarty.session.ProductsCompare[$oid]}active{/if}" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="{if $smarty.session.ProductsCompare[$oid]}Убрать&nbsp;из сравнения{else}Добавить&nbsp;к сравнению{/if}" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a>
+	{/if}
+	
+</form>
+{if $ext_socialposting}
+<div class="alert alert-info">
+{include file="$TMPL_FOLDER/mod/ShopExpressSocialPosting.html"}
+</div>
+{/if}

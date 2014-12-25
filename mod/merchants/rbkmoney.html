@@ -1,0 +1,10 @@
+<form action=https://rbkmoney.ru/acceptpurchase.aspx class="payment-form">
+	<input type="hidden" name="eshopId" value="{$GLOBS.merchants.rbkmoney.eshopId}">
+	<input type="hidden" name="user_email" value="{$order_content.email}">
+	<input type="hidden" name="orderId" value="{$order_id}">
+	<input type="hidden" name="recipientAmount" value="{$summ}">
+	<input type="hidden" name="recipientCurrency" value="{$currency.code}">
+	<input type="hidden" name="serviceName" value="{$GLOBS.merchants.rbkmoney.serviceName|default:'Оплата заказа №'}{$order_id}">
+	<!-- button type=submit class="btn btn-large">{$GLOBS.merchants.rbkmoney.btn|default:'Оплатить через RBKMoney'}</button -->
+	<button type=submit class="btn btn-large" title="{$GLOBS.merchants.rbkmoney.btn|default:'Оплатить через RBKMoney'}" rel="tooltip"><img src="/media0/img/merchants/RBKMoney.png" alt="RBKMoney" width="150" /></button>
+</form>

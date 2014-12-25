@@ -1,0 +1,128 @@
+{if sizeof($directories_filters)>0 && $directories_filters_url}
+<link href="/media0/css/filters.css" rel="stylesheet">
+<script src="/media0/js/jquery.filters.js"></script>
+<script>$(function(){ $('.filters form').filters() });</script>
+	
+<script src="/libs/js/ion.rangeSlider.min.js"></script>
+<link href="/libs/css/ion.rangeSlider.css" rel="stylesheet">
+{* <link href="/libs/css/ion.rangeSlider.skinHTML5.css" rel="stylesheet"> *}
+<link href="/libs/css/ion.rangeSlider.skinNice.css" rel="stylesheet">
+<link href="/media0/css/styled-checkbox.css" rel="stylesheet">
+
+<section class="filters">
+	<div class="filters-inner">
+		<form action="{$directories_filters_url}" method="GET">
+			<input type="hidden" name="oid" value="{$oid}" />
+			<input type="hidden" name="parent_oid" value="{$objinfo.parent_oid}" />
+			{if $tags_word}<input type="hidden" name="value" value="{$tags_word}" />{/if}
+			{if $searchquery}<input type="hidden" name="q" value="{$searchquery}" />{/if}
+			{foreach from=$directories_filters item=filter_field key=filter_name}
+			<p class="filters-header">{if $directories_filters_name[$filter_name]}{$directories_filters_name[$filter_name]}{else}{$filter_name}{/if}</p>
+			{if $directories_filters_type[$filter_name] eq 'string'}
+				<p class="filters-content">
+				{foreach from=$filter_field item=item}
+					{if $item.value}
+					<label>
+						<input type="checkbox" value="{$item.value|escape}" name="filter[{$filter_name}][]" {if $item.checked}checked="checked"{/if} />
+						{if isset($GLOBS[$filter_name][$item.value])}
+						{$GLOBS[$filter_name][$item.value]}
+						{else}
+						{$item.value}
+						{/if}
+					</label>
+					{/if}
+				{/foreach}
+				</p>
+			{else if $directories_filters_type[$filter_name] eq 'digit'}
+
+			{assign var="max" value=0} {* первому значению *}
+			{foreach from=$filter_field item=item}{if $item.value > $max}{assign var="max" value=$item.value}{/if}{/foreach}
+			{assign var="min" value=$max}
+			{foreach from=$filter_field item=item}{if $item.value < $min}{assign var="min" value=$item.value}{/if}{/foreach}
+
+			<div class="filter-slider">
+			
+			<input type="hidden" id="amount-filter-{$filter_name}-from" name="filter[{$filter_name}][from]" value="{$directories_filters_query[$filter_name]['from']}" />
+			<input type="hidden" id="amount-filter-{$filter_name}-to" name="filter[{$filter_name}][to]"  value="{$directories_filters_query[$filter_name]['to']}" />
+			
+			<script>
+			$(function()
+			{
+				$("#slider-range-{$filter_name}").ionRangeSlider({
+					onFinish: function(obj)
+					{
+						$( "#amount-filter-{$filter_name}-from" ).val( obj.from );
+						$( "#amount-filter-{$filter_name}-to" ).val( obj.to );
+
+						if(obj.to != {$max|default:100|string_format:"%d"} || obj.from != {$min|default:0|string_format:"%d"} )
+							$.filters.update($('#slider-range-{$filter_name}').parent());
+					}
+				});
+			});
+			</script>
+			<input type="text" id="slider-range-{$filter_name}"
+				data-min="{$min|default:0|string_format:"%f"}"
+				data-max="{$max|default:100|string_format:"%f"}"
+				{if $min neq $max}data-type="double"{/if}
+				data-grid="true"
+				data-prettify-enabled="true"
+				data-from="{$directories_filters_query[$filter_name]['from']|default:$min|default:0}"
+				data-to="{$directories_filters_query[$filter_name]['to']|default:$max|default:0}">
+			</div>
+			{else if $directories_filters_type[$filter_name] eq 'digit_single_slider'}
+				{assign var="max" value=0} {* первому значению *}
+				{foreach from=$filter_field item=item}{if $item.value > $max}{assign var="max" value=$item.value}{/if}{/foreach}
+				{assign var="min" value=$max}
+				{foreach from=$filter_field item=item}{if $item.value < $min}{assign var="min" value=$item.value}{/if}{/foreach}
+
+				<div class="filter-slider">
+				<input type="hidden" name="filter[{$filter_name}][]"
+					value="{$directories_filters_query[$filter_name][0]|default:$min|default:0}"
+					data-from="{$directories_filters_query[$filter_name][0]|default:$min|default:0}"
+					id="slider-range-{$filter_name}" data-type="single" data-grid="true"
+					data-min="{$min|default:0|string_format:"%f"}"
+					data-max="{$max|default:100|string_format:"%f"}" />
+				<script>$("#slider-range-{$filter_name}").ionRangeSlider();</script>
+				</div>
+				
+			{else if $directories_filters_type[$filter_name] eq 'string_single_slider'}
+			<div class="filter-slider">
+				<input type="hidden" id="slider-range-{$filter_name}" name="filter[{$filter_name}][]" value="{$directories_filters_query[$filter_name][0]}" data-from="{$directories_filters_query[$filter_name][0]}" data-type="single" data-grid="false">
+				<script>
+				var values = [];{foreach from=$filter_field item=item}values.push('{$item.value}');{/foreach}
+				$("#slider-range-{$filter_name}").ionRangeSlider({ values : values });
+				</script>
+			</div>
+			{else if $directories_filters_type[$filter_name] eq 'radio'}
+				<p class="filters-content">
+				{foreach from=$filter_field item=item}
+					{if $item.value}
+					<label>
+						<input type="radio" value="{$item.value|escape}" name="filter[{$filter_name}][]" {if $item.checked}checked="checked"{/if} />
+						{if isset($GLOBS[$filter_name][$item.value])}
+						{$GLOBS[$filter_name][$item.value]}
+						{else}
+						{$item.value}
+						{/if}
+					</label>
+					{/if}
+				{/foreach}
+				</p>
+			{else if $directories_filters_type[$filter_name] eq 'styled_string'}
+				<p class="filters-content">
+				{foreach from=$filter_field item=item name="forn"}
+					{if $item.value}
+					<input class="styled-checkbox" type="checkbox" value="{$item.value|escape}" name="filter[{$filter_name}][]" {if $item.checked}checked="checked"{/if} id="_{$filter_name}_{$smarty.foreach.forn.iteration}" />
+					<label class="styled-label {$item.value|transliterate|replace:' ':''}" title="{if isset($GLOBS[$filter_name][$item.value])}{$GLOBS[$filter_name][$item.value]}{else}{$item.value}{/if}" rel="tooltip" for="_{$filter_name}_{$smarty.foreach.forn.iteration}"></label>
+					{/if}
+				{/foreach}
+				</p>
+			{/if}
+
+			{/foreach}
+			<input type="hidden" name="page" value="0" />
+			<p class="filters-submit"><button type="submit" class="btn-submit">Показать</button></p>
+		</form>
+	</div>
+</section>
+{/if}

@@ -1,0 +1,261 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Изменились данные заказа №{$order_id} в {$GLOBS.SITENAME}</title>
+</head>
+    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: none;margin: 0;padding: 0;background-color: #FAFAFA;width: 100% !important;">
+    	<center>
+        	<table border="0" cellpadding="10" cellspacing="0" height="100%" width="100%" id="backgroundTable" style="margin: 0;padding: 0;background-color: #FAFAFA;height: 100% !important;width: 100% !important;">
+            	<tr>
+                	<td align="center" valign="top" style="border-collapse: collapse;">
+                        	<!-- // Begin Template Preheader \\ -->
+							<h1 style="font-family: 'trebuchet ms', geneva;font-size:24px;text-align:left;">Изменились данные заказа <u>№{$order_id}</u></h1>
+							<p style="font-family: 'trebuchet ms', geneva;font-size:18px;text-align:left;">Мы всегда рады ответить на ваши вопросы по телефону<b> {$GLOBS.PHONE}</b>.</p>
+							<table cellpadding="10" cellspacing="0" border="0" width=100% style="background-color: #FAFAFA;border: 0px solid #DDDDDD;">
+							<thead>
+							  <tr>
+							    <th colspan="2" style="background-color: #f8ffe2;border: 1px solid #DDDDDD;font-size:12px;font-family: 'trebuchet ms', geneva;-moz-border-radius: 5px 5px 0px 0px;-webkit-border-radius: 5px 5px 0px 0px 0px;border-radius: 5px 5px 0px 0px;text-shadow:1px 1px 0 white;background-image: -moz-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -ms-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -o-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -webkit-gradient(linear, center top, center bottom, from(#fbfef1), to(#f8ffe2));background-image: -webkit-linear-gradient(top, #fbfef1, #f8ffe2);background-image: linear-gradient(top, #fbfef1, #f8ffe2);text-align:left;">{$GLOBS.SITENAME}</th>
+							  </tr>
+							{if $GLOBS.MAIL}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									Наша электронная почта:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$GLOBS.MAIL}
+								</td>
+							</tr>
+							{/if}
+							{if $GLOBS.PHONE}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									Наш{if $GLOBS.PHONES}и{/if} телефон{if $GLOBS.PHONES}ы{/if}:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$GLOBS.PHONE}
+									{if $GLOBS.PHONES}<br>{$GLOBS.PHONES}{/if}
+								</td>
+							</tr>
+							{/if}
+
+							{if $GLOBS.SITENAME && $GLOBS.PHONE && $GLOBS.MAIL}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td colspan="2" style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									<a href="http://vcard.difocus.ru/?N={$GLOBS.SITENAME|escape:'url'}&ORG={$GLOBS.SITENAME|escape:'url'}&TEL={$GLOBS.PHONE|escape:'url'}&EMAIL={$GLOBS.MAIL|escape:'url'}&URL=http:%2F%2F{$site_host|escape:'url'}&NOTE=Номер%20заказа%20{$order_id},%20Сумма%20заказа%20{$order_total|price|escape:'url'}&item1%2EURL=http:%2F%2F{$site_host|escape}%2Fbasket%2F?{$order_id}%7C{$order_hash}&item1%2EX-ABLabel=Адрес%20заказа%20{$order_id}"><img src="http://vcard.difocus.ru/vcard.png" width="16" height="16" style="float:left; margin-right:5px;" /> Скачать карточку компании и данные заказа в vCard</a>
+								</td>
+							</tr>
+							{/if}
+							</table>
+							<br />
+							<table cellpadding="10" cellspacing="0" border="0" width=100% style="background-color: #FAFAFA;border: 0px solid #DDDDDD;">
+							<thead>
+							  <tr>
+							    <th style="background-color: #f8ffe2;border: 1px solid #DDDDDD;font-size:12px;font-family: 'trebuchet ms', geneva;-moz-border-radius: 5px 0px 0px;-webkit-border-radius: 5px 0px 0px 0px;border-radius: 5px 0px 0px;text-shadow:1px 1px 0 white;background-image: -moz-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -ms-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -o-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -webkit-gradient(linear, center top, center bottom, from(#fbfef1), to(#f8ffe2));background-image: -webkit-linear-gradient(top, #fbfef1, #f8ffe2);background-image: linear-gradient(top, #fbfef1, #f8ffe2);">Наименование</th>
+							    <th style="background-color: #f8ffe2;border-top: 1px solid #DDDDDD;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:12px;font-family: 'trebuchet ms', geneva;text-shadow:1px 1px 0 white;background-image: -moz-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -ms-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -o-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -webkit-gradient(linear, center top, center bottom, from(#fbfef1), to(#f8ffe2));background-image: -webkit-linear-gradient(top, #fbfef1, #f8ffe2);background-image: linear-gradient(top, #fbfef1, #f8ffe2);">Кол-во<br><small>наименований</small></th>
+							    <th style="background-color: #f8ffe2;border-top: 1px solid #DDDDDD;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:12px;font-family: 'trebuchet ms', geneva;text-shadow:1px 1px 0 white;background-image: -moz-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -ms-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -o-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -webkit-gradient(linear, center top, center bottom, from(#fbfef1), to(#f8ffe2));background-image: -webkit-linear-gradient(top, #fbfef1, #f8ffe2);background-image: linear-gradient(top, #fbfef1, #f8ffe2);">Цена<br><small>без&nbsp;скидки</small></th>
+							    <th style="background-color: #f8ffe2;border-top: 1px solid #DDDDDD;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:12px;font-family: 'trebuchet ms', geneva;text-shadow:1px 1px 0 white;background-image: -moz-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -ms-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -o-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -webkit-gradient(linear, center top, center bottom, from(#fbfef1), to(#f8ffe2));background-image: -webkit-linear-gradient(top, #fbfef1, #f8ffe2);background-image: linear-gradient(top, #fbfef1, #f8ffe2);">Скидка</th>
+							    <th style="background-color: #f8ffe2;border-top: 1px solid #DDDDDD;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:12px;font-family: 'trebuchet ms', geneva;text-shadow:1px 1px 0 white;background-image: -moz-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -ms-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -o-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -webkit-gradient(linear, center top, center bottom, from(#fbfef1), to(#f8ffe2));background-image: -webkit-linear-gradient(top, #fbfef1, #f8ffe2);background-image: linear-gradient(top, #fbfef1, #f8ffe2);">Цена<br><small>со&nbsp;скидкой</small></th>
+							    <th style="background-color: #f8ffe2;border-top: 1px solid #DDDDDD;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:12px;font-family: 'trebuchet ms', geneva;text-shadow:1px 1px 0 white;background-image: -moz-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -ms-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -o-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -webkit-gradient(linear, center top, center bottom, from(#fbfef1), to(#f8ffe2));background-image: -webkit-linear-gradient(top, #fbfef1, #f8ffe2);background-image: linear-gradient(top, #fbfef1, #f8ffe2);">Всего<br><small>без&nbsp;скидки</small></th>
+							    <th style="background-color: #f8ffe2;border-top: 1px solid #DDDDDD;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:12px;font-family: 'trebuchet ms', geneva;-moz-border-radius: 0px 5px 0px 0px;-webkit-border-radius: 0px 5px 0px 0px;border-radius: 0px 5px 0px 0px;text-shadow:1px 1px 0 white;background-image: -moz-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -ms-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -o-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -webkit-gradient(linear, center top, center bottom, from(#fbfef1), to(#f8ffe2));background-image: -webkit-linear-gradient(top, #fbfef1, #f8ffe2);background-image: linear-gradient(top, #fbfef1, #f8ffe2);">Всего<br><small>со&nbsp;скидкой</small></th>
+							  </tr>
+							</thead>
+							{foreach from=$basketdata item=item}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva; min-width:150px;">
+									<a href="http://{$site_host}{$item.vlink}">{assign var="im_showed" value=0}
+									{if sizeof($item.params)>0}{foreach from=$item.params key=key item=value}{foreach from=$item.content.images item="im"}{if $item.content[$key][$value]['name'] eq $im.name}<img src="http://{$site_host}/{image src=$im.path width=180 folder=".180"}" width="100%;" style="min-width:80px;max-width:180px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;float:left; margin-right:10px;" />{assign var="im_showed" value="1"}{break}{/if}{/foreach}{/foreach}{/if}{if empty($im_showed)}{foreach from=$item.content.images item="im"}<img src="http://{$site_host}/{image src=$im.path width=180 folder=".180"}" width="100%;" style="min-width:80px;max-width:180px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;float:left; margin-right:10px;" />{break}{/foreach}{/if}</a>
+									<h3 style="font-size:16px;font-family: 'trebuchet ms', geneva;min-width:100px;display:inline-block;"><a href="http://{$site_host}{$item.vlink}">{$item.content.name}</a></h3>
+									{if $item.content.articul}<p><b>Артикул: </b> {$item.content.articul}</p>{/if}
+								    {if sizeof($item.params)>0}
+							        <p><b>Опции : </b>
+							        {foreach from=$item.params key=key item=value}
+							        <br />&mdash; {$item.content[{$key}][{$value}]['name']}
+							        {/foreach}
+							        </p>
+							        {/if}
+									<p>{$item.content.annotate}</p>
+								</td>
+							    <td nowrap="nowrap" style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;text-align:right;">{$item.count} {numeral number=$item.count ends=$item.content.units|default:'шт.,шт.,шт.'}</td>
+							    <td nowrap="nowrap" style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;text-align:right;">{if $item.oldprice} {$item.oldprice|price}{else}&mdash;{/if}</td>
+							    <td nowrap="nowrap" style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;text-align:right;">
+							    	{if $item.content.discount}{$item.content.discount.human}{else}&mdash;{/if}
+							    </td>
+							    <td nowrap="nowrap" style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;text-align:right;">{$item.price|price}</td>
+							    <td nowrap="nowrap" style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;text-align:right;">{if $item.oldprice}{($item.oldprice*$item.count)|price}{else}&mdash;{/if}</td>
+							    <td nowrap="nowrap" style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;text-align:right;">{($item.price*$item.count)|price}</td>
+							</tr>
+							{/foreach}
+							{if $order_content.discount}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									&nbsp;
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;" colspan="6">
+									Накопительная скидка: {$order_content.discount.human}
+								</td>
+							</tr>
+							{/if}
+							{if $order_content.coupon && $order_content.coupon.coupon_id}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									&nbsp;
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;" colspan="6">
+									Скидка по купону "{$order_content.coupon.name}" - {$order_content.coupon.human}, код: <u>{$order_content.coupon.coupon_id}</u>
+								</td>
+							</tr>
+							{/if}
+							{if $order_content.delivery_id}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+								&nbsp;
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;" colspan="5">
+									Доставка: 
+									{if $GLOBS.delivery[$order_content.delivery]}{$GLOBS.delivery[$order_content.delivery]}{else}{$order_content.delivery}{/if}
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;text-align:right;" nowrap="nowrap">
+									 {if $order_content.delivery_price}{$order_content.delivery_price|price}{else}&mdash;{/if}
+								</td>
+							</tr>
+							{/if}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD; font-size:20px;font-family: 'trebuchet ms', geneva;text-align:right;-moz-border-radius: 0px 0px 0px 5px;-webkit-border-radius: 0px 0px 0px 5px;border-radius: 0px 0px 0px 5px;">
+									&nbsp;
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;font-size:20px;font-family: 'trebuchet ms', geneva;" colspan="5">
+									Итого:
+								</td>
+								{*
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD; font-size:20px;font-family: 'trebuchet ms', geneva;text-align:right;">
+									&nbsp;
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD; font-size:20px;font-family: 'trebuchet ms', geneva;text-align:right;">
+									{$order_content.oldtotal|price}
+								</td>
+								*}
+								<td nowrap="nowrap" style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:20px;font-family: 'trebuchet ms', geneva;text-align:right;-moz-border-radius: 0px 0px 5px;-webkit-border-radius: 0px 0px 5px 0px; border-radius: 0px 0px 5px;" colspan="2">
+									{$order_total|price}
+								</td>
+							</tr>
+							{*<tr>
+								<td style="border-collapse: collapse;border: none; font-size:14px;font-family: 'trebuchet ms', geneva;text-align:center;" colspan="7">
+									<p style="font-size:24px;font-family: 'trebuchet ms', geneva;">
+										<a href="http://{$site_host}/basket/?action=showorder&id={$order_id}&oh={$order_hash}" style="display:inline-block;width:410px;line-height:80px;background:#23a9eb;color:white;text-decoration:none;border-radius:5px;border:1px solid #2288cc; background-image: -moz-linear-gradient(top, #27b9f4, #209ae4); background-image: -ms-linear-gradient(top, #27b9f4, #209ae4); background-image: -o-linear-gradient(top, #27b9f4, #209ae4); background-image: -webkit-gradient(linear, center top, center bottom, from(#27b9f4), to(#209ae4)); background-image: -webkit-linear-gradient(top, #27b9f4, #209ae4); background-image: linear-gradient(top, #27b9f4, #209ae4); "> Оплатить заказ</a>
+									</p>
+								</td>
+							</tr>
+							*}
+							<tr>
+								<td style="border-collapse: collapse;border: none; font-size:14px;font-family: 'trebuchet ms', geneva;text-align:right;" colspan="7">
+									<p style="font-size:14px;font-family: 'trebuchet ms', geneva;"><a href="http://{$site_host}/basket/?{$order_id}%7C{$order_hash}">Постоянный адрес заказа</a></p>
+								</td>
+							</tr>
+							</table>
+	                        <br>
+							<table cellpadding="10" cellspacing="0" border="0" width=100% style="background-color: #FAFAFA;border: 0px solid #DDDDDD;">
+							<thead>
+							  <tr>
+							    <th colspan="2" style="background-color: #f8ffe2;border: 1px solid #DDDDDD;font-size:12px;font-family: 'trebuchet ms', geneva;-moz-border-radius: 5px 5px 0px 0px;-webkit-border-radius: 5px 5px 0px 0px 0px;border-radius: 5px 5px 0px 0px;text-shadow:1px 1px 0 white;background-image: -moz-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -ms-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -o-linear-gradient(top, #fbfef1, #f8ffe2);background-image: -webkit-gradient(linear, center top, center bottom, from(#fbfef1), to(#f8ffe2));background-image: -webkit-linear-gradient(top, #fbfef1, #f8ffe2);background-image: linear-gradient(top, #fbfef1, #f8ffe2);text-align:left;">Введенные данные</th>
+							  </tr>
+							  
+							{if $order_content.fio}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$order_formfields.name|default:'Имя'}:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$order_content.fio}
+								</td>
+							</tr>
+							{/if}
+							{if $order_content.phone}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$order_formfields.phone|default:'Телефон'}:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$order_content.phone}
+								</td>
+							</tr>
+							{/if}
+							{if $order_content.email}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$order_formfields.email|default:'Электронная почта'}:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$order_content.email}
+								</td>
+							</tr>
+							{/if}
+							{if $order_content.pay_method neq 'NON'}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									Способ оплаты:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$GLOBS.pay_methods[$order_content.pay_method]}
+								</td>
+							</tr>
+							{/if}
+							{if $order_content.status}
+							<tr bgcolor="#ffffff">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									Статус заказа:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$GLOBS.order_status[$order_content.status]}
+								</td>
+							</tr>
+							{/if}
+							{if $order_content.pay_status}
+							<tr bgcolor="#f5f5f5">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									Статус оплаты:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$GLOBS.pay_status[$order_content.pay_status]}
+								</td>
+							</tr>
+							{/if}
+							{if $order_content.address}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$order_formfields.address|default:'Адрес'}:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$order_content.address}
+								</td>
+							</tr>
+							{/if}
+							{if $order_content.comment}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$order_formfields.comment|default:'Комментарий'}:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$order_content.comment}
+								</td>
+							</tr>
+							{/if}
+							{if sizeof($order_fields)>0}
+							{foreach from=$order_fields item=field}
+							{if $field.value neq ''}
+							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{$field.runame}:
+								</td>
+								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
+									{if $GLOBS[$field.name][$field.value]}{$GLOBS[$field.name][$field.value]}{else}{$field.value}{/if}
+								</td>
+							</tr>
+							{/if}
+							{/foreach}
+							{/if}
+							</table>
+                    </td>
+                </tr>
+            </table>
+        </center>
+	</body>
+</html>

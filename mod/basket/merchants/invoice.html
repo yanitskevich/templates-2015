@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INVOICE"> {$GLOBS.merchants.invoice.btn|default:'Оплатить по счету'}
+		<p class="help-block">Оплатить заказ безналичным расчетом по выставленным реквизитам.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="INVOICE">{$GLOBS.merchants.invoice.btn|default:'Оплатить по счету'}</option>
+{/if}

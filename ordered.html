@@ -1,0 +1,97 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-body">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
+			{if $order_errors.spam}Извините, система посчитала Ваше сообщение спамом. Если это не так, пожалуйста, обратитесь по почте <a href="mailto:{$GLOBS.MAIL}">{$GLOBS.MAIL}</a>.{/if}
+			{if $order_ok}<h3 align="center">{$order_answer|default:'Спасибо,<br /> Ваш вопрос отправлен.'}</h3>{/if}
+			{if !$order_ok}
+
+			{$text}
+			<form class="form-horizontal" role="form" id="order_form" method="post" enctype='multipart/form-data' action="{$vlink}" style="margin-top:40px;">
+				{if $order_errors}<div class="alert alert-danger">При заполнении формы, были допущены ошибки.</div>{/if}
+				{foreach from=$order_fields item=field name=fieldscounter}
+				{if $field.editable eq 'true'}
+				
+				{if $field.htmltype eq 'textfield'}
+				<div class="form-group {if $field.error}has-error{/if}">
+					<label class="control-label col-sm-3" for="input{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div class="col-sm-9"><input class="form-control" type="text" id="input{$field.name|capitalize}" name="{$field.name}" value="{$field.value}" placeholder="{$field.description}" /></div>
+				</div>
+				{/if}
+				{if $field.htmltype eq 'files'}
+				<div class="form-group {if $field.error}has-error{/if}">
+					<label class="control-label col-sm-3" for="input{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div class="col-sm-9"><input class="form-control" type="file" id="input{$field.name|capitalize}" name="files[{$field.name}]" placeholder="{$field.description}" /></div>
+				</div>
+				{/if}
+				{if $field.htmltype eq 'datefield'}
+				{assign var=datepicker value=1}
+				<div class="form-group {if $field.error}has-error{/if}">
+					<label class="control-label col-sm-3" for="input{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div class="col-sm-9"><input class="form-control" type="text" class="datefield" data-date-format="dd.mm.yyyy" data-date="01.01.2014" id="input{$field.name|capitalize}" name="{$field.name}" value="{$field.value}" placeholder="{$field.description}" autocomplete=off /></div>
+				</div>
+				{/if}
+				{if $field.htmltype eq 'textarea'}
+				<div class="form-group {if $field.error}has-error{/if}">
+					<label class="control-label col-sm-3" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div class="col-sm-9"><textarea class="form-control" class="input-xlarge" id="textarea{$field.name|capitalize}" rows="3" name="{$field.name}" placeholder="{$field.description}">{$field.value}</textarea></div>
+				</div>
+				{/if}
+				{if $field.htmltype eq 'adresfield'}
+				<div class="form-group {if $field.error}has-error{/if}">
+					<label class="control-label col-sm-3" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div class="col-sm-9"><textarea class="form-control" class="input-xlarge" id="textarea{$field.name|capitalize}" rows="3" name="{$field.name}" placeholder="{$field.description}">{$field.value}</textarea></div>
+				</div>
+				{/if}
+				{if $field.htmltype eq 'combostore'}
+				<div class="form-group {if $field.error}has-error{/if}">
+					<label class="control-label col-sm-3" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div class="col-sm-9"><select class="form-control" name="{$field.name}" id="select{$field.name|capitalize}">
+					{foreach from=$GLOBS[$field.name] item=field_item key=field_item_key}
+						<option value="{$field_item_key}">{$field_item}</option>
+					{/foreach}
+					</select>
+					{if $field.description}<span class="help-block">{$field.description}</span>{/if}
+					</div>
+				</div>
+				{/if}
+				{if $field.htmltype eq 'delivery'}
+				<div class="form-group {if $field.error}has-error{/if}">
+					<label class="control-label col-sm-3" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<span class="help-inline">Поле этого типа можно использовать только в корзине.</span>
+				</div>
+				{/if}
+				{/if}
+				{/foreach}
+				<div class="modal-footer">
+				  	<p align="center">
+					  	<input type="hidden" name="antispam" value="" />
+					  	<input type="hidden" name="from" value="{$order_from}" />
+					    <button type="submit" class="btn-submit">Отправить форму</button>
+					    <button class="btn" type="reset">Очистить</button>
+				  	</p>
+				</div>
+			</form>
+			{if $datepicker}<link rel="stylesheet" type="text/css" href="/media0/css/datepicker.css" media="screen" /><script type="text/javascript" src="/media0/js/bootstrap-datepicker.js"></script>{/if}
+			<script>
+			$(document).ready(function()
+			{
+				$("input[name*=antispam]").val('{$antispam}');
+				{if $datepicker} $('.datefield').datepicker(); {/if}
+				$('#order_form').on('submit', function()
+				{
+				    $(this).ajaxSubmit(
+				    {
+				    	success: function(responseText)
+				    	{
+							$('#feedback-box').html(responseText);
+				    	}
+				    });
+				    return false;
+				});
+			});
+			</script>
+		{/if}
+		</div>
+	</div>
+</div>

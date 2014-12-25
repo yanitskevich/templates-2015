@@ -1,0 +1,1187 @@
+{if $GLOBS.user_id eq 3}
+<div class="design-ui-css-editor">
+<div class="drag-me" id="resizer"></div>
+<a href="#" rel="toggler" class="design-ui-uho" data-hidden="0" data-align="horizontal" data-cookie="css-editor">CSS</a>
+	<div id="css-editor"></div>
+	<form action="/cabinet/" method="POST">
+		<p align="center">
+			<button type="submit" name="submit">Сохранить дополнительные CSS</button>
+		</p>
+	</form>
+</div>
+
+<div class="design-ui">
+	<a href="#" rel="toggler" class="design-ui-uho" data-hidden="0" data-align="vertical" data-cookie="design-ui">Дизайн</a>
+	<div class="design-ui-inner">
+	<fieldset>
+		<legend class="collapsed">Дизайны</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-set']}">
+		Дизайн: <span class="selected">изменить</span>
+		<ul id="css_settings_sets" class="settings_sets">
+			{foreach from=$GLOBS.css_settings_sets item=css_settings key=css_settings_name}
+			<li><a href="#-&all=clean{foreach from=$css_settings item=item key=key}&{$key}={$item}{/foreach}" rel="product-set" class="{$css_settings_name}">{$css_settings_name}</a></li>
+			{/foreach}
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Весь сайт</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-site-lib']}">
+		Библиотека: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#bootstrap" rel="common-site-lib">bootstrap</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-site-style']}">
+		Стиль сайта: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#amelia" rel="common-site-style">Amelia</a></li>
+			<li><a href="#cyborg" rel="common-site-style">Cyborg</a></li>
+			<li><a href="#cerulean" rel="common-site-style">Cerulean</a></li>
+			<li><a href="#darkly" rel="common-site-style">Darkly</a></li>
+			<li><a href="#first" rel="common-site-style">First</a></li>
+			<li><a href="#books" rel="common-site-style">Books</a></li>
+			<li><a href="#flatly" rel="common-site-style">Flatly</a></li>
+			<li><a href="#journal" rel="common-site-style">Journal</a></li>
+			<li><a href="#readable" rel="common-site-style">Readable</a></li>
+			<li><a href="#shamrock" rel="common-site-style">Shamrock</a></li>
+			<li><a href="#simplex" rel="common-site-style">Simplex</a></li>
+			<li><a href="#slate" rel="common-site-style">Slate</a></li>
+			<li><a href="#spacelab" rel="common-site-style">Spacelab</a></li>
+			<li><a href="#superhero" rel="common-site-style">Superhero</a></li>
+			<li><a href="#united" rel="common-site-style">United</a></li>
+			<li><a href="#yeti" rel="common-site-style">Yeti</a></li>
+			<li><a href="#origin" rel="common-site-style">Origin</a></li>
+			<li><a href="#surfer" rel="common-site-style">surfer</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['body-background']}">
+		Фон сайта: <span class="selected">изменить</span>
+		<ul class="body-background">
+			<li><a href="#butterflies" rel="body-background" title="butterflies" class="butterflies">butterflies</a></li>
+			<li><a href="#ribbon" rel="body-background" title="ribbon" class="ribbon">ribbon</a></li>
+			<li><a href="#brown" rel="body-background" title="brown" class="brown">brown</a></li>
+			<li><a href="#linen" rel="body-background" title="linen" class="linen">linen</a></li>
+			<li><a href="#grass" rel="body-background" title="grass" class="grass">grass</a></li>
+			<li><a href="#lotus" rel="body-background" title="lotus" class="lotus">lotus</a></li>
+			<li><a href="#floral" rel="body-background" title="floral" class="floral">floral</a></li>
+			<li><a href="#tulips" rel="body-background" title="tulips" class="tulips">tulips</a></li>
+			<li><a href="#denim" rel="body-background" title="denim" class="denim">denim</a></li>
+			<li><a href="#paisley" rel="body-background" title="paisley" class="paisley">paisley</a></li>
+			<li><a href="#45caliber" rel="body-background" title="45caliber" class="caliber">45caliber</a></li>
+			<li><a href="#birds" rel="body-background" title="birds" class="birds">birds</a></li>
+			<li><a href="#lightwood" rel="body-background" title="lightwood" class="lightwood">lightwood</a></li>
+			<li><a href="#monsters" rel="body-background" title="monsters" class="monsters">monsters</a></li>
+			<li><a href="#fruits" rel="body-background" title="fruits" class="fruits">fruits</a></li>
+			<li><a href="#paint" rel="body-background" title="paint" class="paint">paint</a></li>
+			<li><a href="#revolutionaries" rel="body-background" title="revolutionaries" class="revolutionaries">revolutionaries</a></li>
+			<li><a href="#gray" rel="body-background" title="gray" class="gray">gray</a></li>
+			<li><a href="#wood" rel="body-background" title="wood" class="wood">wood</a></li>
+			<li><a href="#wooden" rel="body-background" title="wooden" class="wooden">wooden</a></li>
+			<li><a href="#woodcherry" rel="body-background" title="bereza" class="woodcherry">woodcherry</a></li>
+			<li><a href="#panda" rel="body-background" title="panda" class="panda">panda</a></li>
+			<li><a href="#surfer" rel="body-background" title="surfer" class="surfer">surfer</a></li>
+			<li><a href="#bereza" rel="body-background" title="bereza" class="bereza">bereza</a></li>
+			<li><a href="#books" rel="body-background" title="books" class="books">books</a></li>
+			<li><a href="#pink" rel="body-background" title="pink" class="pink">pink</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-wrapper-padding']}">
+		Подложка: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#first" rel="common-wrapper-padding">First</a></li>
+			<li><a href="#origin" rel="common-wrapper-padding">Origin</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-wrapper-shadow']}">
+		Тень подложки: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#10" rel="common-wrapper-shadow">10%</a></li>
+			<li><a href="#30" rel="common-wrapper-shadow">30%</a></li>
+			<li><a href="#50" rel="common-wrapper-shadow">50%</a></li>
+			<li><a href="#70" rel="common-wrapper-shadow">70%</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-wrapper-bg']}">
+		Фон подложки: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#white-50" rel="common-wrapper-bg">Белая 50%</a></li>
+			<li><a href="#white" rel="common-wrapper-bg">Белая</a></li>
+			<li><a href="#black-50" rel="common-wrapper-bg">Черная 50%</a></li>
+			<li><a href="#black" rel="common-wrapper-bg">Черная</a></li>
+			<li><a href="#paper" rel="common-wrapper-bg">Бумага</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-wrapper-radius']}">
+		Скругление подложки: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#5px" rel="common-wrapper-radius">5px</a></li>
+			<li><a href="#10px" rel="common-wrapper-radius">10px</a></li>
+			<li><a href="#15px" rel="common-wrapper-radius">15px</a></li>
+			<li><a href="#20px" rel="common-wrapper-radius">20px</a></li>
+			<li><a href="#25px" rel="common-wrapper-radius">25px</a></li>
+		</ul>
+		</div>		
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-text-color']}">
+		Цвет текста: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#light-gray" rel="common-text-color">Светло-серый</a></li>
+			<li><a href="#gray" rel="common-text-color">Темно-серый</a></li>
+			<li><a href="#black" rel="common-text-color">Черный</a></li>
+			<li><a href="#white" rel="common-text-color">Белый</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-text-font']}">
+		Шрифт: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#Arial" rel="common-text-font">Arial</a></li>
+			<li><a href="#BadScript" rel="common-text-font">Bad Script</a></li>
+			<li><a href="#Comfortaa" rel="common-text-font">Comfortaa</a></li>
+			<li><a href="#ComicSansMS" rel="common-text-font">Comic Sans MS</a></li>
+			<li><a href="#CourierNew" rel="common-text-font">Courier New</a></li>
+			<li><a href="#Cuprum" rel="common-text-font">Cuprum</a></li>
+			<li><a href="#Georgia" rel="common-text-font">Georgia</a></li>
+			<li><a href="#Helvetica" rel="common-text-font">Helvetica</a></li>
+			<li><a href="#HelveticaNeue" rel="common-text-font">Helvetica Neue</a></li>
+			<li><a href="#Jura" rel="common-text-font">Jura</a></li>
+			<li><a href="#KellySlab" rel="common-text-font">Kelly Slab</a></li>
+			<li><a href="#Lobster" rel="common-text-font">Lobster</a></li>
+			<li><a href="#MarckScript" rel="common-text-font">Marck Script</a></li>
+			<li><a href="#Marmelad" rel="common-text-font">Marmelad</a></li>
+			<li><a href="#OpenSansCondensed" rel="common-text-font">Open Sans Condensed</a></li>
+			<li><a href="#Oranienbaum" rel="common-text-font">Oranienbaum</a></li>
+			<li><a href="#Palatino" rel="common-text-font">Palatino</a></li>
+			<li><a href="#Philosopher" rel="common-text-font">Philosopher</a></li>
+			<li><a href="#PTSans" rel="common-text-font">PT Sans</a></li>
+			<li><a href="#PTSerif" rel="common-text-font">PT Serif</a></li>
+			<li><a href="#Scada" rel="common-text-font">Scada</a></li>
+			<li><a href="#Tahoma" rel="common-text-font">Tahoma</a></li>
+			<li><a href="#TenorSans" rel="common-text-font">Tenor Sans</a></li>
+			<li><a href="#TimesNewRoman" rel="common-text-font">Times New Roman</a></li>
+			<li><a href="#TrebuchetMS" rel="common-text-font">Trebuchet MS</a></li>
+			<li><a href="#Ubuntu" rel="common-text-font">Ubuntu</a></li>
+			<li><a href="#UbuntuMono" rel="common-text-font">Ubuntu Mono</a></li>
+			<li><a href="#UbuntuCondensed" rel="common-text-font">Ubuntu Condensed</a></li>
+			<li><a href="#Underdog" rel="common-text-font">Underdog</a></li>
+			<li><a href="#Verdana" rel="common-text-font">Verdana</a></li>
+			<li><a href="#YesevaOne" rel="common-text-font">Yeseva One</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-text-fontsize']}">
+		Размер шрифта: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#12px" rel="common-text-fontsize">12px</a></li>
+			<li><a href="#13px" rel="common-text-fontsize">13px</a></li>
+			<li><a href="#14px" rel="common-text-fontsize">14px</a></li>
+			<li><a href="#15px" rel="common-text-fontsize">15px</a></li>
+			<li><a href="#16px" rel="common-text-fontsize">16px</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-href-color']}">
+		Цвет ссылок: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#origin" rel="common-href-color">Origin</a></li>
+			<li><a href="#united" rel="common-href-color">United</a></li>
+			<li><a href="#amelia" rel="common-href-color">Amelia</a></li>
+			<li><a href="#first" rel="common-href-color">First</a></li>
+			<li><a href="#cerulean" rel="common-href-color">Cerulean</a></li>
+			<li><a href="#cyborg" rel="common-href-color">cyborg</a></li>
+			<li><a href="#green" rel="common-href-color">green</a></li>
+			<li><a href="#white" rel="common-href-color">Белый</a></li>
+			<li><a href="#surfer" rel="common-href-color">surfer</a></li>
+			<li><a href="#wooden" rel="common-href-color">wooden</a></li>
+			<li><a href="#books" rel="common-href-color">books</a></li>
+			<li><a href="#bereza" rel="common-href-color">bereza</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['common-text-headers']}">
+		Заголовки: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#first" rel="common-text-headers">First</a></li>
+			<li><a href="#origin" rel="common-text-headers">Origin</a></li>
+			<li><a href="#cerulean" rel="common-text-headers">Cerulean</a></li>
+			<li><a href="#surfer" rel="common-text-headers">surfer</a></li>
+			<li><a href="#wooden" rel="common-text-headers">Wooden</a></li>
+			<li><a href="#books" rel="common-text-headers">books</a></li>
+			<li><a href="#bereza" rel="common-text-headers">bereza</a></li>
+		</ul>
+		</div>
+		
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Форма поиска</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-search-style']}">
+		Стиль: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#red-angle" rel="nav-topbar-search-style">Red Angle</a></li>
+			<li><a href="#black" rel="nav-topbar-search-style">Round</a></li>
+		</ul>
+		</div>
+		
+		{*
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-search']}">
+		Расположение: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#left" rel="nav-topbar-search-position">Слева</a></li>
+			<li><a href="#right" rel="nav-topbar-search-position">Справа</a></li>
+			<li><a href="#center" rel="nav-topbar-search-position">Центр</a></li>
+		</ul>
+		</div>
+		*}
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Верхнее меню</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-style']}">
+		Расположение: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#center" rel="nav-topbar-position">Центр</a></li>
+			<li><a href="#left" rel="nav-topbar-position">Слева</a></li>
+			<li><a href="#right" rel="nav-topbar-position">Справа</a></li>
+		</ul>
+		</div>	
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-bg']}">
+		Фон: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#white" rel="nav-topbar-bg">Белый</a></li>
+			<li><a href="#black" rel="nav-topbar-bg">Черный</a></li>
+			<li><a href="#first" rel="nav-topbar-bg">First</a></li>
+			<li><a href="#yellowblack" rel="nav-topbar-bg">YellowBlack</a></li>
+			<li><a href="#wooden" rel="nav-topbar-bg">Wooden</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-bg-2']}">
+		Фон 100%: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#white" rel="nav-topbar-bg-2">Белый</a></li>
+			<li><a href="#black" rel="nav-topbar-bg-2">Черный</a></li>
+			<li><a href="#yellowblack" rel="nav-topbar-bg-2">YellowBlack</a></li>
+		</ul>
+		</div>
+
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-height']}">
+		Высота: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#50px" rel="nav-topbar-height">50px</a></li>
+			<li><a href="#40px" rel="nav-topbar-height">40px</a></li>
+			<li><a href="#30px" rel="nav-topbar-height">30px</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-item-bg']}">
+		Фон пунктов: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#white" rel="nav-topbar-item-bg">Белый</a></li>
+			<li><a href="#black" rel="nav-topbar-item-bg">Черный</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-item-radius']}">
+		Скругление пунктов: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#4px" rel="nav-topbar-item-radius">4px</a></li>
+			<li><a href="#6px" rel="nav-topbar-item-radius">6px</a></li>
+			<li><a href="#10px" rel="nav-topbar-item-radius">10px</a></li>
+			<li><a href="#10px-bottom" rel="nav-topbar-item-radius">10px внизу</a></li>
+			<li><a href="#10px-top" rel="nav-topbar-item-radius">10px вверху</a></li>
+			<li><a href="#15px" rel="nav-topbar-item-radius">15px</a></li>
+			<li><a href="#15px-bottom" rel="nav-topbar-item-radius">15px внизу</a></li>
+			<li><a href="#15px-top" rel="nav-topbar-item-radius">15px вверху</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-item-margin']}">
+		Отступ пунктов: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#2px" rel="nav-topbar-item-margin">2px</a></li>
+			<li><a href="#3px" rel="nav-topbar-item-margin">3px</a></li>
+			<li><a href="#4px" rel="nav-topbar-item-margin">4px</a></li>
+			<li><a href="#5px" rel="nav-topbar-item-margin">5px</a></li>
+			<li><a href="#7px" rel="nav-topbar-item-margin">7px</a></li>
+		</ul>
+		</div>
+
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-transform']}">
+		Transform: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#Lowercase" rel="nav-topbar-transform">маленькими</a></li>
+			<li><a href="#Capitalize" rel="nav-topbar-transform">Прописью</a></li>
+			<li><a href="#Uppercase" rel="nav-topbar-transform">БОЛЬШИМИ</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-color']}">
+		Цвет пунктов: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#white" rel="nav-topbar-color">Белый</a></li>
+			<li><a href="#black" rel="nav-topbar-color">Черный</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-font']}">
+		Шрифт пунктов: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#Arial" rel="nav-topbar-font">Arial</a></li>
+			<li><a href="#BadScript" rel="nav-topbar-font">Bad Script</a></li>
+			<li><a href="#Comfortaa" rel="nav-topbar-font">Comfortaa</a></li>
+			<li><a href="#ComicSansMS" rel="nav-topbar-font">Comic Sans MS</a></li>
+			<li><a href="#CourierNew" rel="nav-topbar-font">Courier New</a></li>
+			<li><a href="#Cuprum" rel="nav-topbar-font">Cuprum</a></li>
+			<li><a href="#Georgia" rel="nav-topbar-font">Georgia</a></li>
+			<li><a href="#Helvetica" rel="nav-topbar-font">Helvetica</a></li>
+			<li><a href="#HelveticaNeue" rel="nav-topbar-font">Helvetica Neue</a></li>
+			<li><a href="#Jura" rel="nav-topbar-font">Jura</a></li>
+			<li><a href="#KellySlab" rel="nav-topbar-font">Kelly Slab</a></li>
+			<li><a href="#Lobster" rel="nav-topbar-font">Lobster</a></li>
+			<li><a href="#MarckScript" rel="nav-topbar-font">Marck Script</a></li>
+			<li><a href="#Marmelad" rel="nav-topbar-font">Marmelad</a></li>
+			<li><a href="#OpenSansCondensed" rel="nav-topbar-font">Open Sans Condensed</a></li>
+			<li><a href="#Oranienbaum" rel="nav-topbar-font">Oranienbaum</a></li>
+			<li><a href="#Palatino" rel="nav-topbar-font">Palatino</a></li>
+			<li><a href="#Philosopher" rel="nav-topbar-font">Philosopher</a></li>
+			<li><a href="#PTSans" rel="nav-topbar-font">PT Sans</a></li>
+			<li><a href="#PTSerif" rel="nav-topbar-font">PT Serif</a></li>
+			<li><a href="#Scada" rel="nav-topbar-font">Scada</a></li>
+			<li><a href="#Tahoma" rel="nav-topbar-font">Tahoma</a></li>
+			<li><a href="#TenorSans" rel="nav-topbar-font">Tenor Sans</a></li>
+			<li><a href="#TimesNewRoman" rel="nav-topbar-font">Times New Roman</a></li>
+			<li><a href="#TrebuchetMS" rel="nav-topbar-font">Trebuchet MS</a></li>
+			<li><a href="#Ubuntu" rel="nav-topbar-font">Ubuntu</a></li>
+			<li><a href="#UbuntuMono" rel="nav-topbar-font">Ubuntu Mono</a></li>
+			<li><a href="#UbuntuCondensed" rel="nav-topbar-font">Ubuntu Condensed</a></li>
+			<li><a href="#Underdog" rel="nav-topbar-font">Underdog</a></li>
+			<li><a href="#Verdana" rel="nav-topbar-font">Verdana</a></li>
+			<li><a href="#YesevaOne" rel="nav-topbar-font">Yeseva One</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-fontsize']}">
+		Размер шрифта: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#0-6em" rel="nav-topbar-fontsize">60%</a></li>
+			<li><a href="#0-8em" rel="nav-topbar-fontsize">80%</a></li>
+			<li><a href="#1-0em" rel="nav-topbar-fontsize">100%</a></li>
+			<li><a href="#1-2em" rel="nav-topbar-fontsize">120%</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-hover']}">
+		При наведении: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#first" rel="nav-topbar-hover">first</a></li>
+			<li><a href="#origin" rel="nav-topbar-hover">origin</a></li>
+			<li><a href="#wooden" rel="nav-topbar-hover">wooden</a></li>
+			<li><a href="#underline" rel="nav-topbar-hover">Подчеркивание</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-border']}">
+		Граница пунктов: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#slate" rel="nav-topbar-border">Двойная</a></li>
+			<li><a href="#min" rel="nav-topbar-border">min</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Шапка</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['header-style']}">
+		Общий стиль: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#v1" rel="header-style">v1</a></li>
+			<li><a href="#v2" rel="header-style">v2</a></li>
+			<li><a href="#v3" rel="header-style">v3</a></li>
+			<li><a href="#v4" rel="header-style">v4</a></li>
+			<li><a href="#v5" rel="header-style">v5</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['header-colors']}">
+		Цветовая гамма: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#first" rel="header-colors">first</a></li>
+			<li><a href="#origin" rel="header-colors">origin</a></li>
+			<li><a href="#surfer" rel="header-colors">surfer</a></li>
+			<li><a href="#wooden" rel="header-colors">wooden</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Основное меню</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-style']}">
+		Набор: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#amelia&nav-navbar-color=white&nav-navbar-bg=amelia&nav-navbar-active=amelia&nav-navbar-hover=amelia" rel="nav-navbar-style">amelia</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-font']}">
+		Шрифт: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#Arial" rel="nav-navbar-font">Arial</a></li>
+			<li><a href="#BadScript" rel="nav-navbar-font">Bad Script</a></li>
+			<li><a href="#Comfortaa" rel="nav-navbar-font">Comfortaa</a></li>
+			<li><a href="#ComicSansMS" rel="nav-navbar-font">Comic Sans MS</a></li>
+			<li><a href="#CourierNew" rel="nav-navbar-font">Courier New</a></li>
+			<li><a href="#Cuprum" rel="nav-navbar-font">Cuprum</a></li>
+			<li><a href="#Georgia" rel="nav-navbar-font">Georgia</a></li>
+			<li><a href="#Helvetica" rel="nav-navbar-font">Helvetica</a></li>
+			<li><a href="#HelveticaNeue" rel="nav-navbar-font">Helvetica Neue</a></li>
+			<li><a href="#Jura" rel="nav-navbar-font">Jura</a></li>
+			<li><a href="#KellySlab" rel="nav-navbar-font">Kelly Slab</a></li>
+			<li><a href="#Lobster" rel="nav-navbar-font">Lobster</a></li>
+			<li><a href="#MarckScript" rel="nav-navbar-font">Marck Script</a></li>
+			<li><a href="#Marmelad" rel="nav-navbar-font">Marmelad</a></li>
+			<li><a href="#OpenSansCondensed" rel="nav-navbar-font">Open Sans Condensed</a></li>
+			<li><a href="#Oranienbaum" rel="nav-navbar-font">Oranienbaum</a></li>
+			<li><a href="#Palatino" rel="nav-navbar-font">Palatino</a></li>
+			<li><a href="#Philosopher" rel="nav-navbar-font">Philosopher</a></li>
+			<li><a href="#PTSans" rel="nav-navbar-font">PT Sans</a></li>
+			<li><a href="#PTSerif" rel="nav-navbar-font">PT Serif</a></li>
+			<li><a href="#Scada" rel="nav-navbar-font">Scada</a></li>
+			<li><a href="#Tahoma" rel="nav-navbar-font">Tahoma</a></li>
+			<li><a href="#TenorSans" rel="nav-navbar-font">Tenor Sans</a></li>
+			<li><a href="#TimesNewRoman" rel="nav-navbar-font">Times New Roman</a></li>
+			<li><a href="#TrebuchetMS" rel="nav-navbar-font">Trebuchet MS</a></li>
+			<li><a href="#Ubuntu" rel="nav-navbar-font">Ubuntu</a></li>
+			<li><a href="#UbuntuMono" rel="nav-navbar-font">Ubuntu Mono</a></li>
+			<li><a href="#UbuntuCondensed" rel="nav-navbar-font">Ubuntu Condensed</a></li>
+			<li><a href="#Underdog" rel="nav-navbar-font">Underdog</a></li>
+			<li><a href="#Verdana" rel="nav-navbar-font">Verdana</a></li>
+			<li><a href="#YesevaOne" rel="nav-navbar-font">Yeseva One</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-color']}">
+		Цвет пунктов: <span class="selected">изменить</span>
+		<ul class="nav-navbar-color">
+			<li><a href="#white" rel="nav-navbar-color" class="white" title="Белый"></a></li>
+			<li><a href="#yellow" rel="nav-navbar-color" class="yellow" title="Желтый"></a></li>
+			<li><a href="#orange" rel="nav-navbar-color" class="orange" title="Оранжевый"></a></li>
+			<li><a href="#gray" rel="nav-navbar-color" class="gray" title="Серый"></a></li>
+			<li><a href="#dark-gray" rel="nav-navbar-color" class="dark-gray" title="Темно серый"></a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-border']}">
+		Граница пунктов: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#slate" rel="nav-navbar-border">Двойная</a></li>
+			<li><a href="#first" rel="nav-navbar-border">Одинарная</a></li>
+			<li><a href="#line" rel="nav-navbar-border">Маленькая</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-position']}">
+		Расположение пунктов: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#left" rel="nav-navbar-position">Слева</a></li>
+			<li><a href="#right" rel="nav-navbar-position">Справа</a></li>
+			<li><a href="#center" rel="nav-navbar-position">Центр</a></li>
+			<li><a href="#justify" rel="nav-navbar-position">Justify</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-bg']}">
+		Гамма: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#amelia" rel="nav-navbar-bg">amelia</a></li>
+			<li><a href="#origin" rel="nav-navbar-bg">origin</a></li>
+			<li><a href="#cerulean" rel="nav-navbar-bg">cerulean</a></li>
+			<li><a href="#cyborg" rel="nav-navbar-bg">cyborg</a></li>
+			<li><a href="#darkly" rel="nav-navbar-bg">darkly</a></li>
+			<li><a href="#flatly" rel="nav-navbar-bg">flatly</a></li>
+			<li><a href="#shamrock" rel="nav-navbar-bg">shamrock</a></li>
+			<li><a href="#spacelab" rel="nav-navbar-bg">spacelab</a></li>
+			<li><a href="#simplex" rel="nav-navbar-bg">simplex</a></li>
+			<li><a href="#surfer" rel="nav-navbar-bg">surfer</a></li>
+			<li><a href="#united" rel="nav-navbar-bg">united</a></li>
+			<li><a href="#reight" rel="nav-navbar-bg">reight</a></li>
+			<li><a href="#orange" rel="nav-navbar-bg">orange</a></li>
+			<li><a href="#dark-gray" rel="nav-navbar-bg">dark-gray</a></li>
+			<li><a href="#wooden" rel="nav-navbar-bg">wooden</a></li>
+			<li><a href="#books" rel="nav-navbar-bg">books</a></li>
+			<li><a href="#spruce" rel="nav-navbar-bg">spruce</a></li>
+			<li><a href="#redoval" rel="nav-navbar-bg">redoval</a></li>
+			<li><a href="#wine" rel="nav-navbar-bg">wine</a></li>
+			<li><a href="#first" rel="nav-navbar-bg">first</a></li>
+			<li><a href="#bereza" rel="nav-navbar-bg">bereza</a></li>
+			<li><a href="#yellowblack" rel="nav-navbar-bg">yellowblack</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-height']}">
+		Высота: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#30px" rel="nav-navbar-height">30px</a></li>
+			<li><a href="#40px" rel="nav-navbar-height">40px</a></li>
+			<li><a href="#50px" rel="nav-navbar-height">50px</a></li>
+			<li><a href="#70px" rel="nav-navbar-height">70px</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-shadow']}">
+		Тень: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#v1" rel="nav-navbar-shadow">Вариант №1</a></li>
+			<li><a href="#v2" rel="nav-navbar-shadow">Вариант №2</a></li>
+			<li><a href="#v3" rel="nav-navbar-shadow">Вариант №3</a></li>
+			<li><a href="#v4" rel="nav-navbar-shadow">Вариант №4</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-radius']}">
+		Скругление меню: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#4px" rel="nav-navbar-radius">4px</a></li>
+			<li><a href="#6px" rel="nav-navbar-radius">6px</a></li>
+			<li><a href="#10px" rel="nav-navbar-radius">10px</a></li>
+			<li><a href="#10px-bottom" rel="nav-navbar-radius">10px внизу</a></li>
+			<li><a href="#10px-top" rel="nav-navbar-radius">10px вверху</a></li>
+			<li><a href="#15px" rel="nav-navbar-radius">15px</a></li>
+			<li><a href="#15px-bottom" rel="nav-navbar-radius">15px внизу</a></li>
+			<li><a href="#15px-top" rel="nav-navbar-radius">15px вверху</a></li>
+			<li><a href="#25px" rel="nav-navbar-radius">25px</a></li>
+			<li><a href="#25px-bottom" rel="nav-navbar-radius">25px внизу</a></li>
+			<li><a href="#25px-top" rel="nav-navbar-radius">25px вверху</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-hover']}">
+		Hover пункты: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#amelia" rel="nav-navbar-hover">amelia</a></li>
+			<li><a href="#origin" rel="nav-navbar-hover">origin</a></li>
+			<li><a href="#first" rel="nav-navbar-hover">first</a></li>
+			<li><a href="#cerulean" rel="nav-navbar-hover">cerulean</a></li>
+			<li><a href="#united" rel="nav-navbar-hover">united</a></li>
+			<li><a href="#surfer" rel="nav-navbar-hover">surfer</a></li>
+			<li><a href="#simplex" rel="nav-navbar-hover">simplex</a></li>
+			<li><a href="#bereza" rel="nav-navbar-hover">bereza</a></li>
+			<li><a href="#wooden" rel="nav-navbar-hover">wooden</a></li>
+			<li><a href="#books" rel="nav-navbar-hover">books</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-active']}">
+		Активные пункты: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#amelia" rel="nav-navbar-active">amelia</a></li>
+			<li><a href="#origin" rel="nav-navbar-active">origin</a></li>
+			<li><a href="#united" rel="nav-navbar-active">united</a></li>
+			<li><a href="#cerulean" rel="nav-navbar-active">cerulean</a></li>
+			<li><a href="#surfer" rel="nav-navbar-active">surfer</a></li>
+			<li><a href="#simplex" rel="nav-navbar-active">simplex</a></li>
+			<li><a href="#bereza" rel="nav-navbar-active">bereza</a></li>
+			<li><a href="#wooden" rel="nav-navbar-active">wooden</a></li>
+			<li><a href="#books" rel="nav-navbar-active">books</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-transform']}">
+		transform: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#Lowercase" rel="nav-navbar-transform">маленькими</a></li>
+			<li><a href="#Capitalize" rel="nav-navbar-transform">Прописью</a></li>
+			<li><a href="#Uppercase" rel="nav-navbar-transform">БОЛЬШИМИ</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-fontsize']}">
+		Размер шрифта: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#1-0em" rel="nav-navbar-fontsize">Обычный</a></li>
+			<li><a href="#1-1em" rel="nav-navbar-fontsize">Больше на 10%</a></li>
+			<li><a href="#1-2em" rel="nav-navbar-fontsize">Больше на 20%</a></li>
+			<li><a href="#1-3em" rel="nav-navbar-fontsize">Больше на 30%</a></li>
+			<li><a href="#1-4em" rel="nav-navbar-fontsize">Больше на 40%</a></li>
+			<li><a href="#1-5em" rel="nav-navbar-fontsize">Больше на 50%</a></li>
+			<li><a href="#1-6em" rel="nav-navbar-fontsize">Больше на 60%</a></li>
+			<li><a href="#1-7em" rel="nav-navbar-fontsize">Больше на 70%</a></li>
+			<li><a href="#1-8em" rel="nav-navbar-fontsize">Больше на 80%</a></li>
+			<li><a href="#1-9em" rel="nav-navbar-fontsize">Больше на 90%</a></li>
+			<li><a href="#2-0em" rel="nav-navbar-fontsize">Больше на 100%</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Меню каталога</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-location']}">
+		Позиция: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#left" rel="aside-location">Слева</a></li>
+			<li><a href="#right" rel="aside-location">Справа</a></li>
+			<li><a href="#hide" rel="aside-location">Скрыть</a></li>
+		</ul>
+		</div>
+
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-categories-bg']}">
+		Фон: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#amelia" rel="aside-categories-bg">Amelia</a></li>
+			<li><a href="#origin" rel="aside-categories-bg">Origin</a></li>
+			<li><a href="#first" rel="aside-categories-bg">First</a></li>
+			<li><a href="#cerulean" rel="aside-categories-bg">Cerulean</a></li>
+			<li><a href="#black" rel="aside-categories-bg">Black</a></li>
+			<li><a href="#books" rel="aside-categories-bg">books</a></li>
+			<!--li><a href="#darkly" rel="aside-categories-bg">Darkly</a></li>
+			<li><a href="#flatly" rel="aside-categories-bg">flatly</a></li>
+			<li><a href="#slate" rel="aside-categories-bg">slate</a></li>
+			<li><a href="#spacelab" rel="aside-categories-bg">spacelab</a></li>
+			<li><a href="#spruce" rel="aside-categories-bg">spruce</a></li>
+			<li><a href="#superhero" rel="aside-categories-bg">superhero</a></li-->
+
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-categories-style']}">
+		Стиль: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#usual" rel="aside-categories-style">usual</a></li>
+			<li><a href="#slick" rel="aside-categories-style">slick</a></li>
+			<li><a href="#first" rel="aside-categories-style">first</a></li>
+			<li><a href="#origin" rel="aside-categories-style">origin</a></li>
+			<li><a href="#column" rel="aside-categories-style">column</a></li>
+		</ul>
+		</div>		
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-categories-font']}">
+		Шрифт ссылок: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#Arial" rel="aside-categories-font">Arial</a></li>
+			<li><a href="#BadScript" rel="aside-categories-font">Bad Script</a></li>
+			<li><a href="#Comfortaa" rel="aside-categories-font">Comfortaa</a></li>
+			<li><a href="#ComicSansMS" rel="aside-categories-font">Comic Sans MS</a></li>
+			<li><a href="#CourierNew" rel="aside-categories-font">Courier New</a></li>
+			<li><a href="#Cuprum" rel="aside-categories-font">Cuprum</a></li>
+			<li><a href="#Georgia" rel="aside-categories-font">Georgia</a></li>
+			<li><a href="#Helvetica" rel="aside-categories-font">Helvetica</a></li>
+			<li><a href="#HelveticaNeue" rel="aside-categories-font">Helvetica Neue</a></li>
+			<li><a href="#Jura" rel="aside-categories-font">Jura</a></li>
+			<li><a href="#KellySlab" rel="aside-categories-font">Kelly Slab</a></li>
+			<li><a href="#Lobster" rel="aside-categories-font">Lobster</a></li>
+			<li><a href="#MarckScript" rel="aside-categories-font">Marck Script</a></li>
+			<li><a href="#Marmelad" rel="aside-categories-font">Marmelad</a></li>
+			<li><a href="#OpenSansCondensed" rel="aside-categories-font">Open Sans Condensed</a></li>
+			<li><a href="#Oranienbaum" rel="aside-categories-font">Oranienbaum</a></li>
+			<li><a href="#Palatino" rel="aside-categories-font">Palatino</a></li>
+			<li><a href="#Philosopher" rel="aside-categories-font">Philosopher</a></li>
+			<li><a href="#PTSans" rel="aside-categories-font">PT Sans</a></li>
+			<li><a href="#PTSerif" rel="aside-categories-font">PT Serif</a></li>
+			<li><a href="#Scada" rel="aside-categories-font">Scada</a></li>
+			<li><a href="#Tahoma" rel="aside-categories-font">Tahoma</a></li>
+			<li><a href="#TenorSans" rel="aside-categories-font">Tenor Sans</a></li>
+			<li><a href="#TimesNewRoman" rel="aside-categories-font">Times New Roman</a></li>
+			<li><a href="#TrebuchetMS" rel="aside-categories-font">Trebuchet MS</a></li>
+			<li><a href="#Ubuntu" rel="aside-categories-font">Ubuntu</a></li>
+			<li><a href="#UbuntuMono" rel="aside-categories-font">Ubuntu Mono</a></li>
+			<li><a href="#UbuntuCondensed" rel="aside-categories-font">Ubuntu Condensed</a></li>
+			<li><a href="#Underdog" rel="aside-categories-font">Underdog</a></li>
+			<li><a href="#Verdana" rel="aside-categories-font">Verdana</a></li>
+			<li><a href="#YesevaOne" rel="aside-categories-font">Yeseva One</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-categories-color']}">
+		Цвет ссылок: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#amelia" rel="aside-categories-color">amelia</a></li>
+			<li><a href="#white" rel="aside-categories-color">white</a></li>
+			<li><a href="#v2" rel="aside-categories-color">Вариант №2</a></li>
+			<li><a href="#v3" rel="aside-categories-color">Вариант №3</a></li>
+			<li><a href="#v4" rel="aside-categories-color">Вариант №4</a></li>
+			<li><a href="#v5" rel="aside-categories-color">Вариант №5</a></li>
+			<li><a href="#v6" rel="aside-categories-color">Вариант №6</a></li>
+			<li><a href="#v7" rel="aside-categories-color">Вариант №7</a></li>
+			<li><a href="#v8" rel="aside-categories-color">Вариант №8</a></li>
+			<li><a href="#v9" rel="aside-categories-color">Вариант №9</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-categories-hover']}">
+		Hover ссылка: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#first" rel="aside-categories-hover">first</a></li>
+			<li><a href="#origin" rel="aside-categories-hover">origin</a></li>
+			<li><a href="#v1" rel="aside-categories-hover">Вариант №1</a></li>
+			<li><a href="#v2" rel="aside-categories-hover">Вариант №2</a></li>
+			<li><a href="#v3" rel="aside-categories-hover">Вариант №3</a></li>
+			<li><a href="#v4" rel="aside-categories-hover">Вариант №4</a></li>
+			<li><a href="#v5" rel="aside-categories-hover">Вариант №5</a></li>
+			<li><a href="#v6" rel="aside-categories-hover">Вариант №6</a></li>
+			<li><a href="#v7" rel="aside-categories-hover">Вариант №7</a></li>
+			<li><a href="#v8" rel="aside-categories-hover">Вариант №8</a></li>
+
+			<li><a href="#v10" rel="aside-categories-hover">Вариант №10</a></li>
+			<li><a href="#underline" rel="aside-categories-hover">Подчеркивание</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-categories-active']}">
+		Active пункт: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#origin" rel="aside-categories-active">Origin</a></li>
+			
+			<li><a href="#v1" rel="aside-categories-active">Вариант №1</a></li>
+			<li><a href="#v2" rel="aside-categories-active">Вариант №2</a></li>
+			<li><a href="#v3" rel="aside-categories-active">Вариант №3</a></li>
+			<li><a href="#v4" rel="aside-categories-active">Вариант №4</a></li>
+			<li><a href="#v5" rel="aside-categories-active">Вариант №5</a></li>
+			<li><a href="#v6" rel="aside-categories-active">Вариант №6</a></li>
+			<li><a href="#v7" rel="aside-categories-active">Вариант №7</a></li>
+			<li><a href="#v8" rel="aside-categories-active">Вариант №8</a></li>
+			<li><a href="#v9" rel="aside-categories-active">Вариант №9</a></li>
+			<li><a href="#v10" rel="aside-categories-active">Вариант №10</a></li>
+			<li><a href="#v11" rel="aside-categories-active">Вариант №11</a></li>
+			<li><a href="#v12" rel="aside-categories-active">Вариант №12</a></li>
+			<li><a href="#v13" rel="aside-categories-active">Вариант №13</a></li>
+			<li><a href="#v14" rel="aside-categories-active">Вариант №14</a></li>
+			<li><a href="#v15" rel="aside-categories-active">Вариант №15</a></li>
+			<li><a href="#v16" rel="aside-categories-active">Вариант №16</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-categories-decor']}">
+		Transform ссылки: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#Lowercase" rel="aside-categories-decor">маленькими</a></li>
+			<li><a href="#Capitalize" rel="aside-categories-decor">Прописью</a></li>
+			<li><a href="#Uppercase" rel="aside-categories-decor">БОЛЬШИМИ</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-categories-bullet']}">
+		bullet'ы ссылок: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#none" rel="aside-categories-bullet">Нет</a></li>
+			<li><a href="#circle" rel="aside-categories-bullet">Circle</a></li>
+			<li><a href="#disc" rel="aside-categories-bullet">Disc</a></li>
+			<li><a href="#square" rel="aside-categories-bullet">Square</a></li>
+			<li><a href="#angle" rel="aside-categories-bullet">Angle(red)</a></li>
+			<li><a href="#corner" rel="aside-categories-bullet">Corner(red)</a></li>
+			
+			<li><a href="#v5" rel="aside-categories-bullet">Вариант №5</a></li>
+			<li><a href="#v6" rel="aside-categories-bullet">Вариант №6</a></li>
+			<li><a href="#v7" rel="aside-categories-bullet">Вариант №7</a></li>
+			<li><a href="#v8" rel="aside-categories-bullet">Вариант №8</a></li>
+			<li><a href="#v9" rel="aside-categories-bullet">Вариант №9</a></li>
+<!--
+			<li><a href="#angle" rel="aside-categories-bullet">Angle(black)</a></li>
+			<li><a href="#corner" rel="aside-categories-bullet">Corner(black)</a></li>
+			<li><a href="#angle" rel="aside-categories-bullet">Angle(yellow)</a></li>
+			<li><a href="#corner" rel="aside-categories-bullet">Corner(yellow)</a></li>
+-->
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-filters-bg']}">
+		Гамма фильтров: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#first" rel="aside-filters-bg">first</a></li>
+			<li><a href="#origin" rel="aside-filters-bg">origin</a></li>
+			<li><a href="#cerulean" rel="aside-filters-bg">cerulean</a></li>
+			<li><a href="#black" rel="aside-filters-bg">black</a></li>
+			<li><a href="#books" rel="aside-filters-bg">books</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-filters-style']}">
+		Отступ фильтров: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#first" rel="aside-filters-style">first</a></li>
+			<li><a href="#origin" rel="aside-filters-style">origin</a></li>
+			<li><a href="#no-padding" rel="aside-filters-style">no-padding</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-filters-headers']}">
+		Шрифты фильтров: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#first" rel="aside-filters-headers">first</a></li>
+			<li><a href="#origin" rel="aside-filters-headers">origin</a></li>
+			<li><a href="#surfer" rel="aside-filters-headers">surfer</a></li>
+			<li><a href="#books" rel="aside-filters-headers">books</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Навигационная строка</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['breadcrumbs-bg']}">
+		Фон: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#first" rel="breadcrumbs-bg">first</a></li>
+			<li><a href="#surfer" rel="breadcrumbs-bg">surfer</a></li>
+			<li><a href="#wooden" rel="breadcrumbs-bg">wooden</a></li>
+			<li><a href="#books" rel="breadcrumbs-bg">books</a></li>
+			<li><a href="#bereza" rel="breadcrumbs-bg">bereza</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['breadcrumbs-text-font']}">
+		Шрифт: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#Arial" rel="breadcrumbs-text-font">Arial</a></li>
+			<li><a href="#BadScript" rel="breadcrumbs-text-font">Bad Script</a></li>
+			<li><a href="#Comfortaa" rel="breadcrumbs-text-font">Comfortaa</a></li>
+			<li><a href="#ComicSansMS" rel="breadcrumbs-text-font">Comic Sans MS</a></li>
+			<li><a href="#CourierNew" rel="breadcrumbs-text-font">Courier New</a></li>
+			<li><a href="#Cuprum" rel="breadcrumbs-text-font">Cuprum</a></li>
+			<li><a href="#Georgia" rel="breadcrumbs-text-font">Georgia</a></li>
+			<li><a href="#Helvetica" rel="breadcrumbs-text-font">Helvetica</a></li>
+			<li><a href="#HelveticaNeue" rel="breadcrumbs-text-font">Helvetica Neue</a></li>
+			<li><a href="#Jura" rel="breadcrumbs-text-font">Jura</a></li>
+			<li><a href="#KellySlab" rel="breadcrumbs-text-font">Kelly Slab</a></li>
+			<li><a href="#Lobster" rel="breadcrumbs-text-font">Lobster</a></li>
+			<li><a href="#MarckScript" rel="breadcrumbs-text-font">Marck Script</a></li>
+			<li><a href="#Marmelad" rel="breadcrumbs-text-font">Marmelad</a></li>
+			<li><a href="#OpenSansCondensed" rel="breadcrumbs-text-font">Open Sans Condensed</a></li>
+			<li><a href="#Oranienbaum" rel="breadcrumbs-text-font">Oranienbaum</a></li>
+			<li><a href="#Palatino" rel="breadcrumbs-text-font">Palatino</a></li>
+			<li><a href="#Philosopher" rel="breadcrumbs-text-font">Philosopher</a></li>
+			<li><a href="#PTSans" rel="breadcrumbs-text-font">PT Sans</a></li>
+			<li><a href="#PTSerif" rel="breadcrumbs-text-font">PT Serif</a></li>
+			<li><a href="#Scada" rel="breadcrumbs-text-font">Scada</a></li>
+			<li><a href="#Tahoma" rel="breadcrumbs-text-font">Tahoma</a></li>
+			<li><a href="#TenorSans" rel="breadcrumbs-text-font">Tenor Sans</a></li>
+			<li><a href="#TimesNewRoman" rel="breadcrumbs-text-font">Times New Roman</a></li>
+			<li><a href="#TrebuchetMS" rel="breadcrumbs-text-font">Trebuchet MS</a></li>
+			<li><a href="#Ubuntu" rel="breadcrumbs-text-font">Ubuntu</a></li>
+			<li><a href="#UbuntuMono" rel="breadcrumbs-text-font">Ubuntu Mono</a></li>
+			<li><a href="#UbuntuCondensed" rel="breadcrumbs-text-font">Ubuntu Condensed</a></li>
+			<li><a href="#Underdog" rel="breadcrumbs-text-font">Underdog</a></li>
+			<li><a href="#Verdana" rel="breadcrumbs-text-font">Verdana</a></li>
+			<li><a href="#YesevaOne" rel="breadcrumbs-text-font">Yeseva One</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['breadcrumbs-radius']}">
+		Скругление фона: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#3px" rel="breadcrumbs-radius">3px</a></li>
+			<li><a href="#4px" rel="breadcrumbs-radius">4px</a></li>
+			<li><a href="#6px" rel="breadcrumbs-radius">6px</a></li>
+			<li><a href="#10px" rel="breadcrumbs-radius">10px</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Разделы</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['catalog-sections-col']}">
+		Кол-во на строке: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#col-6" rel="catalog-sections-col">по 6 штук</a></li>
+			<li><a href="#col-5" rel="catalog-sections-col">по 5 штук</a></li>
+			<li><a href="#col-4" rel="catalog-sections-col">по 4 штуки</a></li>
+			<li><a href="#col-3" rel="catalog-sections-col">по 3 штуки</a></li>
+			<li><a href="#col-2" rel="catalog-sections-col">по 2 штуки</a></li>
+			<li><a href="#col-1" rel="catalog-sections-col">по 1 штуки</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Статьи</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['articles-item-col']}">
+		Кол-во на строке: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#col-4" rel="articles-item-col">по 4 штуки</a></li>
+			<li><a href="#col-3" rel="articles-item-col">по 3 штуки</a></li>
+			<li><a href="#col-2" rel="articles-item-col">по 2 штуки</a></li>
+			<li><a href="#col-1" rel="articles-item-col">по 1 штуки</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Фотогалереи</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['galleries-item-col']}">
+		Кол-во на строке: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#col-4" rel="galleries-item-col">по 4 штуки</a></li>
+			<li><a href="#col-3" rel="galleries-item-col">по 3 штуки</a></li>
+			<li><a href="#col-2" rel="galleries-item-col">по 2 штуки</a></li>
+			<li><a href="#col-1" rel="galleries-item-col">по 1 штуки</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Товарный блок</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-item-col']}">
+		Кол-во на строке: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#col-6" rel="product-item-col">по 6 штук</a></li>
+			<li><a href="#col-5" rel="product-item-col">по 5 штук</a></li>
+			<li><a href="#col-4" rel="product-item-col">по 4 штуки</a></li>
+			<li><a href="#col-3" rel="product-item-col">по 3 штуки</a></li>
+			<li><a href="#col-2" rel="product-item-col">по 2 штуки</a></li>
+			<li><a href="#col-1" rel="product-item-col">по 1 штуки</a></li>
+		</ul>
+		</div>
+
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-item-description']}">
+		Описание: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#hide" rel="product-item-description">Скрыть</a></li>
+			<li><a href="#bottom" rel="product-item-caption">Абсолют</a></li>
+		</ul>
+		</div>
+		
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-item-price']}">
+		Цена: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#long" rel="product-item-price">Длинная</a></li>
+			<li><a href="#short" rel="product-item-price">Короткая</a></li>
+			<li><a href="#hide" rel="product-item-price">Скрыть</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-item-h5-size']}">
+		Размер названия: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#1-0em" rel="product-item-h5-size">Обычный</a></li>
+			<li><a href="#1-2em" rel="product-item-h5-size">Больше на 20%</a></li>
+			<li><a href="#1-3em" rel="product-item-h5-size">Больше на 30%</a></li>
+			<li><a href="#1-5em" rel="product-item-h5-size">Больше на 50%</a></li>
+		</ul>
+		</div>
+		
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-item-price-size']}">
+		Размер цены: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#1-0em" rel="product-item-price-size">Обычный</a></li>
+			<li><a href="#1-1em" rel="product-item-price-size">Больше на 10%</a></li>
+			<li><a href="#1-2em" rel="product-item-price-size">Больше на 20%</a></li>
+			<li><a href="#1-3em" rel="product-item-price-size">Больше на 30%</a></li>
+			<li><a href="#1-4em" rel="product-item-price-size">Больше на 40%</a></li>
+			<li><a href="#1-5em" rel="product-item-price-size">Больше на 50%</a></li>
+			<li><a href="#1-6em" rel="product-item-price-size">Больше на 60%</a></li>
+			<li><a href="#1-7em" rel="product-item-price-size">Больше на 70%</a></li>
+			<li><a href="#1-8em" rel="product-item-price-size">Больше на 80%</a></li>
+			<li><a href="#1-9em" rel="product-item-price-size">Больше на 90%</a></li>
+			<li><a href="#2-0em" rel="product-item-price-size">Больше на 100%</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-item-pos']}">
+		Позиция: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#pos-1&product-item-col=col-2" rel="product-item-pos">Позиция 1 для 2шт.</a></li>
+			<li><a href="#pos-2&product-item-col=col-1" rel="product-item-pos">Позиция 2 для 1шт.</a></li>
+			<li><a href="#pos-3" rel="product-item-pos">Изображение 100%</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-item-style']}">
+		Стиль: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#simple" rel="product-item-style">simple</a></li>
+			<li><a href="#first" rel="product-item-style">first</a></li>
+			<li><a href="#bereza" rel="product-item-style">bereza</a></li>
+			<li><a href="#yellowblack" rel="product-item-style">yellowblack</a></li>
+			<li><a href="#reight" rel="product-item-style">reight</a></li>
+			<li><a href="#reight-inverse" rel="product-item-style">reight-inverse</a></li>
+			<li><a href="#blue" rel="product-item-style">blue</a></li>			
+			<li><a href="#chami" rel="product-item-style">chami</a></li>
+			<li><a href="#wooden" rel="product-item-style">wooden</a></li>
+			<li><a href="#antiq" rel="product-item-style">antiq</a></li>
+			<li><a href="#pink" rel="product-item-style">pink</a></li>
+			<li><a href="#butik" rel="product-item-style">butik</a></li>
+			<li><a href="#surfer" rel="product-item-style">surfer</a></li>
+			<li><a href="#books" rel="product-item-style">books</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-item-bg']}">
+		Фон: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#white" rel="product-item-bg">Белый</a></li>
+			<li><a href="#gradient" rel="product-item-bg">Градиент</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-item-shadow']}">
+		Тень: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#v1" rel="product-item-shadow">Вариант №1</a></li>
+			<li><a href="#v2" rel="product-item-shadow">Вариант №2</a></li>
+			<li><a href="#v3" rel="product-item-shadow">Вариант №3</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['product-badges-style']}">
+		Шильдики: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#simple" rel="product-badges-style">Овал №1</a></li>
+			<li><a href="#chami" rel="product-badges-style">Овал №2</a></li>
+			<li><a href="#blue" rel="product-badges-style">Овал №3</a></li>
+			<li><a href="#1lenta" rel="product-badges-style">Лента №1</a></li>
+			<li><a href="#2lenta" rel="product-badges-style">Лента №2</a></li>
+			<li><a href="#3lenta" rel="product-badges-style">Лента №3</a></li>
+			<li><a href="#wooden" rel="product-badges-style">Прямоугольник №1</a></li>
+			<li><a href="#reight" rel="product-badges-style">Прямоугольник №2</a></li>
+			<li><a href="#flag" rel="product-badges-style">Флаг №1</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Подвал</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['footer-style']}">
+		Общий стиль: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#first" rel="footer-style">First</a></li>
+			<li><a href="#origin" rel="footer-style">Origin</a></li>
+			<li><a href="#wooden" rel="footer-style">Wooden</a></li>
+			<li><a href="#paper" rel="footer-style">Paper</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Пейджинг</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['paging-style']}">
+		Стиль: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#default" rel="paging-style">Обычный</a></li>
+			<li><a href="#square" rel="paging-style">Квадратный</a></li>
+			<li><a href="#round" rel="paging-style">Круглый</a></li>
+			<li><a href="#modern" rel="paging-style">Modern</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['paging-color']}">
+		Цвет: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#amelia" rel="paging-color">amelia</a></li>
+			<li><a href="#cyborg" rel="paging-color">cyborg</a></li>
+			<li><a href="#origin" rel="paging-color">origin</a></li>
+			<li><a href="#first" rel="paging-color">first</a></li>
+			<li><a href="#cerulean" rel="paging-color">cerulean</a></li>
+			<li><a href="#wooden" rel="paging-color">wooden</a></li>
+			<li><a href="#united" rel="paging-color">united</a></li>
+			<li><a href="#surfer" rel="paging-color">surfer</a></li>
+			<li><a href="#simplex" rel="paging-color">simplex</a></li>
+			<li><a href="#books" rel="paging-color">books</a></li>
+			<li><a href="#pink" rel="paging-color">pink</a></li>
+			<li><a href="#modern" rel="paging-color">Modern</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['paging-hover']}">
+		Hover: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#amelia" rel="paging-hover">amelia</a></li>
+			<li><a href="#cyborg" rel="paging-hover">cyborg</a></li>
+			<li><a href="#origin" rel="paging-hover">origin</a></li>
+			<li><a href="#first" rel="paging-hover">first</a></li>
+			<li><a href="#cerulean" rel="paging-hover">cerulean</a></li>
+			<li><a href="#wooden" rel="paging-hover">wooden</a></li>
+			<li><a href="#united" rel="paging-hover">united</a></li>
+			<li><a href="#simplex" rel="paging-hover">simplex</a></li>
+			<li><a href="#books" rel="paging-hover">books</a></li>
+			<li><a href="#bereza" rel="paging-hover">bereza</a></li>
+			<li><a href="#pink" rel="paging-hover">pink</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['paging-active']}">
+		Active: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#amelia" rel="paging-active">amelia</a></li>
+			<li><a href="#cyborg" rel="paging-active">cyborg</a></li>
+			<li><a href="#f5f5f5" rel="paging-active">f5f5f5</a></li>
+			<li><a href="#simplex" rel="paging-active">simplex</a></li>
+			<li><a href="#books" rel="paging-active">books</a></li>
+			<li><a href="#bereza" rel="paging-active">bereza</a></li>
+			<li><a href="#pink" rel="paging-active">pink</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend class="collapsed">Кнопки</legend>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['button-style']}">
+		Общий стиль: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#slim" rel="button-style">Узкая</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['button-icon']}">
+		Иконка: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#no-icon" rel="button-icon">Без иконки</a></li>
+			<li><a href="#icon-right" rel="button-icon">Иконка справа</a></li>
+			<li><a href="#icon-left" rel="button-icon">Иконка слева</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['button-background']}">
+		Цв. гамма: <span class="selected">изменить</span>
+		<ul class="button-background">
+			<li><a href="#amelia" rel="button-background" class="bb-amelia">amelia</a></li>
+			<li><a href="#bereza" rel="button-background" class="bb-bereza">bereza</a></li>
+			<li><a href="#bubbles" rel="button-background" class="bb-bubbles">bubbles</a></li>
+			<li><a href="#books" rel="button-background" class="bb-books">books</a></li>
+			<li><a href="#cerulean" rel="button-background" class="bb-cerulean">cerulean</a></li>
+			<li><a href="#cosmo" rel="button-background" class="bb-cosmo">cosmo</a></li>
+			<li><a href="#cyborg" rel="button-background" class="bb-cyborg">cyborg</a></li>
+			<li><a href="#first" rel="button-background" class="bb-first">first</a></li>
+			<li><a href="#simple" rel="button-background" class="bb-simple">simple</a></li>
+			<li><a href="#origin" rel="button-background" class="bb-origin">origin</a></li>
+			<li><a href="#united" rel="button-background" class="bb-united">united</a></li>
+			<li><a href="#surfer" rel="button-background" class="bb-surfer">surfer</a></li>
+			<li><a href="#readable" rel="button-background" class="bb-readable">readable</a></li>
+			<li><a href="#wooden" rel="button-background" class="bb-wooden">wooden</a></li>
+						
+			<li><a href="#pink1" rel="button-background" class="bb-pink1">Розовый 1</a></li>
+			<li><a href="#pink2" rel="button-background" class="bb-pink2">Розовый 2</a></li>
+			{*
+			<li><a href="#pink3" rel="button-background">Розовый 3</a></li>
+			<li><a href="#pink4" rel="button-background">Розовый 4</a></li>
+			*}
+			<li><a href="#gray1" rel="button-background" class="bb-grey1">Серый 1</a></li>
+			{*
+			<li><a href="#gray2" rel="button-background">Серый 2</a></li>
+			<li><a href="#red1" rel="button-background">Красный 1</a></li>
+			<li><a href="#red4" rel="button-background">Красный 4</a></li>
+			<li><a href="#blue1" rel="button-background">Голубой 1</a></li>
+			<li><a href="#blue2" rel="button-background">Голубой 2</a></li>
+			<li><a href="#blue3" rel="button-background">Голубой 3</a></li>
+			*}
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['button-radius']}">
+		Скругление кнопки: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#3px" rel="button-radius">3px</a></li>
+			<li><a href="#4px" rel="button-radius">4px</a></li>
+			<li><a href="#6px" rel="button-radius">6px</a></li>
+			<li><a href="#10px" rel="button-radius">10px</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['button-font']}">
+		Шрифт: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#Arial" rel="button-font">Arial</a></li>
+			<li><a href="#BadScript" rel="button-font">Bad Script</a></li>
+			<li><a href="#Comfortaa" rel="button-font">Comfortaa</a></li>
+			<li><a href="#ComicSansMS" rel="button-font">Comic Sans MS</a></li>
+			<li><a href="#CourierNew" rel="button-font">Courier New</a></li>
+			<li><a href="#Cuprum" rel="button-font">Cuprum</a></li>
+			<li><a href="#Georgia" rel="button-font">Georgia</a></li>
+			<li><a href="#Helvetica" rel="button-font">Helvetica</a></li>
+			<li><a href="#HelveticaNeue" rel="button-font">Helvetica Neue</a></li>
+			<li><a href="#Jura" rel="button-font">Jura</a></li>
+			<li><a href="#KellySlab" rel="button-font">Kelly Slab</a></li>
+			<li><a href="#Lobster" rel="button-font">Lobster</a></li>
+			<li><a href="#MarckScript" rel="button-font">Marck Script</a></li>
+			<li><a href="#Marmelad" rel="button-font">Marmelad</a></li>
+			<li><a href="#OpenSansCondensed" rel="button-font">Open Sans Condensed</a></li>
+			<li><a href="#Oranienbaum" rel="button-font">Oranienbaum</a></li>
+			<li><a href="#Palatino" rel="button-font">Palatino</a></li>
+			<li><a href="#Philosopher" rel="button-font">Philosopher</a></li>
+			<li><a href="#PTSans" rel="button-font">PT Sans</a></li>
+			<li><a href="#PTSerif" rel="button-font">PT Serif</a></li>
+			<li><a href="#Scada" rel="button-font">Scada</a></li>
+			<li><a href="#Tahoma" rel="button-font">Tahoma</a></li>
+			<li><a href="#TenorSans" rel="button-font">Tenor Sans</a></li>
+			<li><a href="#TimesNewRoman" rel="button-font">Times New Roman</a></li>
+			<li><a href="#TrebuchetMS" rel="button-font">Trebuchet MS</a></li>
+			<li><a href="#Ubuntu" rel="button-font">Ubuntu</a></li>
+			<li><a href="#UbuntuMono" rel="button-font">Ubuntu Mono</a></li>
+			<li><a href="#UbuntuCondensed" rel="button-font">Ubuntu Condensed</a></li>
+			<li><a href="#Underdog" rel="button-font">Underdog</a></li>
+			<li><a href="#Verdana" rel="button-font">Verdana</a></li>
+			<li><a href="#YesevaOne" rel="button-font">Yeseva One</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['button-font-color']}">
+		Цвет текста: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#white" rel="button-font-color">white</a></li>
+			<li><a href="#black" rel="button-font-color">black</a></li>
+		</ul>
+		</div>
+		<div class="dropdown" data-value="{$GLOBS.css_settings['button-font-transform']}">
+		Transform: <span class="selected">изменить</span>
+		<ul>
+			<li><a href="#Lowercase" rel="button-font-transform">маленькими</a></li>
+			<li><a href="#Capitalize" rel="button-font-transform">Прописью</a></li>
+			<li><a href="#Uppercase" rel="button-font-transform">БОЛЬШИМИ</a></li>
+		</ul>
+		</div>
+	</fieldset>
+	</div>
+	<form action="/cabinet/" method="POST">
+	{if $GLOBS.css_settings}
+	{foreach from=$GLOBS.css_settings item=item key=key}<input type="hidden" value="{$item}" name="css_settings[{$key}]" id="input_{$key}" />{/foreach}
+	{else}
+	<input type="hidden" value="left" name="css_settings[aside-location]" id="input_aside-location" />
+	<input type="hidden" value="col-4" name="css_settings[product-item-col]" id="input_product-item-col" />
+	<input type="hidden" value="short" name="css_settings[product-item-price]" id="input_product-item-price" />
+	{/if}
+	
+	<p align="center">
+		<input name="css_settings_name" type="text" placeholder="Название сборника" class="css_settings_name" />
+		<button type="submit" name="submit">ОК</button>
+	</p>
+	</form>
+</div>
+
+
+
+<link rel="stylesheet" href="/libs/css/design-ui.css">
+
+
+{/if}

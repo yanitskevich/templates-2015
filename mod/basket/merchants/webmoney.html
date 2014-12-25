@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="WEBMONEY"> {$GLOBS.merchants.webmoney.btn|default:'Оплатить через Webmoney'}
+		<p class="help-block">Оплата через сервис WebMoney.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="WEBMONEY">{$GLOBS.merchants.webmoney.btn|default:'Оплатить через Webmoney'}</option>
+{/if}

@@ -1,0 +1,21 @@
+{if $ext_shopexpresscopyright}
+{if $shopexpresscopyright_url eq 'yes'}
+<a href="http://shopexpress.difocus.ru" target="_blank" {if $vpath neq '/'}rel="nofollow"{/if}>ShopExpress &mdash; cоздание интернет-магазинов</a>
+{else}
+{if $shopexpresscopyright_anchor}<br />{$shopexpresscopyright_anchor}{/if}
+{/if}
+{else}
+{if $vpath neq '/'}<!--noindex-->{/if}
+{if $GLOBS.SE_COPYRIGHT eq '1'}
+<a href="http://shopexpress.difocus.ru" target="_blank" {if $vpath neq '/'}rel="nofollow"{/if}>ShopExpress &mdash; cоздание интернет-магазинов</a>
+{else if $GLOBS.SE_COPYRIGHT eq '2'}
+<a href="http://www.difocus.ru" target="_blank" {if $vpath neq '/'}rel="nofollow"{/if}>Создание сайта &mdash; Difocus</a>
+{else if $GLOBS.SE_COPYRIGHT eq '3'}
+<br /><a href="http://shopexpress.difocus.ru" target="_blank" {if $vpath neq '/'}rel="nofollow"{/if}>Интернет-магазин от ShopExpress</a>			
+{else if $GLOBS.SE_COPYRIGHT eq '4'}
+<a href="http://shopexpress.difocus.ru" target="_blank" {if $vpath neq '/'}rel="nofollow"{/if}>ShopExpress &mdash; cоздание интернет-магазинов</a>
+{else}
+<a href="http://shopexpress.difocus.ru" target="_blank" {if $vpath neq '/'}rel="nofollow"{/if}>ShopExpress &mdash; аренда интернет-магазина</a>
+{/if}
+{if $vpath neq '/'}<!--/noindex-->{/if}
+{/if}

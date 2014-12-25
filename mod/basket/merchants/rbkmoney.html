@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="RBKMONEY"> {$GLOBS.merchants.rbkmoney.btn|default:'Оплатить через RBKMoney'}
+		<p class="help-block">Оплата через сервис RBKMoney. Пластиковые карты, WebMoney, Яндекс.Деньги и другие способы оплаты.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="RBKMONEY">{$GLOBS.merchants.rbkmoney.btn|default:'Оплатить через RBKMoney'}</option>
+{/if}

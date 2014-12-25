@@ -1,0 +1,38 @@
+{if $shopexpressdisqus_URL}
+<div class="comments">
+<hr />
+<div class="list">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+{if $shopexpressdisqus_URL}var disqus_shortname = '{$shopexpressdisqus_URL}';{/if}
+{if $shopexpressdisqus_disqus_title eq 'h1'}
+var disqus_title = $('h1').first().text();
+{/if}
+{if $shopexpressdisqus_disqus_category_id eq 'yes'}
+var disqus_category_id = '{$objinfo.parent_oid}';
+{/if}
+{if $shopexpressdisqus_disqus_disable_mobile eq 'false'}
+var disqus_disable_mobile = false;
+{/if}
+
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script type="text/javascript">
+var disqus_shortname = 'newshop-shx';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+</div>
+</div>
+{/if}

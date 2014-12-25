@@ -1,0 +1,64 @@
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<title>{if $title}{$title}{elseif $name}{$name}{elseif $GLOBS.SITENAME}{$GLOBS.SITENAME}{/if}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="title" content="{$title}">
+{foreach from=$GLOBS.metatags item=tag}
+{if $tag.name eq 'favicon'}
+<link rel="icon" href="{$tag.content}" type="image/x-icon" />
+<link rel="shortcut icon" href="{$tag.content}" type="image/ico" />
+{else if $tag.name eq 'canonical'}
+<link rel="canonical" href="http://{$smarty.server.HTTP_HOST}{$vlink|replace:'/index.html':'/'}" />
+{else if $tag.name|contains:'fb:'}
+<meta property="{$tag.name}" content="{$tag.content}">
+{else if $tag.name|contains:'social:'}
+{assign var=social_button value=1}
+{else}
+<meta name="{$tag.name}" content="{$tag.content}">
+{/if}
+{/foreach}
+
+{if $meta_description}<meta name="description" content="{$meta_description}">{/if}
+{if $meta_keywords}<meta name="keywords" content="{$meta_keywords}">{/if}
+<meta name="author" content="{$objinfo.master_src.name}">
+	
+{if $directories_paging>1}
+{if $directories_paging-1 eq $directories_current+1}<link rel="next" href="?page={$directories_current+1}">{/if}
+{if $directories_current!=0}<link rel="prev" href="?page={$directories_current-1}">{/if}
+{/if}
+	
+<script src="/media0/js/jquery-1.9.1.min.js"></script>
+<!--[if lt IE 9]>
+<script src="/libs/js/html5shiv.js"></script>
+<script src="/libs/js/respond.min.js"></script>
+<![endif]-->
+
+{if $GLOBS.favicon}
+<link rel="icon" href="{$GLOBS.favicon}" type="image/x-icon" />
+<link rel="shortcut icon" href="{$GLOBS.favicon}" type="image/ico" />
+{/if}
+	
+{if $GLOBS.css_settings}
+{if $GLOBS.user_id eq 3}
+{foreach from=$GLOBS.css_settings item=item key=key}<link href="/libs/css/{$key}/{$item}.css" rel="stylesheet" id="{$key}">{/foreach}
+{else}
+<link href="/{combine input=$GLOBS.css_settings output='alboms/all.css' date=$GLOBS.css_settings_date}" type="text/css" rel="stylesheet">
+{/if}
+{else}
+<link href="/{combine input=array('/libs/css/aside-location/left.css', '/libs/css/aside-location/left.css', '/libs/css/product-item-price/short.css', '/libs/css/common-site-lib/bootstrap.css') output='alboms/jquery.all.css' age='1'}" type="text/css" rel="stylesheet">
+{/if}
+
+<link href="/{combine input=array('/media0/css/jquery.basket.css','/media0/css/jquery.rating.css', '/media0/css/jquery.fancybox.css', '/media0/css/jquery.comments.css', '/media0/css/social.css', '/libs/css/search.css', '/libs/css/main.css') output='alboms/jquery.all.css' age='30' date=$GLOBS.css_settings_date}" type="text/css" rel="stylesheet">
+
+<style id="custom-style" type="text/css">{$GLOBS.css_style}</style>
+
+{if $ext_socialposting}
+<meta property="og:title" content="{$title}"/>
+<meta property="og:image" content="http://{$smarty.server.SERVER_NAME}{$images[0].path}"/>
+<link rel="image_src" href="http://{$smarty.server.SERVER_NAME}{$images[0].path}" />
+<meta property="og:site_name" content="{$GLOBS.SITENAME}"/>
+<meta property="og:description" content="{if $annotate}{$annotate|addslashes|strip_tags}{else}{$text|addslashes|strip_tags|truncate:200}{/if}"/>
+{/if}
+</head>

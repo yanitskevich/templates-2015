@@ -1,0 +1,10 @@
+<form name="_xclick" action="https://www.paypal.com/ru/cgi-bin/webscr" method="post" class="payment-form">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="{$GLOBS.merchants.paypal.email}">
+<input type="hidden" name="currency_code" value="{$currency.code}">
+<input type="hidden" name="item_name" value="{$GLOBS.merchants.paypal.serviceName|default:'Payment Order #'}{$order_id}">
+{*<input type="hidden" name="amount" value="{if $currency.code neq 'USD'}{math equation="round(summ/course,lim)" lim=2 summ=$summ course=$GLOBS.allcurrencies.USD.course}{else}{$summ}{/if}">*}
+<input type="hidden" name="amount" value="{$summ|price:false|replace:' ':''}">
+<!-- button type=submit class="btn">{$GLOBS.merchants.paypal.btn|default:'Оплатить через PayPal'}</button -->
+<button type=submit class="btn btn-large" title="{$GLOBS.merchants.paypal.btn|default:'Оплатить через PayPal'}" rel="tooltip"><img src="/media0/img/merchants/PayPal.png" alt="PayPal" width="150" /></button>
+</form>

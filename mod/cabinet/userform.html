@@ -1,0 +1,464 @@
+{$text}
+
+{if $reg_success==1 && $act_success!=1 && $act_success!=2 && !$fog_success}
+	<div class="alert alert-success">
+	<strong>Спасибо за регистрацию</strong><br />
+	<p>Мы выслали письмо с указанными логином ({$register_fields.login.value}) и паролем, на Вашу электронную почту "{$register_fields.email.value}". В данный момент Ваша учетная запись <b>НЕ</b> активирована. Проверьте почту и активируйте учетную запись, пройдя по ссылке указанной в письме.</p>
+	</div>
+{/if}
+
+{if $fog_success==1}
+	<div class="alert alert-success">
+	<strong>Восстановление пароля</strong><br />
+	<p>На почту учетной записи {$fog_login} высланы инструкции по восстановлению пароля.</p>
+	</div>
+{/if}
+
+{if $fog_success==-16}
+	<div class="alert alert-warning">
+	<strong>Восстановление пароля</strong><br />
+	<p>Указанная почта {$fog_login} не найдена в базе.</p>
+	</div>
+{/if}
+
+{if $fog_success==-32}
+	<div class="alert alert-warning">
+	<strong>Восстановление пароля</strong><br />
+	<p>Указанный логин {$fog_login} не найден в базе.</p>
+	</div>
+{/if}
+
+{if $reg_success==-1}
+	<div class="alert alert-warning">
+	<button class="close" data-dismiss="alert">&times;</button>
+	<strong>Внимание!</strong><br />
+	Некоторые из полей заполнены неверно
+	</div>
+{/if}
+
+{if $reg_error}
+	<div class="alert alert-warning">
+	<button class="close" data-dismiss="alert">&times;</button>
+	<strong>Внимание!</strong><br />
+	Некоторые из полей заполнены неверно
+	</div>
+{/if}
+
+{if $act_success==1}
+	<div class="alert alert-success">
+	<strong>Регистрация завершена</strong><br />
+	Учетная запись {$act_login} <b>активирована</b>.<br />
+	Вы можете пройти процедуру авторизации, нажав на <a href="">эту ссылку</a>.
+	</div>
+{/if}
+
+{if $act_success==2}
+	<div class="alert alert-success">
+	<strong>Регистрация завершена</strong><br />
+	Учетная запись {$act_login} была активирована ранее.
+	Вы можете пройти процедуру авторизации, нажав на <a href="">эту ссылку</a>.
+	</div>
+{/if}
+
+{if $act_success==-1}
+	<div class="alert alert-warning">
+	<button class="close" data-dismiss="alert">&times;</button>
+	<strong>Регистрация</strong><br />
+	<p>Во время активации произошла непредвиденная ошибка. Логин или код активации были указаны неверно.</p>
+	<ul>
+		<li><a href="/cabinet/reg.html?login={$act_login}">Выслать повторное письмо с кодом активации для учетной записи {$act_login}.</a></li>
+		<li>Вы можете пройти процедуру регистрации заново, заполнив форму ниже.</li>
+	</ul>
+	</div>
+{/if}
+{if $reg_success<0 || !$reg_success}
+      <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+        <fieldset>
+          {* ГОСТЕВАЯ ФОРМА *}
+          {if $GLOBS.user_id eq 6}
+          <div class="form-group{if $register_fields.login.error} has-error{/if}">
+            <label class="control-label col-sm-3" for="inputName">Желаемый логин <sup style="color:red;">!</sup></label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="inputName" name="regdata[login]" value="{$register_fields.login.value}" autocomplete=off />
+              {if $register_fields.login.error}<span class="help-block">{$reg_errors[$register_fields.login.checked]}</span>{/if}
+              <p class="help-block">В качестве логина можно использовать электронный адрес, сменить логин нельзя.</p>
+            </div>
+          </div>
+          {* /ГОСТЕВАЯ ФОРМА *}
+          {else}
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="inputName">Ваш логин</label>
+            <div class="col-sm-9">
+            	<p class="form-control-static">{$register_fields.login.value}</p>
+	            <input type="hidden" name="regdata[login]" id="inputName" value="{$register_fields.login.value}" readonly="true" />
+            </div>
+          </div>
+          {/if}
+
+          
+          {if $ext_usercarma && $GLOBS.user_id neq 6}
+          <div class="form-group">
+            <label class="control-label col-sm-3">Ваш уровень активности</label>
+            <div class="col-sm-9">
+            	{if $GLOBS.userdata.carma}
+				<div class="{if $GLOBS.userdata.discount}pull-left {/if}">
+					<div class="progress" style="margin-bottom:0;">
+					  <div class="progress-bar progress-bar-success" style="width: {math x=$GLOBS.userdata.nextlevel y=$GLOBS.userdata.carma equation="floor((y/x)*100)-floor((y/x)*100)%20"}%;" rel="tooltip" title="У вас {$GLOBS.userdata.level} уровень" data-container="body">{$GLOBS.userdata.carma}</div>
+					  <div class="progress-bar progress-bar-warning" style="width: {math x=$GLOBS.userdata.nextlevel y=$GLOBS.userdata.carma equation="100-(floor((y/x)*100)-floor((y/x)*100)%20)"}%;" rel="tooltip" title="До {$GLOBS.userdata.level+1} уровня осталось" data-container="body">{$GLOBS.userdata.nextlevel-$GLOBS.userdata.carma}</div>
+					</div>
+				</div>
+				{/if}
+				{if $GLOBS.userdata.discount}<span class="help-inline" style="line-height:22px;">Скидка <b>{$GLOBS.userdata.discount.human}</b></span>{/if}
+				<p class="help-block">Ваша активность на сайте определяется количеством комментариев, статей и покупок. Чем выше Ваш уровень активности, тем выше скидка, которую вы получите при покупке. </p>
+            </div>
+          </div>
+          {/if}
+          
+          {if $ext_userpoints && $GLOBS.user_id neq 6}{* && $GLOBS.userdata.points>0*}
+          <div class="form-group">
+            <label class="control-label col-sm-3">Ваши бонусы</label>
+            <div class="col-sm-9">
+              <big><i class="glyphicon glyphicon-gift"></i> {$GLOBS.userdata.points}</big>
+              <p class="help-block">Бонусы можно заработать, оставляя комментарии или покупая определенные товары. </p>
+            </div>
+          </div>
+          {/if}
+          
+          <div class="form-group{if $register_fields.email.error} has-error{/if}">
+            <label class="control-label col-sm-3" for="inputEmail">Электронный адрес <sup style="color:red;">!</sup></label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="inputEmail" name="regdata[email]" value="{$register_fields.email.value}" autocomplete=off />{if $register_fields.email.error}<span class="help-block">{$reg_errors[$register_fields.email.checked]}</span>{/if}
+              <p class="help-block">На указанный адрес придет ссылка с подтверждением регистрации, указывайте существующий адрес.</p>
+            </div>
+          </div>
+          <div class="form-group{if $register_fields.pass.error} has-error{/if}">
+            <label class="control-label col-sm-3" for="inputPass">Пароль <sup style="color:red;">!</sup></label>
+            <div class="col-sm-9">
+				<div class="input-group">
+					<input type="password" id="inputPass" class="form-control" name="regdata[pass]" autocomplete=off />
+					<span class="input-group-btn">
+						<button class="btn btn-password" type="button" id="showPass" title="Показывать пароль" rel="tooltip" data-container="body"><i class="glyphicon glyphicon-eye-open"></i></button>
+					</span>
+				</div>
+				<input type="hidden" name="retype_password" />
+				{if $register_fields.pass.error}<span class="help-block">{$reg_errors[$register_fields.pass.checked]}</span>{/if}
+				<span class="help-inline" id="passwordStrength"></span>
+				<p class="help-block">
+					Пароль должен содержать не менее 6 символов из списка:<br />
+				A-z, 0-9, ! @ # $ % ^ & * ( ) _ - +, и не может совпадать с электронным адресом
+				</p>
+				<script src="/media0/js/jquery.YAPSM.js"></script>
+				<script>
+				$('#inputPass').change(function() { $('[name=retype_password]').val($(this).val()); } );
+				$("#inputPass").yapsm( {
+				        dictionary : function() { return ['aaabbb', 'qwe123', '1q2w3e', '123456', "qwe123asd", "1234567", "12345678", "123456789", '1234567890']; }
+				} ).keyup(function() { $("#passwordStrength").html(this.complexity); });
+				$('#showPass').click(function(){
+					var $input = $("#inputPass");
+					if($input.attr('type') == 'password')
+					{
+				  	$input.attr('type', 'text');
+				  	$(this).html('<i class="glyphicon glyphicon-eye-close"></i>');
+				  	$(this).tooltip('destroy');
+				  	$(this).attr('title','Скрывать пароль');
+				  	$(this).tooltip('show');
+				}
+				else
+				{
+					$input.attr('type', 'password');
+				  	$(this).html('<i class="glyphicon glyphicon-eye-open"></i>');
+				  	$(this).tooltip('destroy');
+				  	$(this).attr('title','Показывать пароль');
+				  	$(this).tooltip('show');
+				}
+				});
+				</script>
+             </div>
+          </div>
+          
+          {if sizeof($register_fields)>0}
+			{foreach from=$register_fields item=item name=fieldscounter}
+				{if $item.htmltype eq 'textfield'}
+				<div class="form-group {if $item.error} has-error{/if}">
+					<label class="control-label col-sm-3" for="input{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
+					<div class="col-sm-9">
+						<input type="text" id="input{$item.name|capitalize}" class="form-control" name="{$item.fieldname}" value="{$item.value}">
+						{if $item.error}<span class="help-block">{$reg_errors[$item.checked]}</span>{/if}
+			            {if $item.description}<p class="help-block">{$item.description}</p>{/if}
+					</div>
+				</div>
+				{/if}
+				{if $item.htmltype eq 'adresfield'}
+				<div class="form-group {if $item.error} has-error{/if}">
+					<label class="control-label col-sm-3" for="input{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
+					<div class="col-sm-9">
+						<input type="text" id="input{$item.name|capitalize}" class="form-control" name="{$item.fieldname}" value="{$item.value}">
+						{if $item.error}<span class="help-block">{$reg_errors[$item.checked]}</span>{/if}
+			            {if $item.description}<p class="help-block">{$item.description}</p>{/if}
+					</div>
+				</div>
+				<link href="https://dadata.ru/static/css/suggestions-4.3.css" type="text/css" rel="stylesheet" />
+				<!--[if lt IE 10]>
+				<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
+				<![endif]-->
+				<script type="text/javascript" src="https://dadata.ru/static/js/jquery.suggestions-4.3.min.js"></script>
+				<script type="text/javascript">
+				    $("#input{$item.name|capitalize}").suggestions({
+				        serviceUrl: "https://dadata.ru/api/v2/suggest/address",
+				        type: "ADDRESS",
+						token: "b94c274fc11fbd3fa9f26c57047e57d0287ab91f",
+				        onSelect: function(suggestion) {
+				            if($('#inputPostindex').length)
+				            	$('#inputPostindex').val(suggestion.data.postal_code);
+				        }
+				    });
+				</script>
+				{/if}								
+				{if $item.htmltype eq 'datefield'}
+				{assign var=datepicker value=1}
+				<div class="form-group {if $item.error} has-error{/if}">
+					<label class="control-label col-sm-3" for="input{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
+					<div class="col-sm-9">
+						<input type="text" id="input{$item.name|capitalize}" class="datefield form-control" name="{$item.fieldname}" value="{$item.value}" data-date-format="dd.mm.yyyy" data-date="01.01.2014">
+						{if $item.error}<span class="help-block">{$reg_errors[$item.checked]}</span>{/if}
+			            {if $item.description}<p class="help-block">{$item.description}</p>{/if}
+					</div>
+				</div>
+				{/if}
+				
+				{if $item.htmltype eq 'textarea'}
+				<div class="form-group {if $item.error} has-error{/if}">
+					<label class="control-label col-sm-3" for="textarea{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
+					<div class="col-sm-9">
+						<textarea name="{$item.fieldname}" class="form-control" cols=30 wrap="wrap" id="textarea{$item.name|capitalize}">{$item.value}</textarea>
+						{if $item.error}<span class="help-block">{$reg_errors[$item.checked]}</span>{/if}
+			            {if $item.description}<p class="help-block">{$item.description}</p>{/if}
+					</div>
+				</div>
+				{/if}
+				
+				{if $item.htmltype eq 'combostore'}
+				<div class="form-group {if $order_fields[$item.name]['error']} error{/if}">
+					<label class="control-label col-sm-3" for="input{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
+					<div class="col-sm-9">
+						<select name="{$item.fieldname}" class="form-control" id="select{$item.name|capitalize}">
+						{foreach from=$GLOBS[$item.name] item=field_item key=field_item_key}
+							<option value="{$field_item_key}" {if $item.value eq $field_item_key}selected{/if}>{$field_item}</option>
+						{/foreach}
+						</select>
+						{if $item.error}<span class="help-block">{$reg_errors[$item.checked]}</span>{/if}
+			            {if $item.description}<p class="help-block">{$item.description}</p>{/if}
+					</div>
+				</div>
+				{/if}
+				
+				{if $item.htmltype eq 'delivery' && sizeof($delivery)>0}				
+				<div class="form-group {if $item.error} has-error{/if}">
+					<label class="control-label col-sm-3" for="select{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
+					<div class="col-sm-9">
+						<select name="delivery" class="form-control" id="select{$item.name|capitalize}">
+							{foreach from=$delivery item=delivery_item key=delivery_key}
+							<option value="{$delivery_key}"
+									data-total-from="{$delivery_item.total_from|default:0}"
+									data-total-to="{$delivery_item.total_to|default:0}"
+									{if $delivery_item.disabled} disabled {/if}>
+								{$delivery_item.name} {if $delivery_item.price}( {$delivery_item.price|price:false} {numeral number=$delivery_item.price|price:false ends=$GLOBS.currency.name}){/if}
+								</option>
+							{/foreach}
+						</select>
+						{if $item.error}<span class="help-block">Обязательно для заполнения</span>{/if}
+			            {if $item.description}<p class="help-block">{$item.description}</p>{/if}
+					</div>
+				</div>
+				{/if}
+
+				{if $item.htmltype eq 'checkbox'}
+				<div class="form-group {if $item.error} has-error{/if}">
+					<label class="control-label col-sm-3" for="checkbox{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
+					<div class="col-sm-9">
+						
+
+			            {if $item.description}<p class="help-block"><label><input type="checkbox" id="checkbox{$item.name|capitalize}" name="{$item.fieldname}" value="1" {if $item.value}checked{/if} /> {$item.description}</label></p>{else}
+			            <input type="checkbox" id="checkbox{$item.name|capitalize}" name="{$item.fieldname}" value="{$item.value}" {if $item.value}checked{/if} />
+			            {/if}
+			            
+						{if $item.error}<span class="help-block">{$reg_errors[$item.checked]}</span>{/if}
+					</div>
+				</div>
+				{/if}
+				
+				{if $item.htmltype eq 'hidden'}
+				<input type="hidden" name="{$item.fieldname}" value="{$item.value}">
+				{/if}
+			{/foreach}
+		  {else}
+	          <div class="form-group{if $register_fields.name.error} has-error{/if}">
+	            <label class="control-label col-sm-3" for="inputName">Имя и фамилия</label>
+	            <div class="col-sm-9">
+	              <input type="text" class="form-control" id="inputName" name="regdata[name]" value="{$register_fields.name.value}" />
+	            </div>
+	          </div>
+	          
+	          {if $register_fields.gender.fieldname}
+	          <div class="form-group{if $register_fields.gender.error} has-error{/if}">
+	            <label class="control-label col-sm-3" for="inputSex">Пол</label>
+	            <div class="col-sm-9">
+					<select name="regdata[gender]" class="form-control" id="inputSex">
+						{foreach from=$GLOBS.gender item=item key=key}
+						<option value="{$key}" {if $register_fields.gender.value eq $key} selected{/if}>{$item}</option>
+						{/foreach}
+					</select>
+	            </div>
+	          </div>
+	          {/if}
+          {/if}
+         
+          {if $ext_authsocial}
+          {if !$GLOBS.userdata.facebook || !$GLOBS.userdata.twitter || !$GLOBS.userdata.vkontakte || !$GLOBS.userdata.yandex || !$GLOBS.userdata.mailru || !$GLOBS.userdata.google}
+          <div class="form-group">
+            <label class="control-label col-sm-3">Привязать к аккаунту</label>
+            <div class="col-sm-9">
+				<p>
+				{if !$GLOBS.userdata.facebook && $authsocial_facebook}<a href="/cabinet/?provider=facebook&r={$vpath}" class="social-font-facebook" rel="tooltip" title="Facebook"><i class="icon-facebook"></i></a>{/if}
+				{if !$GLOBS.userdata.twitter && $authsocial_twitter}<a href="/cabinet/?provider=twitter&r={$vpath}" class="social-font-twitter" rel="tooltip" title="Twitter"><i class="icon-twitter"></i></a>{/if}
+				{if !$GLOBS.userdata.google && $authsocial_google}<a href="/cabinet/?provider=google&r={$vpath}" class="social-font-google" rel="tooltip" title="Google"><i class="icon-google"></i></a>{/if}
+				{if !$GLOBS.userdata.vkontakte && $authsocial_vkontakte}<a href="/cabinet/?provider=vkontakte&r={$vpath}" class="social-font-vkontakte" rel="tooltip" title="Вконтакте"><i class="icon-vkontakte"></i></a>{/if}
+				{if !$GLOBS.userdata.yandex && $authsocial_yandex}<a href="/cabinet/?provider=yandex&r={$vpath}" class="social-font-yandex" rel="tooltip" title="Яндекс"><i class="icon-yandex"></i></a>{/if}
+				{if !$GLOBS.userdata.mailru && $authsocial_mailru}<a href="/cabinet/?provider=mailru&r={$vpath}" class="social-font-mailru" rel="tooltip" title="Mail.Ru"><i class="icon-mailru"></i></a>{/if}
+				</p>
+            </div>
+          </div>
+          {/if}
+          
+          {if $GLOBS.userdata.facebook || $GLOBS.userdata.twitter || $GLOBS.userdata.vkontakte || $GLOBS.userdata.yandex || $GLOBS.userdata.mailru || $GLOBS.userdata.google}
+          <script>
+			!function ($) {
+				$(function(){
+					//var 
+					var userpic_src = $('input[name*=userpic]').val();
+					$('.userpic img').each(function(){
+						if( $(this).attr('src') == userpic_src ) $(this).parent().parent().addClass('active');
+					});
+
+					$('.userpic').click(function()
+					{
+						$('input[name*=userpic]').val($(this).attr('href'));
+						$('.userpic').parent().removeClass('active');
+						$(this).parent().addClass('active');
+
+						return false;
+					});
+				})
+			}(window.jQuery);
+          </script>
+          <div class="form-group">
+	          <label class="control-label col-sm-3">Привязан к аккаунту</label>
+	          <div class="col-sm-9">
+	          <div class="row">
+	          {*if $GLOBS.userdata.userpic}
+	          <div class="col-sm-4 col-xs-6">
+		          <img src="{$GLOBS.userdata.userpic}" width=48 height=48 class="main-userpic" />
+	          </div>
+	          {/if*}
+	          
+	          {if $GLOBS.userdata.facebook}
+	          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+	          	<div class="thumbnail account">
+		          <a href="{$GLOBS.userdata.facebook_photoURL}" class="userpic" title="Использовать изображение, как аватар" rel="tooltip">
+		          	<img src="{$GLOBS.userdata.facebook_photoURL}" width=48 height=48 />
+		          </a>
+		          <p class="profile">
+			          <a href="{$GLOBS.userdata.facebook_profileURL}" class="social-font-facebook social-font-size-12" title="Перейти к профилю социальной сети Facebook" target="_blank"><i class="icon-facebook"></i></a>
+			          <a href="{$GLOBS.userdata.facebook_profileURL}">{$GLOBS.userdata.facebook_displayName|default:$GLOBS.userdata.facebook_profileURL}</a>
+		          </p>
+	          	</div>
+	          </div>
+
+	          {/if}
+	          {if $GLOBS.userdata.twitter}
+	          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+	          	<div class="thumbnail account">
+		          <a href="{$GLOBS.userdata.twitter_photoURL}" class="userpic" title="Использовать изображение, как аватар" rel="tooltip">
+		          	<img src="{$GLOBS.userdata.twitter_photoURL}" width=48 height=48 />
+		          </a>
+		          <p class="profile">
+			          <a href="{$GLOBS.userdata.twitter_profileURL}" class="social-font-twitter social-font-size-12" title="Перейти к профилю социальной сети Twitter" target="_blank"><i class="icon-twitter"></i></a>
+			          <a href="{$GLOBS.userdata.twitter_profileURL}">{$GLOBS.userdata.twitter_displayName|default:$GLOBS.userdata.twitter_profileURL}</a>
+		          </p>
+	          	</div>
+	          </div>
+	          {/if}
+	          {if $GLOBS.userdata.google}
+	          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+	          	<div class="thumbnail account">
+		          <a href="{$GLOBS.userdata.google_photoURL}" class="userpic" title="Использовать изображение, как аватар" rel="tooltip">
+		          	<img src="{$GLOBS.userdata.google_photoURL}" width=48 height=48 />
+		          </a>
+		          <p class="profile">
+			          <a href="{$GLOBS.userdata.google_profileURL}" class="social-font-google social-font-size-12" title="Перейти к профилю социальной сети Google+" target="_blank"><i class="icon-google"></i></a>
+			          <a href="{$GLOBS.userdata.google_profileURL}">{$GLOBS.userdata.google_displayName|default:$GLOBS.userdata.google_profileURL}</a>
+		          </p>
+	          	</div>
+	          </div>
+	          {/if}
+	          {if $GLOBS.userdata.vkontakte}
+	          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+	          	<div class="thumbnail account">
+		          <a href="{$GLOBS.userdata.vkontakte_photoURL}" class="userpic" title="Использовать изображение, как аватар" rel="tooltip">
+		          	<img src="{$GLOBS.userdata.vkontakte_photoURL}" width=48 height=48 />
+		          </a>
+		          <p class="profile">
+			          <a href="{$GLOBS.userdata.vkontakte_profileURL}" class="social-font-vkontakte social-font-size-12" title="Перейти к профилю социальной сети Вконтакте" target="_blank"><i class="icon-vkontakte"></i></a>
+			          <a href="{$GLOBS.userdata.vkontakte_profileURL}">{$GLOBS.userdata.vkontakte_displayName|default:$GLOBS.userdata.vkontakte_profileURL}</a>
+		          </p>
+	          	</div>
+	          </div>
+              {/if}
+              {if $GLOBS.userdata.yandex}
+	          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+	          	<div class="thumbnail account">
+		          <a href="{$GLOBS.userdata.yandex_photoURL}" class="userpic" title="Использовать изображение, как аватар" rel="tooltip">
+		          	<img src="{$GLOBS.userdata.yandex_photoURL}" width=48 height=48 />
+		          </a>
+		          <p class="profile">
+			          <a href="{$GLOBS.userdata.yandex_profileURL}" class="social-font-yandex social-font-size-12" title="Перейти к профилю Yandex" target="_blank"><i class="icon-yandex"></i></a>
+			          <a href="{$GLOBS.userdata.yandex_profileURL}">{$GLOBS.userdata.yandex_displayName|default:$GLOBS.userdata.yandex_profileURL}</a>
+		          </p>
+	          	</div>
+	          </div>
+              {/if}
+              {if $GLOBS.userdata.mailru}
+	          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+	          	<div class="thumbnail account">
+		          <a href="{$GLOBS.userdata.mailru_photoURL}" class="userpic" title="Использовать изображение, как аватар" rel="tooltip" rel="tooltip">
+		          	<img src="{$GLOBS.userdata.mailru_photoURL}" width=48 height=48 />
+		          </a>
+		          <p class="profile">
+			          <a href="{$GLOBS.userdata.mailru_profileURL}" class="social-font-mailru social-font-size-12" title="Перейти к профилю Mail.Ru" target="_blank"><i class="icon-mailru"></i></a>
+			          <a href="{$GLOBS.userdata.mailru_profileURL}">{$GLOBS.userdata.mailru_displayName|default:$GLOBS.userdata.mailru_profileURL}</a>
+		          </p>
+		          
+	          	</div>
+	          </div>
+              {/if}
+	          </div>
+	          </div>
+          </div>
+          {/if}
+          {/if}
+          <div class="form-actions">
+	        {if $GLOBS.user_id eq 6}
+	        <button type="submit" class="btn-submit">Зарегистрироваться</button>
+	        {else}
+	        <button type="submit" class="btn-submit">Сохранить</button>
+	        {/if}
+            <button class="btn-delete" type="reset">Сбросить</button>
+          </div>
+        </fieldset>
+      </form>
+{/if}
+{if $datepicker}
+<link rel="stylesheet" type="text/css" href="/media0/css/datepicker.css" media="screen" />
+<script type="text/javascript" src="/media0/js/bootstrap-datepicker.js"></script>
+<script>$(document).ready(function(){ $('.datefield').datepicker(); });</script>
+{/if}

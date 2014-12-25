@@ -1,0 +1,20 @@
+{$text}
+
+<div class="articles">
+	{foreach from=$cabinetcommented_pubs item=item}
+	<div class="box">
+		<div class="img-box"><a href="{$item.content.vlink}" target="_blank">{if $item.content.active_image}<img src="/{image src=$item.content.image[$item.content.active_image].path width=138 height=90 folder=".138x90"}"/>{else}{if sizeof($item.content.image)}<img src="/{foreach from=$item.content.image item=im}{image src=$im.path width=138 height=90 folder=".138x90"}{break}{/foreach}"/>{else}<img src="/media/images/no_image_article.jpg" />{/if}{/if}</a></div>
+		<div class="desc">
+
+			<big><a href="{$item.content.vlink}" target="_blank">{$item.content.name}</a></big>
+			{if $item.content.tags}<div class="tags">Метки: {tags value=$item.content.tags}</div>{/if}
+		</div>
+		
+		{if $item.rankpub}<div class="rating">Оценка:
+		{section name=poprank loop=$item.rankpub step=1} <em class="r0"></em>{/section}
+		{section name=poprank loop=5 start=$item.rankpub step=1} <em class="r1"></em>{/section}</div>{else}
+		<div class="rating">Оценка: {section name=poprank loop=5 step=1} <em class="r1"></em>{/section}</div>
+		{/if}
+	</div>
+	{/foreach}
+</div>

@@ -1,0 +1,28 @@
+{include file="$TMPL_FOLDER/mod/comments/disqus.html"}
+{include file="$TMPL_FOLDER/mod/comments/hypercomments.html"}
+{include file="$TMPL_FOLDER/mod/comments/vkcomments.html"}
+{if $ext_comments}
+<h3>{$comments_name|default:'Комментарии'}</h3>
+<a name="comments"></a>
+<div class="comments">
+		{if $authOnly && $GLOBS.user_id eq 6}
+		<p class="alert alert-warning text-center">
+			<a href="/cabinet/?tmpl=short&r={$vpath|escape:url}" rel="nofollow" data-toggle="modal" data-target="#login-box"><i class="glyphicon glyphicon-user"></i> Авторизуйтесь</a> &mdash; чтобы оставлять комментарии.
+		</p>
+		{else}
+			<p class="controls text-center">
+				<a href="#message" class="btn btn-primary" rel="answer" data-coid="0">Написать комментарий</a>
+				{*<a href="#lastcomments" class="btn">Последние комментарии</a> <a href="#message" class="btn">Участники</a>*}
+			</p>
+			{include file="$TMPL_FOLDER/mod/comments/new-message.html"}
+		{/if}
+
+		{if sizeof($comments)>0}
+		{foreach from=$comments item=comment}
+			{include file="$TMPL_FOLDER/mod/comments/message.html"}
+		{/foreach}
+		{else}
+		{*<p align="center">&larr; Пока отзывов нет.</p>*}
+		{/if}
+</div>
+{/if}

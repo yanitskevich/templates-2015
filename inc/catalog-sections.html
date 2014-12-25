@@ -1,0 +1,7 @@
+{if sizeof($directories_subfolders)>0}
+<div class="categories">
+	<div class="categories-inner">
+	{foreach from=$directories_subfolders item=folder_index name=categs}{assign var="item" value=$directories_folders[$folder_index]}<div class="categories-item"><a href="{$item.vlink}" title="{$item.content.name}" class="categories-item-inner">{if $item.content.images[0].path}<img src="/{image src=$item.content.images[0].path height=200 folder=".200"}" />{/if}<div class="caption"><h4>{$item.content.name}</h4></div></a></div>{/foreach}
+	</div>
+</div>
+{/if}

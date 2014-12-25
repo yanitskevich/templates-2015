@@ -1,0 +1,6 @@
+{if $ext_productlast && sizeof($productlast_products)}
+{if $productlast_name}
+<h3>{$productlast_name}</h3>
+{/if}
+<section class="products products-last">{foreach from=$productlast_products item="item" key="oid" name=cat}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$oid}{/foreach}</section>
+{/if}

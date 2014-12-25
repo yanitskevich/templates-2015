@@ -1,0 +1,18 @@
+{if $GLOBS.currency.code neq 'RUR' && $GLOBS.currency.code neq 'RUB'}
+{assign var=summ value=ceil($summ/$GLOBS.allcurrencies.RUB.course)}
+{/if}
+<form method="GET" action="https://z-payment.com/merchant.php" class="payment-form">
+	<input type="hidden" value="{$order_id}" name="LMI_PAYMENT_NO"/>
+	<input type="hidden" value="{$summ}" name="LMI_PAYMENT_AMOUNT"/>
+	
+	<input type="hidden" value="{$GLOBS.merchants.zpayment.id}" name="LMI_PAYEE_PURSE"/>
+
+	<input type="hidden" value="{$GLOBS.merchants.zpayment.serviceName|default:'Оплата заказа №'}{$order_id}" name="LMI_PAYMENT_DESC"/>
+
+	<!--input type="hidden" value="{$order_content.fio}" name="USER_VALUE1"/>
+	<input type="hidden" value="{$order_content.email}" name="CLIENT_MAIL"/-->
+
+	<!-- button type=submit class="btn">{$GLOBS.merchants.zpayment.btn|default:'Оплатить через Z-Payment'}</button-->
+	<button type=submit class="btn btn-large" title="{$GLOBS.merchants.zpayment.btn|default:'Оплатить через Z-Payment'}" rel="tooltip"><img src="/media0/img/merchants/ZPayment.png" alt="Z-Payment" width="150" /></button>	
+	 
+</form>

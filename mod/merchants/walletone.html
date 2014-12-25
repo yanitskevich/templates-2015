@@ -1,0 +1,28 @@
+<form method="post" action="https://www.walletone.com/checkout/default.aspx" accept-charset="UTF-8" class="payment-form">
+<input name="WMI_MERCHANT_ID" value="{$GLOBS.merchants.walletone.id}" type="hidden" />
+<input name="WMI_PAYMENT_NO" value="{$order_id}" type="hidden" />
+<input name="WMI_PAYMENT_AMOUNT" value="{$summ}" type="hidden" />
+<input name="WMI_CUSTOMER_EMAIL" value="{$order_content.email}" type="hidden" />
+<input name="WMI_DELIVERY_ORDERID" value="{$order_id}" type="hidden" />
+<input name="WMI_CURRENCY_ID" value="643" type="hidden" />
+
+{*
+Идентификатор валюты (ISO 4217):
+643 — Российские рубли
+710 — Южно-Африканские ранды
+840 — Американские доллары
+978 — Евро
+980 — Украинские гривны
+398 — Казахстанские тенге
+974 — Белорусские рубли
+972 — Таджикские сомони
+*}
+<input name="WMI_DESCRIPTION" value="BASE64:{base64 value=$GLOBS.merchants.walletone.desc|default:'Оплата заказа №' value1=$order_id}" type="hidden" />
+
+<input name="WMI_SUCCESS_URL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden" />
+<input name="WMI_FAIL_URL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden" />
+
+<input name="WMI_SIGNATURE" value="{walletone WMI_PAYMENT_NO=$order_id WMI_PAYMENT_AMOUNT=$summ WMI_CUSTOMER_EMAIL=$order_content.email WMI_CURRENCY_ID=643 order_hash=$order_hash}" type="hidden" />
+
+<button type=submit class="btn btn-large" title="{$GLOBS.merchants.walletone.btn|default:'Оплатить через Единую кассу'}" rel="tooltip"><img src="/media0/img/merchants/WalletOne.png" alt="WalletOne" width="150" /></button>
+</form>

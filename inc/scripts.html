@@ -1,0 +1,67 @@
+<script type="text/javascript" src="/libs/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/libs/js/fn.bookmarks.js"></script>
+<script type="text/javascript" src="/libs/js/fn.expandarea.js"></script>
+
+<script type="text/javascript" src="/media0/js/jquery.cart.1.2.js"></script>
+<script type="text/javascript" src="/media0/js/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="/media0/js/jquery.form.js"></script>
+
+<script type="text/javascript" src="/media0/js/jquery.comments.js"></script>
+<script type="text/javascript" src="/media0/js/jquery.validator.js"></script>
+<script type="text/javascript" src="/media0/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/media0/js/jquery.wiwi.js"></script>
+<script type="text/javascript" src="/media0/js/jquery.lazyload.min.js"></script>
+<!--[if lt IE 10]>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="https://dadata.ru/static/js/lib/jquery.suggestions-4.8.min.js"></script>
+
+<script type="text/javascript" src="/libs/js/application.js"></script>
+							
+{if $GLOBS.user_id eq 3}
+<script type="text/javascript" src="/libs/ace/ace.js"></script>
+<script type="text/javascript" src="/libs/ace/ext-language_tools.js"></script>
+
+<script type="text/javascript" src="/libs/ace/ext-emmet.js"></script>
+<script type="text/javascript" src="/libs/ace/mode-javascript.js"></script>
+<script type="text/javascript" src="/libs/ace/snippets/javascript.js"></script>
+<script type="text/javascript" src="/libs/ace/worker-javascript.js"></script>
+
+<script type="text/javascript" src="/libs/ace/mode-css.js"></script>
+<script type="text/javascript" src="/libs/ace/snippets/css.js"></script>
+<script type="text/javascript" src="/libs/ace/worker-css.js"></script>
+
+<script type="text/javascript" src="/libs/js/design-ui.js"></script>
+{/if}
+{if $ext_shopexpresssocialtabs}
+<script src="/media0/js/jquery.wiwi.js"></script>
+<script>
+!function ($) {
+$(function(){
+{if $shopexpresssocialtabs_twitter}$.wiwis({ selector : '.twitter' });{/if}
+{if $shopexpresssocialtabs_fb}$.wiwis({ selector : '.facebook' });{/if}
+{if $shopexpresssocialtabs_vk}$.wiwis({ selector : '.vk' });{/if}
+{if $shopexpresssocialtabs_map}$.wiwis({ selector : '.map' });{/if}
+{if $shopexpresssocialtabs_ok}$.wiwis({ selector : '.odkl' });{/if}
+})
+}(window.jQuery)
+</script>
+{if $shopexpresssocialtabs_ok}
+<script>
+!function (d, id, did, st) {
+  var js = d.createElement("script");
+  js.src = "http://connect.ok.ru/connect.js";
+  js.onload = js.onreadystatechange = function () {
+  if (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") {
+    if (!this.executed) {
+      this.executed = true;
+      setTimeout(function () {
+        OK.CONNECT.insertGroupWidget(id,did,st);
+      }, 0);
+    }
+  }}
+  d.documentElement.appendChild(js);
+} (document,"ok_group_widget","{$shopexpresssocialtabs_ok}","{ width:400,height:335 }");
+</script>
+{/if}
+{/if}

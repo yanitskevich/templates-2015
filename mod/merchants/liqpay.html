@@ -1,0 +1,4 @@
+<form action="https://www.liqpay.com/?do=clickNbuy" method="POST" class="payment-form" />
+	{liqpay opt=$GLOBS.merchants.liqpay order_id=$order_id currency=$currency.code summ=$summ}
+	<button type=submit class="btn btn-large" title="{$GLOBS.merchants.liqpay.btn|default:'Оплатить через LiqPay'}" rel="tooltip"><img src="/media0/img/merchants/liqpay.png" alt="liqpay" width="150" /></button>
+</form>

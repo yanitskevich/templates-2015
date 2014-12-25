@@ -1,0 +1,10 @@
+<div class="gallery-item">
+	<div class="gallery-item-inner">
+		<a href="{$item.vlink}">{if sizeof($content.images)>0}{foreach from=$content.images item="im"}<img src="/{image src=$im.path height=$GLOBS.img_height|default:250 folder=$GLOBS.img_height|default:"250" crop=true}" alt="{$im.name}" />{break}{/foreach}{else}<img src="/media0/img/no-image.png" alt="Нет изображения" />{/if}</a>
+		<div class="caption">
+			<h5><a href="{$item.vlink}">{$content.name}</a></h5>
+			
+			<p class="description">{$content.annotate}</p>
+		</div>
+	</div>
+</div>

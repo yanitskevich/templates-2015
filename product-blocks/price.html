@@ -1,0 +1,20 @@
+
+<p class="product-rating" property="v:rating" content="{$ratingaverage}">
+	<a href="#comments" title="Поставить свою оценку" rel="tooltip">{section name=poprank loop=$ratingaverage step=1}<i class="star-rating star-rating-on"></i>{/section}{section name=poprank loop=5-$ratingaverage step=1}<i class="star-rating"></i>{/section}</a>
+</p>
+
+{if $price}
+<div class="price-block" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+	 {if $discount}<small>Старая цена <span class="oldprice">{$price|price:false}</span> {$GLOBS.currency.shortname}</small><br />
+	 {else if $old_price}<small>Старая цена <span class="oldprice">{$old_price|price:false}</span> {$GLOBS.currency.shortname}</small><br />{else}Цена: {/if}
+	 
+	 <span itemprop="price" class="price" data-price="{$price|discount:$discount}" data-discount-percent="{$discount.percent|default:0}" data-discount-money="{$discount.money|default:0}" data-oldprice="{if $discount}{$price}{else if $old_price}{$old_price}{else}{$price}{/if}">{$price|discount:$discount|price:false}</span> {$GLOBS.currency.shortname} {if $units}за {numeral ends=$units number=1}{/if}
+	 {if $discount}<sup class="label label-success">Скидка {$discount.human}</sup>{/if}
+	 {if $points && $GLOBS.user_id neq 6}<sup class="label label-success" title="При покупке добавляет {$points} бонусных баллов на ваш счёт" rel="tooltip"><i class="glyphicon glyphicon-gift"></i> {$points} бонусов</sup>{/if}
+	 {if $discount.date_to_days < 30}<span class="countdown" data-date="{$discount.date_to}"></span><script src="/media0/js/jquery.countdown.js"></script><script>$('.countdown').countdown();</script>{/if}
+	 <meta itemprop="priceCurrency" content="{$GLOBS.currency.code}">
+</div>
+
+{else}
+<div class="price-block">Цена не указана <span class="price" data-price="0" style="display:none;"></span></div>
+{/if}

@@ -1,0 +1,12 @@
+<ul class="opros">
+{foreach from=$comment_args.opros item=item key=key}
+<li><span>{$item}</span> {section name=opros loop=5 step=1}
+<input class="star required" type="radio" name="comment[opros][{$key}]" value="{$smarty.section.opros.index}" />
+{/section}
+</li>
+{/foreach}
+</ul>
+<script type="text/javascript" language="javascript" src="/media0/js/jquery.rating.js"></script>
+<script>
+$('input[name*=opros]').rating({ control: false });
+</script>

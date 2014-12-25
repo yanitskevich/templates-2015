@@ -1,0 +1,39 @@
+<div id="message" class="hide">
+	<form action="" method="post" role="form" class="form-horizontal">
+		<input type="hidden" name="comment[iq]" value="">
+		<input type="hidden" name="comment[user_oid]" value="{$GLOBS.user_id}">
+		<script>$(document).ready(function(){ $("input[name*=iq]").val('{$antispamkey}'); });</script>
+		<input type="hidden" name="comment[parent]" value="0">
+		<div class="row">
+		<div class="col-md-2 col-sm-3 col-xs-3">
+			{if $GLOBS.userdata.userpic}
+			<img src="{$GLOBS.userdata.userpic}" class="userpic" />
+			{else}
+			<img src="/media0/img/no-avatar.gif" class="img-responsive thumbnail" />
+			{/if}
+		</div>
+		<div class="col-md-10 col-sm-9 col-xs-9">
+			{include file="$TMPL_FOLDER/mod/comments/questions.html"}
+
+			<textarea class="form-control" name="comment[txt]" placeholder="Введите сюда текст и нажмите отправить"></textarea>
+			{if $GLOBS.user_id neq 6}
+			<input type="hidden" name="comment[login]" value="{$GLOBS.userdata.name}" />
+			{else}
+			<div class="row">
+			
+			<div class="col-md-6">
+			<label>Введите ваше имя </label>
+			<input class="form-control" type="text" name="comment[login]" value="" placeholder="" /> 
+			</div>
+			<div class="col-md-6">
+			<label>Введите вашу электронную почту </label>
+			<input class="form-control" type="text" name="comment[email]" value="" placeholder="если хотите следить за комментариями" />
+			</div>
+			</div>
+			{/if}
+			<hr />
+			<p align="right"><span class="error">Отсутствует текст комментария</span><button class="btn btn-success" type="submit">Отправить</button></p>
+		</div>
+		</div>
+	</form>
+</div>

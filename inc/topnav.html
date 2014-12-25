@@ -1,0 +1,24 @@
+<nav role="navigation" class="topbar">
+	<div class="container">
+		<div class="topbar-inner">
+			<ul class="nav navbar-nav">
+				{if $ext_bookmarked}<li><a href="/favorites/" {if $vpath|contains:'/favorites/'}class="active"{/if}>Избранное</a></li>{/if}
+				{if $ext_productscompared}<li><a href="/compare/" {if $vpath|contains:'/compare/'}class="active"{/if}>Сравнение</a></li>{/if}
+				<li><a href="/contacts/order.html" rel="nofollow" data-toggle="modal" data-target="#feedback-box">Обратный звонок</a></li>
+				{if $GLOBS.user_id eq 6}<li><a href="/cabinet/?tmpl=short&r={$vpath|escape:url}" rel="nofollow" data-toggle="modal" data-target="#login-box">Вход/Регистрация</a></li>{else}<li><a href="/cabinet/" {if $vpath|contains:'/cabinet/'}class="active"{/if}>Личный кабинет</a></li>{/if}
+				<li><a href="/basket/" id="minibasket" {if $vpath|contains:'/basket/'}class="active"{/if}>Корзина</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="modal fade" id="login-box" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div class="modal fade" id="feedback-box" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div class="modal fade absbasket" id="absbasket-box" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<script>
+$('#feedback-box').on('hidden.bs.modal', function (e) {
+	$(this).removeData('bs.modal');
+});
+$('#absbasket-box').on('hidden.bs.modal', function (e) {
+	$(this).removeData('bs.modal');
+});
+</script>

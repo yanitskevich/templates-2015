@@ -1,0 +1,125 @@
+{if $GLOBS.GOOGLECOUNTER && $GLOBS.GOOGLECOUNTER|strpos:'Например' !== 0}
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){ i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() { (i[r].q=i[r].q||[]).push(arguments) },i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) } )(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	ga('create', '{$GLOBS.GOOGLECOUNTER}', 'auto');
+	ga('require', 'ecommerce', 'ecommerce.js');
+	ga('require', 'displayfeatures');
+	ga('send', 'pageview');
+	ga('set', '&uid', '{$GLOBS.userdata.login}');
+
+{if $order_id && !$order_show}
+
+	ga('ecommerce:addTransaction', {
+		'id': '{$order_id}',// Transaction ID. Required.
+		'affiliation': '{$GLOBS.SITENAME}',// Affiliation or store name.
+		'revenue': '{($order_total-$order_content.delivery_price)|replace:',':'.'}',// Grand Total.
+		'shipping': '{$order_content.delivery_price|replace:',':'.'}',// Shipping.
+		'currency': '{$GLOBS.currency.code}',
+		'tax': '0'// Tax.
+	});
+	{foreach from=$basketdata item=item name="orderitems"}
+		ga('ecommerce:addItem', {
+			'id': '{$order_id}',// Transaction ID. Required.
+			'name': '{$item.content.name}',// Product name. Required.
+			'sku': '{$item.oid}',// SKU/code.
+			'category': '{$item.parent.name}',// Category or variation.
+			'price': '{$item.content.price|replace:',':'.'}',// Unit price.
+			'currency': '{$GLOBS.currency.code}',
+			'quantity': '{$item.count}'// Quantity.
+		});
+	{/foreach}
+	ga('ecommerce:send');
+{/if}
+
+
+	$(function (){
+		$('a.inbasket').click( function(){
+			var category_name = $('h1').first().text();
+			var product_name = $(this).parent().children('h5').children('a').text();
+			if( category_name.length == 0 ) name_category = 'Главная страница';
+			if( product_name.length == 0 ) name_product = $(this).attr('href');
+			
+			ga('send', 'event', 'В корзину', category_name, product_name );
+	
+		});
+		$('form.inbasket').click( function(){
+			ga('send', 'event', 'В корзину', 'Страница товара', '{$name}' );
+		});
+	});
+</script>
+{/if}
+
+{if $GLOBS.LIRUCOUNTER && $GLOBS.LIRUCOUNTER eq 'yes'}
+<script type="text/javascript">document.write("<a href='http://www.liveinternet.ru/click' target=_blank><img src='//counter.yadro.ru/hit?t18.4;r" + escape(document.referrer) + ((typeof(screen)=="undefined")?"":";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+";h"+escape(document.title.substring(0,80))+";"+Math.random()+"' alt='' title='LiveInternet: показано число просмотров за 24"+" часа, посетителей за 24 часа и за сегодня' "+"border='0' width='88' height='31'><\/a>")
+</script>
+{/if}
+
+{if $GLOBS.YACOUNTER && $GLOBS.YACOUNTER|strpos:'Например' !== 0}
+<script type="text/javascript">
+{if $order_id && !$order_show}
+var yaParams = {
+	order_id: "{$order_id}",
+	order_price: {$order_total|replace:',':'.'}, 
+	currency: "{$GLOBS.currency.code}",
+	exchange_rate: 1,
+	goods : []
+};
+{foreach from=$basketdata item=item name="orderitems"}yaParams.goods.push( { id: "{$item.oid}", name: "{$item.content.name}", price: {$item.content.price|replace:',':'.'}, quantity: {$item.count} } );{/foreach}	
+{/if}
+
+$(function (){
+	$('a.inbasket').on('click', function(){
+		try { yaCounter{$GLOBS.YACOUNTER}.reachGoal('ProductPutFromCatalog'); }
+		catch(e)
+		{
+			//console.log('Счетчик Яндекс.Метрика не установлен.');
+		}
+	});
+	$('form.inbasket').on('submit', function(){
+		try { yaCounter{$GLOBS.YACOUNTER}.reachGoal('ProductPutFromProduct'); }
+		catch(e)
+		{
+			//console.log('Счетчик Яндекс.Метрика не установлен.');
+		}
+	});
+	$('.fancybox.ajax').on('click', function(){
+		try { yaCounter{$GLOBS.YACOUNTER}.reachGoal($(this).text()); }
+		catch(e)
+		{
+			//console.log('Счетчик Яндекс.Метрика не установлен.');
+		}
+	});
+});
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter{$GLOBS.YACOUNTER} = new Ya.Metrika( { id:{$GLOBS.YACOUNTER},
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    trackHash:true,
+                    params:window.yaParams || { } } );
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/{$GLOBS.YACOUNTER}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+{/if}
+
+{if $GLOBS.JSCOUNTER && $GLOBS.JSCOUNTER|strpos:'Например' !== 0}
+{$GLOBS.JSCOUNTER}
+{/if}

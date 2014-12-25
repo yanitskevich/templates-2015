@@ -1,0 +1,11 @@
+{if $type eq 'radio'}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="ROBOKASSA"> {$GLOBS.merchants.robokassa.btn|default:'Оплатить через ROBOKASSA'}
+		<p class="help-block">Оплата через сервис ROBOKASSA. Пластиковые карты, WebMoney, Яндекс.Деньги и другие способы оплаты.</p>
+	</label>
+</div>
+{/if}
+{if $type eq 'option'}
+<option value="ROBOKASSA">{$GLOBS.merchants.robokassa.btn|default:'Оплатить через ROBOKASSA'}</option>
+{/if}

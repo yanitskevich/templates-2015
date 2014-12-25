@@ -1,0 +1,20 @@
+{if $GLOBS.merchants.webmoney.wm|contains:'R' && $GLOBS.currency.code neq 'RUR' && $GLOBS.currency.code neq 'RUB' && $GLOBS.allcurrencies.RUB.course}
+{assign var=summ value=ceil($summ/$GLOBS.allcurrencies.RUB.course)}
+{/if}
+{if $GLOBS.merchants.webmoney.wm|contains:'Z' && $GLOBS.currency.code neq 'USD' && $GLOBS.allcurrencies.USD.course}
+{assign var=summ value=ceil($summ/$GLOBS.allcurrencies.USD.course)}
+{/if}
+{if $GLOBS.merchants.webmoney.wm|contains:'E' && $GLOBS.currency.code neq 'EUR' && $GLOBS.allcurrencies.EUR.course}
+{assign var=summ value=ceil($summ/$GLOBS.allcurrencies.EUR.course)}
+{/if}
+<form method="post" accept-charset="windows-1251" action="https://merchant.webmoney.ru/lmi/payment.asp" class="payment-form" target="_blank">
+	<input type="hidden" name="LMI_PAYMENT_DESC" value="{$GLOBS.merchants.webmoney.desc|default:'Оплата заказа №'}{$order_id}" />
+	<input type="hidden" name="LMI_PAYMENT_NO" value="{$order_id}" />
+	<input type="hidden" name="LMI_PAYMENT_AMOUNT" value="{$summ}" />
+	<input type="hidden" name="LMI_SIM_MODE" value="0" />
+	<input type="hidden" name="LMI_PAYEE_PURSE" value="{$GLOBS.merchants.webmoney.wm}">
+	<input type="hidden" name="LMI_PAYMER_EMAIL" value="{$order_content.email}" >
+	<input type="hidden" name="FIELD_1" value="{$GLOBS.userdata.email}" >
+	<!-- button type=submit class="btn">{$GLOBS.merchants.webmoney.btn|default:'Оплатить через Webmoney'}</button-->
+	<button type=submit class="btn btn-large" title="{$GLOBS.merchants.webmoney.btn|default:'Оплатить через Webmoney'}" rel="tooltip"><img src="/media0/img/merchants/Webmoney.png" alt="Webmoney" width="150" /></button>
+</form>
