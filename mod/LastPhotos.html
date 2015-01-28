@@ -1,11 +1,6 @@
 {if sizeof($lastphotos_photos)>0}
 <div class="LastPhotos">
 {if $lastphotos_name}<h3>{$lastphotos_name}</h3>{/if}
-	{foreach from=$lastphotos_photos item="item" name=limiter}<div class="LastPhotos-item">
-        <a href="{$item.content.vlink}" title="{$item.content.name}" class="thumbnail" style="margin: 0 1%;">
-        	<img src='/{image src=$item.content.randimage width=400 height=300 folder='.400x300'}'  class="img-responsive" />
-        </a>
-      </a>
-    </div>{/foreach}
+{foreach from=$lastphotos_photos item="item" name=limiter}<div class="LastPhotos-item"><a href="{$item.content.vlink}" title="{$item.content.name}" class="thumbnail" style="margin: 0 1%;"><img src='/{image src=$item.content.randimage width=400 height=300 folder='.400x300'}'  class="img-responsive" alt="{$item.content.name}" /></a></div>{/foreach}
 </div>
 {/if}

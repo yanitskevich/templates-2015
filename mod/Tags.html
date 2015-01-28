@@ -1,7 +1,7 @@
 {if $ext_tags && sizeof($tags_all)>0}
 <div class="Tags">
 	<div class="Tags-inner">
-		<h3>Теги</h3>
+		<h3>{$tags_name|default:'Теги'}</h3>
 		{foreach key=key from=$tags_all item=item}
 			<a href="{$tags_url}?value={$item.enslovo}" style="font-size:{$item.size}; {*color:{$item.color};*}" title="{$item.count}">{$item.slovo}</a>
 		{/foreach}

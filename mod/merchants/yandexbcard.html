@@ -1,13 +1,11 @@
-{if $GLOBS.currency.code neq 'RUR' && $GLOBS.currency.code neq 'RUB'}
-{assign var=summ value=ceil($summ/$GLOBS.allcurrencies.RUB.course)}
-{/if}
+{if $GLOBS.merchants.yandexmoney.bcard}
 <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml" class="payment-form">
    <input name="receiver" type="hidden" value="{$GLOBS.merchants.yandexmoney.uid}">
    <input name="label" type="hidden" value="{$order_id}:{$order_content.email}">
    <input name="need-email" type="hidden" value="false">
    <input name="is-inner-form" type="hidden" value="true">
-	<input name="referer" type="hidden" value="">
-   <input name="paymentType" type="hidden" value="PC">
+   <input name="referer" type="hidden" value="">
+   <input name="paymentType" type="hidden" value="AC">
    <input name="writable-targets" type="hidden" value="false">
    <input name="writable-sum" type="hidden" value="false">
    <input name="comment-needed" type="hidden" value="false">
@@ -16,9 +14,10 @@
    <input type="hidden" name="successURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}">
    <input type="hidden" name="targets" value="{$GLOBS.SITENAME|escape}: {$GLOBS.merchants.yandexmoney.serviceName|default:'Оплата заказа №'}{$order_id}">
    {if empty($GLOBS.merchants.yandexmoney.commission)}
-   <input name="sum" data-type="number" type="hidden" value="{if $summ*0.005<0.1}{$summ+0.1}{else}{($summ*1.005)|replace:',':'.'}{/if}">
+   <input name="sum" data-type="number" type="hidden" value="{($summ*1.02041)|string_format:"%.2f"|replace:',':'.'}">
    {else}
    <input name="sum" data-type="number" type="hidden" value="{$summ|replace:',':'.'}">
    {/if}
-   <button type="submit" name="submit-button" class="btn" title="{$GLOBS.merchants.yandexmoney.btn|default:'Оплатить через Яндекс.Деньги'}" rel="tooltip"><img src="/media0/img/merchants/Yandex.png" alt="Яндекс.Деньги" width="150" /></button>
+   <button type="submit" name="submit-button" class="btn" title="Оплатить через Visa или MasterCard" rel="tooltip"><img src="/media0/img/merchants/VisaMasterYandex.png" alt="Visa и MasterCard через Яндекс.Деньги" width="150" /></button>
 </form>
+{/if}

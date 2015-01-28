@@ -175,5 +175,8 @@ var duplicateOrder = function (order_id, order_hash)
 {/foreach}
 {include file="$TMPL_FOLDER/mod/paging.html" pagekey="page" pages=$cabinetbaskethistory_paging page=$cabinetbaskethistory_current perpage=$cabinetbaskethistory_perpage total=$cabinetbaskethistory_total}
 {else}
-<p>Пока вы не сделали ни одного заказа.</p>
+	<div class="well">
+		<h3>Ваша история заказов пуста</h3>
+		<p>К сожалению, вы пока не сделали ни одного заказа, поэтому здесь пусто.</p>
+	</div>
 {/if}

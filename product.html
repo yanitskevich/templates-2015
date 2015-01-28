@@ -18,7 +18,7 @@
 				
 				{if $name}<h1 itemprop="name">{$name}</h1>{/if}
 				<article>
-					{if $annotate}<p class="lead" itemprop="description">{$annotate}</p>{/if}
+					{if $annotate}<h2 class="lead" itemprop="description">{$annotate}</h2>{/if}
 				    <div class="row">
 					      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">{include file="$TMPL_FOLDER/product-blocks/images.html"}</div>
 					      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -42,6 +42,6 @@
 		</div>
 	</div>
 	{include file="$TMPL_FOLDER/inc/footer.html"}
+	{include file="$TMPL_FOLDER/inc/scripts.html"}
 </body>
-{include file="$TMPL_FOLDER/inc/scripts.html"}
 </html>

@@ -1,14 +1,8 @@
 {if sizeof($directories_filters)>0 && $directories_filters_url}
-<link href="/media0/css/filters.css" rel="stylesheet">
 <script src="/media0/js/jquery.filters.js"></script>
 <script>$(function(){ $('.filters form').filters() });</script>
-	
+{* <link href="/libs/css/ion.rangeSlider.skinHTML5.css" rel="stylesheet"> *}	
 <script src="/libs/js/ion.rangeSlider.min.js"></script>
-<link href="/libs/css/ion.rangeSlider.css" rel="stylesheet">
-{* <link href="/libs/css/ion.rangeSlider.skinHTML5.css" rel="stylesheet"> *}
-<link href="/libs/css/ion.rangeSlider.skinNice.css" rel="stylesheet">
-<link href="/media0/css/styled-checkbox.css" rel="stylesheet">
-
 <section class="filters">
 	<div class="filters-inner">
 		<form action="{$directories_filters_url}" method="GET">

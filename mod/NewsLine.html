@@ -12,7 +12,7 @@
 		<div class="row">
 		<div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
 			{if $item.content.images[0].path}
-			<a href="{$item.content.vlink}" class="thumbnail"><img src="/{image src=$item.content.images[0].path width=250 height=150 folder=".250x150"}" class="img-responsive" /></a>
+			<a href="{$item.content.vlink}" class="thumbnail"><img src="/{image src=$item.content.images[0].path width=250 height=150 folder=".250x150"}" class="img-responsive" alt="{$item.content.images[0].name}" /></a>
 			{/if}
 		</div>
 		<div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">

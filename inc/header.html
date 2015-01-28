@@ -2,13 +2,13 @@
 	<div class="container">
 		<div class="header-inner">
 			<div class="brand">
-				{if is_array($GLOBS.LOGO)}<a href="/"><img src="{$GLOBS.LOGO[0].path}" ></a>{else if $GLOBS.LOGO}<a href="/"><img src="{$GLOBS.LOGO}" ></a>{else}<a href="/">{$GLOBS.SITENAME}<small>{$GLOBS.SITEDESCRIPTION}</small></a>{/if}
+				{if is_array($GLOBS.LOGO)}<a href="/"><img src="{$GLOBS.LOGO[0].path}" alt="{$GLOBS.SITENAME}" /></a>{else if $GLOBS.LOGO}<a href="/"><img src="{$GLOBS.LOGO}" alt="{$GLOBS.SITENAME}" /></a>{else}<a href="/">{$GLOBS.SITENAME}<small>{$GLOBS.SITEDESCRIPTION}</small></a>{/if}
 				
 			</div>
 			<div class="contacts">
-				{if $GLOBS.PHONE}<big>{$GLOBS.PHONE}</big>{/if}
+				{if $GLOBS.PHONE}<div class="phone">{$GLOBS.PHONE}</div>{/if}
 				{if $GLOBS.PHONES}<small>{$GLOBS.PHONES}</small><br />{/if}
-				{if $GLOBS.MAIL}<a href="mailto:{$GLOBS.MAIL}">{$GLOBS.MAIL}</a><br />{/if}
+				{if $ext_shopexpresscallback}<a href="{$shopexpresscallback_url|default:'/contacts/order.html'}" rel="nofollow" data-toggle="modal" data-target="#feedback-box" class="btn btn-xs"><i class="glyphicon glyphicon-phone"></i> {$shopexpresscallback_text|default:'Заказать обратный звонок'}</a>{/if}
 			</div>
 			{if $ext_livesearch}
 			<form class="form-search" role="search" action="/search/">

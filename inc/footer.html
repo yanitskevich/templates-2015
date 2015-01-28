@@ -1,10 +1,7 @@
 <div class="modal fade" id="basket-box" tabindex="-1" role="dialog" aria-hidden="true"></div>
-
-<link href="/media0/css/footer.css" rel="stylesheet">
 <footer>
 	<div class="container">
 		<div class="footer-inner">
-			
 			<div class="row">
 				<div class="col-md-4 col-xs-6">
 					<p class="h5">Контактная информация</p>
@@ -13,21 +10,16 @@
 					{if $GLOBS.PHONES}{$GLOBS.PHONES}<br />{/if}
 					{if $GLOBS.MAIL}Электронная почта: <a href="mailto:{$GLOBS.MAIL}">{$GLOBS.MAIL}</a><br />{/if}
 					</p>
-					{if $GLOBS.ADRES|nl2br}<p><b>Адрес:</b>{$GLOBS.ADRES|nl2br}</p>{/if}
+					{if $GLOBS.ADRES|nl2br}<p><b>Адрес:</b> {$GLOBS.ADRES|nl2br}</p>{/if}
 				</div>
 				<div class="col-md-3 col-xs-6">
 					{if $GLOBS.merchants}
 					<p class="h5">Мы принимаем к оплате: </p>
 					<link href="/media0/css/payment-icons.css" rel="stylesheet">
 					<p>
-					{foreach from=$GLOBS.merchants item=vl key=merchant}<span class="payment-icon {$merchant}" rel="tooltip" title="{$GLOBS.pay_methods[$merchant|upper]}"></span>{/foreach}{if $GLOBS.merchants.yandexmoney_ur['PC']}<span class="payment-icon yandexmoney"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['АС']}<span class="payment-icon visa"></span><span class="payment-icon mastercard"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['MC']}<span class="payment-icon sms"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['GP']}<span class="payment-icon terminals"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['WM']}<span class="payment-icon webmoney"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['SB']}<span class="payment-icon sberbank"></span>{/if}
+					{foreach from=$GLOBS.merchants item=vl key=merchant}<span class="payment-icon {$merchant}" rel="tooltip" title="{$GLOBS.pay_methods[$merchant|upper]}"></span>{/foreach}{if $GLOBS.merchants.yandexmoney_ur['АС']}<span class="payment-icon visa" rel="tooltip" title="Карта Visa"></span><span class="payment-icon mastercard" rel="tooltip" title="Карта MasterCard"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['MC']}<span class="payment-icon sms" rel="tooltip" title="Со счета мобильного телефона"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['GP']}<span class="payment-icon terminals" rel="tooltip" title="Наличными через кассы и терминалы"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['WM']}<span class="payment-icon webmoney" rel="tooltip" title="Из кошелька в системе Webmoney"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['SB']}<span class="payment-icon sberbank" rel="tooltip" title="Со счета мобильного телефона"></span>{/if}{if $GLOBS.merchants.yandexmoney.bcard}<span class="payment-icon visa" rel="tooltip" title="Карта Visa"></span><span class="payment-icon mastercard" rel="tooltip" title="Карта MasterCard"></span>{/if}
 					</p>
 					{/if}
-					{if $ext_geolocate}
-						<p class="h5">Ваш регион</p>
-						<p>{$GeoLocate.country.name_ru}, {$GeoLocate.city.name_ru}</p>
-					{/if}
-					
 					{include file="$TMPL_FOLDER/inc/counters.html"}
 				</div>
 				<div class="col-md-5 col-xs-12">
@@ -39,15 +31,14 @@
 						{if $ext_bookmarked}<li><a href="/favorites/" {if $vpath|contains:'/favorites/'}class="active"{/if}>Избранное</a></li>{/if}
 						{if $ext_productscompared}<li><a href="/compare/" {if $vpath|contains:'/compare/'}class="active"{/if}>Сравнение</a></li>{/if}
 						<li><a href="/basket/" {if $vpath|contains:'/basket/'}class="active"{/if}>Корзина</a></li>
-						{if $GLOBS.user_id eq 6}<li><a href="/cabinet/?tmpl=short&r={$vpath|escape:url}" rel="nofollow" data-toggle="modal" data-target="#login-box">Вход</a></li>{else}<li><a href="/cabinet/" {if $vpath|contains:'/cabinet/'}class="active"{/if}>Кабинет</a></li><li><a href="/cabinet/history.html" {if $vpath|contains:'/cabinet/'}class="active"{/if}>История заказов</a></li>{/if}
+						{if $GLOBS.user_id eq 6}<li><a href="/cabinet/?tmpl=short&amp;r={$vpath|escape:url}" rel="nofollow" data-toggle="modal" data-target="#login-box">Вход</a></li>{else}<li><a href="/cabinet/" {if $vpath|contains:'/cabinet/'}class="active"{/if}>Кабинет</a></li><li><a href="/cabinet/history.html" {if $vpath|contains:'/cabinet/'}class="active"{/if}>История заказов</a></li>{/if}
 					</ul>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4 col-xs-6">
-					<p class="h5">
-						{if is_array($GLOBS.LOGO)}<a href="/"><img class="img-responsive" src="{$GLOBS.LOGO[0].path}" ></a>{else if $GLOBS.LOGO}<a href="/"><img class="img-responsive" src="{$GLOBS.LOGO}" ></a>{else}<a href="/">{$GLOBS.SITENAME} <small>{$GLOBS.SITEDESCRIPTION}</small></a>{/if}
+					<p class="h5"><a href="/">{$GLOBS.SITENAME}<br /><small>{$GLOBS.SITEDESCRIPTION}</small></a></p>
 					<p>{$GLOBS.COPYRIGHT}</p>
 				</div>
 				<div class="col-md-3 col-xs-6">
@@ -55,6 +46,10 @@
 					<p class="h5">Мы в социальных сетях: </p>
 					<p>{foreach from=$GLOBS.metatags item=tag}{if $tag.name|contains:'social:'}<a href="{$tag.content}" class="social-font-{$tag.name|replace:'social:':''}" target="_blank"><i class="icon-{$tag.name|replace:'social:':''}"></i></a> {/if}{/foreach}
 					</p>
+					{/if}
+					{if $ext_geolocate}
+						<p class="h5">Ваш регион</p>
+						<p>{$GeoLocate.country.name_ru}, {$GeoLocate.city.name_ru}</p>
 					{/if}
 				</div>
 				<div class="col-md-5 col-xs-12">

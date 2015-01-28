@@ -2,5 +2,5 @@
 
 <h3>Возможно, вам понравится</h3>
 
-<section class="products productrelated">{foreach from=$tags_related item="item" key="oid" name=cat}{if $item.type eq 7}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{else}{include file="$TMPL_FOLDER/inc/publish-item.html" content=$item.content oid=$oid}{/if}{/foreach}</section>
+<section class="products productrelated">{foreach from=$tags_related item="item" key="oid" name=cat}{if $item.type eq 7}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{else}{include file="$TMPL_FOLDER/inc/article-item.html" content=$item.content oid=$oid}{/if}{/foreach}</section>
 {/if}

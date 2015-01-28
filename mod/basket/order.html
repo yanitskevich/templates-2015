@@ -102,6 +102,8 @@
 				<!-- p align="center">{$GLOBS.pay_methods[$order_content.pay_method]}</p -->
 				{assign var=merchant value=$order_content.pay_method|lower}
 				<div class="text-center">{include file="$TMPL_FOLDER/mod/merchants/$merchant.html" shipping_price=$order_content.delivery_price summ=$order_total order_id=$order_id currency=$GLOBS.allcurrencies[$order_content.currency] order_content=$order_content}</div>
+			{/if}
+			{if $order_content.pay_method && $order_content.pay_status neq 'FP'}				
 				<p class="clearfix"></p>
 				<script>
 				!function ($) {
@@ -116,9 +118,9 @@
 					});
 				}(window.jQuery);
 				</script>
-				<p align="center"><a href="#" id="change_merchant">Показать все способы оплаты</a></p>
+				{if $order_content.pay_method neq 'NON'}<p align="center"><a href="#" id="change_merchant">Показать все способы оплаты</a></p>{/if}
 
-				<div class="hide text-center" id="merchants">{include file="$TMPL_FOLDER/mod/merchants/merchant.html" shipping_price=$order_content.delivery_price summ=$order_total order_id=$order_id currency=$GLOBS.allcurrencies[$order_content.currency]}</div>
+				<div class="{if $order_content.pay_method neq 'NON'}hide {/if}text-center" id="merchants">{include file="$TMPL_FOLDER/mod/merchants/merchant.html" shipping_price=$order_content.delivery_price summ=$order_total order_id=$order_id currency=$GLOBS.allcurrencies[$order_content.currency]}</div>
 			{/if}
 			{/if}
 
