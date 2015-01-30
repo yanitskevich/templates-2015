@@ -73,17 +73,17 @@
 			
 			{if $ext_bookmarked}
 			{if $bookmarks[$oid]}
-			<li><a class="btn-bookmark active" href="/favorites/?{$oid}&amp;time={$smarty.now}" title="Убрать&nbsp;из избранного" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
+			<li><a class="btn-bookmark active" href="/favorites/?{$oid}&amp;time={$smarty.now}" title="Убрать&nbsp;из избранного" data-toggle="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
 			{else}
-			<li><a class="btn-bookmark" href="/favorites/?{$oid}&amp;time={$smarty.now}" title="Добавить&nbsp;в избранное" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
+			<li><a class="btn-bookmark" href="/favorites/?{$oid}&amp;time={$smarty.now}" title="Добавить&nbsp;в избранное" data-toggle="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
 			{/if}
 			{/if}
 		
 			{if $ext_productscompared}
 			{if $smarty.session.ProductsCompare[$oid]}
-			<li><a class="btn-compare active" href="/compare/?{$oid}&amp;r=1&amp;time={$smarty.now}" title="Убрать&nbsp;из сравнения" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
+			<li><a class="btn-compare active" href="/compare/?{$oid}&amp;r=1&amp;time={$smarty.now}" title="Убрать&nbsp;из сравнения" data-toggle="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
 			{else}
-			<li><a class="btn-compare" href="/compare/?{$oid}&amp;r=1&amp;time={$smarty.now}" title="Добавить&nbsp;к сравнению" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
+			<li><a class="btn-compare" href="/compare/?{$oid}&amp;r=1&amp;time={$smarty.now}" title="Добавить&nbsp;к сравнению" data-toggle="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
 			{/if}
 			{/if}
 			

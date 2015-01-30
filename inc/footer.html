@@ -15,7 +15,6 @@
 				<div class="col-md-3 col-xs-6">
 					{if $GLOBS.merchants}
 					<p class="h5">Мы принимаем к оплате: </p>
-					<link href="/media0/css/payment-icons.css" rel="stylesheet">
 					<p>
 					{foreach from=$GLOBS.merchants item=vl key=merchant}<span class="payment-icon {$merchant}" rel="tooltip" title="{$GLOBS.pay_methods[$merchant|upper]}"></span>{/foreach}{if $GLOBS.merchants.yandexmoney_ur['АС']}<span class="payment-icon visa" rel="tooltip" title="Карта Visa"></span><span class="payment-icon mastercard" rel="tooltip" title="Карта MasterCard"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['MC']}<span class="payment-icon sms" rel="tooltip" title="Со счета мобильного телефона"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['GP']}<span class="payment-icon terminals" rel="tooltip" title="Наличными через кассы и терминалы"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['WM']}<span class="payment-icon webmoney" rel="tooltip" title="Из кошелька в системе Webmoney"></span>{/if}{if $GLOBS.merchants.yandexmoney_ur['SB']}<span class="payment-icon sberbank" rel="tooltip" title="Со счета мобильного телефона"></span>{/if}{if $GLOBS.merchants.yandexmoney.bcard}<span class="payment-icon visa" rel="tooltip" title="Карта Visa"></span><span class="payment-icon mastercard" rel="tooltip" title="Карта MasterCard"></span>{/if}
 					</p>
@@ -60,4 +59,7 @@
 		</div>
 	</div>
 </footer>
+{if $GLOBS.group_id eq 2}
+<a href="/adm/#!{$oid}" target="_admin_panel" style="background: url(/adm/extJS/images/_admin_panel.png) 0 0 no-repeat;position: fixed;top:0;right:0;display: block;width: 55px;height: 55px;" title="Открыть страницу в панеле управления" data-toggle="tooltip" data-placement="bottom"></a>
+{/if}
 {if $ext_shopexpresssocialtabs}{include file="$TMPL_FOLDER/mod/ShopExpressSocialTabs.html"}{/if}

@@ -2,10 +2,9 @@
 	<div class="container">
 		<div class="topbar-inner">
 			<ul class="nav navbar-nav">
-				{if $ext_bookmarked}<li><a href="/favorites/" {if $vpath|contains:'/favorites/'}class="active"{/if}>Избранное</a></li>{/if}
-				{if $ext_productscompared}<li><a href="/compare/" {if $vpath|contains:'/compare/'}class="active"{/if}>Сравнение</a></li>{/if}
-				{*<li><a href="/contacts/order.html" rel="nofollow" data-toggle="modal" data-target="#feedback-box">Обратный звонок</a></li>*}
-				{if $GLOBS.user_id eq 6}<li><a href="/cabinet/?tmpl=short&amp;r={$vpath|escape:url}" rel="nofollow" data-toggle="modal" data-target="#login-box">Вход/Регистрация</a></li>{else}<li><a href="/cabinet/" {if $vpath|contains:'/cabinet/'}class="active"{/if}>Личный кабинет</a></li>{/if}
+				{if $ext_bookmarked}<li><a href="/favorites/" class="topbar-favorites{if $vpath|contains:'/favorites/'} active{/if}">Избранное</a></li>{/if}
+				{if $ext_productscompared}<li><a href="/compare/" class="topbar-compare{if $vpath|contains:'/compare/'} active{/if}">Сравнение</a></li>{/if}
+				{if $GLOBS.user_id eq 6}<li><a href="/cabinet/?tmpl=short&amp;r={$vpath|escape:url}" rel="nofollow" data-toggle="modal" data-target="#login-box" class="topbar-cabinet">Вход/Регистрация</a></li>{else}<li><a href="/cabinet/" class="topbar-cabinet{if $vpath|contains:'/cabinet/'} active{/if}" title="Ваш личный кабинет, {$GLOBS.userdata.name|default:$GLOBS.userdata.login}">Личный кабинет</a></li>{/if}
 				<li><a href="/basket/" id="minibasket" {if $vpath|contains:'/basket/'}class="active"{/if}>Корзина</a></li>
 			</ul>
 		</div>

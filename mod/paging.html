@@ -1,25 +1,25 @@
 {if $pages>1 || $total>10}
 <table style="width:100%;">
 <tr>
-<td align="left">
+<td style="text-align:left;">
 {if $pages>1}
 <ul class="pagination">
-{if $page!=0}<li><a href="?{$pagekey}={$page-1}{if $directories_order_pubs}&orderby={$directories_order_pubs}{/if}{if $directories_filters_query_url}&{$directories_filters_query_url}{/if}{if $tags_word}&value={$tags_word}{/if}{if $searchquery}&q={$searchquery}{/if}">&larr;</a></li>{else}<li class="disabled"><a href="#">&larr;</a></li>{/if}
+{if $page!=0}<li><a href="?{$pagekey}={$page-1}{if $directories_order_pubs}&amp;orderby={$directories_order_pubs}{/if}{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">&larr;</a></li>{else}<li class="disabled"><a href="#">&larr;</a></li>{/if}
 {section name=paging loop=$pages}
 	{if abs($smarty.section.paging.index-$page)<2 || $smarty.section.paging.index<4 || ($pages-$smarty.section.paging.index)<3}
 	{if $smarty.section.paging.index==$page}
 	<li class="active"><a href="#">{$smarty.section.paging.index+1}</a></li>
 	{else}
-	<li>{if $smarty.section.paging.index!=0}<a href="?{$pagekey}={$smarty.section.paging.index}{if $directories_order_pubs}&orderby={$directories_order_pubs}{/if}{if $directories_filters_query_url}&{$directories_filters_query_url}{/if}{if $tags_word}&value={$tags_word}{/if}{if $searchquery}&q={$searchquery}{/if}">{$smarty.section.paging.index+1}</a>{else}<a href=".">{$smarty.section.paging.index+1}</a>{/if}</li>
+	<li>{if $smarty.section.paging.index!=0}<a href="?{$pagekey}={$smarty.section.paging.index}{if $directories_order_pubs}&amp;orderby={$directories_order_pubs}{/if}{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">{$smarty.section.paging.index+1}</a>{else}<a href=".">{$smarty.section.paging.index+1}</a>{/if}</li>
 	{/if}
 	{else}
 	{/if}
 {/section}
-{if ($page+1)!=$pages}<li><a href="?{$pagekey}={$page+1}{if $directories_order_pubs}&orderby={$directories_order_pubs}{/if}{if $directories_filters_query_url}&{$directories_filters_query_url}{/if}{if $tags_word}&value={$tags_word}{/if}{if $searchquery}&q={$searchquery}{/if}">&rarr;</a></li>{else}<li class="disabled"><a href="#">&rarr;</a></li>{/if}
+{if ($page+1)!=$pages}<li><a href="?{$pagekey}={$page+1}{if $directories_order_pubs}&amp;orderby={$directories_order_pubs}{/if}{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">&rarr;</a></li>{else}<li class="disabled"><a href="#">&rarr;</a></li>{/if}
 </ul>
 {/if}
 </td>
-<td align="right">
+<td style="text-align:right;">
 <!-- размер страницы и сортировка - расположены справа -->
 <ul class="pagination">
     {if $pages>1 || $total>10}
@@ -28,10 +28,10 @@
         <a class="dropdown-toggle" data-toggle="dropdown">{if $perpage neq 'all'}{$perpage}{else}Все{/if}<b class="caret"></b></a>
         <!-- количество элементов на странице -->
         <ul class="dropdown-menu pull-right items-perpage">
-			<li{if $perpage == 12} class="active"{/if}><a href="?perpage=12{if $directories_filters_query_url}&{$directories_filters_query_url}{/if}{if $tags_word}&value={$tags_word}{/if}{if $searchquery}&q={$searchquery}{/if}">12</a></li>
-			<li{if $perpage == 18} class="active"{/if}><a href="?perpage=18{if $directories_filters_query_url}&{$directories_filters_query_url}{/if}{if $tags_word}&value={$tags_word}{/if}{if $searchquery}&q={$searchquery}{/if}">18</a></li>
-			<li{if $perpage == 24} class="active"{/if}><a href="?perpage=24{if $directories_filters_query_url}&{$directories_filters_query_url}{/if}{if $tags_word}&value={$tags_word}{/if}{if $searchquery}&q={$searchquery}{/if}">24</a></li>
-			<li{if $perpage eq 'all'} class="active"{/if}><a href="?perpage=all{if $directories_filters_query_url}&{$directories_filters_query_url}{/if}{if $tags_word}&value={$tags_word}{/if}{if $searchquery}&q={$searchquery}{/if}">Все</a></li>
+			<li{if $perpage == 12} class="active"{/if}><a href="?perpage=12{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">12</a></li>
+			<li{if $perpage == 18} class="active"{/if}><a href="?perpage=18{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">18</a></li>
+			<li{if $perpage == 24} class="active"{/if}><a href="?perpage=24{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">24</a></li>
+			<li{if $perpage eq 'all'} class="active"{/if}><a href="?perpage=all{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">Все</a></li>
         </ul>
     </li>
     {/if}
@@ -42,13 +42,12 @@
         <a class="dropdown-toggle" data-toggle="dropdown"> {$directories_order_name[$directories_order_pubs]} <b class="caret"></b></a>
         <ul class="dropdown-menu pull-right items-orderby">
             {foreach from=$directories_order_name item=item key=key}
-            {if $key neq $directories_order_pubs}<li><a href="?orderby={$key}{if $directories_filters_query_url}&{$directories_filters_query_url}{/if}{if $tags_word}&value={$tags_word}{/if}{if $searchquery}&q={$searchquery}{/if}">{$item}</a></li>{/if}
+            {if $key neq $directories_order_pubs}<li><a href="?orderby={$key}{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">{$item}</a></li>{/if}
             {/foreach}
         </ul>
     </li>
     {/if}
 </ul>
-</div>
 
 <script type="text/javascript">
 $(function () { $('.dropdown-toggle').dropdown(); });
