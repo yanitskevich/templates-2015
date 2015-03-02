@@ -3,7 +3,7 @@
 	<input type="hidden" name="order_id" value="{$order_id}" />
 	<input type="hidden" name="order_hash" value="{$order_hash}" />
 	<input type="hidden" name="r" value="{$vpath}" />
-	<button type=submit class="btn" title="{$GLOBS.merchants.invoice.btn|default:'Оплатить по счету'}" rel="tooltip"><img src="/media0/img/merchants/invoice.png" width="150" /></button>
+	<button type=submit class="btn btn-simple" title="{$GLOBS.merchants.invoice.btn|default:'Оплатить по счету'}" rel="tooltip"><img src="/media0/img/merchants/invoice.png" width="150" /></button>
 </form>
 {else}
 <a class="btn btn-large fancybox" title="Посмотреть реквизиты" rel="tooltip" href="#invoce-req"><img src="/media0/img/merchants/invoice-req.png" width="150" /></a>

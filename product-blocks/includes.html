@@ -11,7 +11,4 @@
 {include file="$TMPL_FOLDER/mod/ProductSimilar.html"}
 {include file="$TMPL_FOLDER/mod/ProductLast.html"}
 
-<section class="products">
-	<h3>Товары из этого раздела</h3>
-	{foreach from=$directories_pubs item="item" name="cat"}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{/foreach}
-</section>
+{include file="$TMPL_FOLDER/mod/ProductDirectory.html"}

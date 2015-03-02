@@ -1,0 +1,6 @@
+{if $ext_productdirectory}
+<section class="products">
+	<h3>{$productdirectory_name|default:"Товары этого раздела"}</h3>
+	{foreach from=$directories_pubs item="item" name="cat"}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{if $smarty.foreach.cat.iteration eq $productdirectory_name}{break}{/if}{/foreach}
+</section>
+{/if}

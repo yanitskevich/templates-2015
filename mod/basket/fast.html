@@ -139,8 +139,9 @@
 				<fieldset>
 				{assign var='fieldscount' value=sizeof($orderfields)}
 				{foreach from=$orderfields item=item name=fieldscounter}
+
 				{if $item.htmltype eq 'hidden'}
-				<input type="hidden" id="hidden{$item.name|capitalize}" name="{$item.name}" value="{$order_fields[$item.name]['value']}" />
+				{if $smarty.cookies[$item.name]}<input type="hidden" id="hidden{$item.name|capitalize}" name="{$item.name}" value="{$order_fields[$item.name]['value']|default:$smarty.cookies[$item.name]}" />{else}<input type="hidden" id="hidden{$item.name|capitalize}" name="{$item.name}" value="{$order_fields[$item.name]['value']}" />{/if}
 				{/if}
 
 				{if $item.necessary eq 'true'}

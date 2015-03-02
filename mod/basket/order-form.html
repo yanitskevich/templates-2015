@@ -56,9 +56,9 @@
 		{/if}
 
 		{if $item.htmltype eq 'hidden'}
-		<input type="hidden" id="hidden{$item.name|capitalize}" name="{$item.name}" value="{$order_fields[$item.name]['value']}" />
+		{if $smarty.cookies[$item.name]}<input type="hidden" id="hidden{$item.name|capitalize}" name="{$item.name}" value="{$order_fields[$item.name]['value']|default:$smarty.cookies[$item.name]}" />{else}<input type="hidden" id="hidden{$item.name|capitalize}" name="{$item.name}" value="{$order_fields[$item.name]['value']}" />{/if}
 		{/if}
-			
+
 		{if $item.htmltype eq 'combostore'}
 		<div class="form-group {if $order_fields[$item.name]['error']} has-error{/if}">
 			<label class="control-label col-sm-3" for="{$item.htmltype}{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
@@ -89,7 +89,7 @@
 			<div class="form-group {if $item.error} has-error{/if}">
 				<div class="col-sm-offset-3 col-sm-9">
 		            {if $item.description}<p class="help-block"><label><input type="checkbox" id="checkbox{$item.name|capitalize}" name="{$item.fieldname}" value="1" {if $item.value}checked{/if} /> {$item.description}</label></p>{else}
-		            <input type="checkbox" id="checkbox{$item.name|capitalize}" name="{$item.fieldname}" value="{$item.value}" {if $item.value}checked{/if} />
+		            <input type="checkbox" id="checkbox{$item.name|capitalize}" name="{$item.name}" value="{$item.value}" {if $item.value}checked{/if} />
 		            <label for="checkbox{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
 		            {/if}
 					{if $item.error}<span class="help-block">{$reg_errors[$item.checked]}</span>{/if}
@@ -101,6 +101,7 @@
 	{/foreach}
 	</div>
 	<div class="col-md-6">
+		{if sizeof($delivery)>0}
 		<h4>Тип доставки</h4>
 		<div class="row">
 			{*foreach from=$orderfields item=item name=fieldscounter}
@@ -165,6 +166,7 @@
 			{/foreach}
 			</div>
 		</div>
+		{/if}
 		{if $GLOBS.merchants}
 		<h4>Способ оплаты</h4>
 		<div class="row">

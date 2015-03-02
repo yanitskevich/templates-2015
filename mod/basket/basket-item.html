@@ -1,98 +1,99 @@
-  <tr class="basket-item inbasket-item" id="product{$item.oid}">
-  	<td style="max-width:100px;">
-	  	<a class="thumbnail" href="{$item.vlink}">{assign var="im_showed" value=0}{if sizeof($item.params)>0}{foreach from=$item.params key=key item=value}{foreach from=$item.content.images item="im"}{if $item.content[$key][$value]['name'] eq $im.name}<img src="/{image src=$im.path width=160 folder=".160"}" alt="{$im.name}">{assign var="im_showed" value="1"}{break}{/if}{/foreach}{/foreach}{/if}{if empty($im_showed)}{foreach from=$item.content.images item="im"}<img src="/{image src=$im.path width=160 folder=".160"}" alt="{$im.name}">{break}{/foreach}{/if}</a>
-  	</td>
-    <td>
-	    <h4>
-		    <a href="{$item.vlink}">{$item.content.name}</a>
-		    <sup class="label label-success {if $basketdiscount || !$item.content.discount}hide{/if}">
-		    	Скидка <span class="discount">{$item.content.discount.human}</span>
-		    </sup>
-		</h4>
-		
+<tr class="basket-item inbasket-item" id="product{$item.oid}">
+	<td style="max-width:100px;">
+  	<a class="thumbnail" href="{$item.vlink}">{assign var="im_showed" value=0}{if sizeof($item.params)>0}{foreach from=$item.params key=key item=value}{foreach from=$item.content.images item="im"}{if $item.content[$key][$value]['name'] eq $im.name}<img src="/{image src=$im.path width=160 folder=".160"}" alt="{$im.name}">{assign var="im_showed" value="1"}{break}{/if}{/foreach}{/foreach}{/if}{if empty($im_showed)}{foreach from=$item.content.images item="im"}<img src="/{image src=$im.path width=160 folder=".160"}" alt="{$im.name}">{break}{/foreach}{/if}</a>
+	</td>
+<td>
+    <h4>
+	    <a href="{$item.vlink}">{$item.content.name}</a>
+	    <sup class="label label-success {if $basketdiscount || !$item.content.discount}hide{/if}">
+	    	Скидка <span class="discount">{$item.content.discount.human}</span>
+	    </sup>
+	</h4>
+	
 {*<!--
-		для смены спецификаций в корзине
-		<form action="/basket/?action=set" method="post">
-			{foreach from=$item.params_fieldnames item=param_fieldname}
-			{if $item.content.$param_fieldname|editable_count}
-			<div>
-				<label for="selectParams_{$param_fieldname}">
-					<small>{$GLOBS.fieldnames[7][$param_fieldname]}</small>
-				</label>
-				<select name="params[{$item.real_oid}][{$param_fieldname}]" id="selectParams_{$param_fieldname}" style="font-size:13px;line-height:13px;height:auto;width:80%;" data-oid="{$item.oid}">
-				{foreach from=$item.content.$param_fieldname item=field_value key=field_value_index}
-				{if $field_value.editable eq 'true'}
-				<option value="{$field_value_index}"
-					data-price="{$field_value.price|discount:$item.content.discount}"
-					data-oldprice="{$field_value.price}"
-					data-type="{$field_value.type}"
-					data-name="{$field_value.name}"
-					{if $item.params.$param_fieldname eq $field_value_index}selected{/if}>
-					{$field_value.name}
-					{if $field_value.price && $field_value.type eq 'plus'},
-					дополнительно {$field_value.price|discount:$item.content.discount|price:false} {numeral number=$field_value.price|discount:$item.content.discount|price:false ends=$GLOBS.currency.name}
-					{elseif $field_value.price}
-					, цена {$field_value.price|discount:$item.content.discount|price:false} {numeral number=$field_value.price|discount:$item.content.discount|price:false ends=$GLOBS.currency.name}
-					{else}
-					{/if}
-				</option>
+	для смены спецификаций в корзине
+	<form action="/basket/?action=set" method="post">
+		{foreach from=$item.params_fieldnames item=param_fieldname}
+		{if $item.content.$param_fieldname|editable_count}
+		<div>
+			<label for="selectParams_{$param_fieldname}">
+				<small>{$GLOBS.fieldnames[7][$param_fieldname]}</small>
+			</label>
+			<select name="params[{$item.real_oid}][{$param_fieldname}]" id="selectParams_{$param_fieldname}" style="font-size:13px;line-height:13px;height:auto;width:80%;" data-oid="{$item.oid}">
+			{foreach from=$item.content.$param_fieldname item=field_value key=field_value_index}
+			{if $field_value.editable eq 'true'}
+			<option value="{$field_value_index}"
+				data-price="{$field_value.price|discount:$item.content.discount}"
+				data-oldprice="{$field_value.price}"
+				data-type="{$field_value.type}"
+				data-name="{$field_value.name}"
+				{if $item.params.$param_fieldname eq $field_value_index}selected{/if}>
+				{$field_value.name}
+				{if $field_value.price && $field_value.type eq 'plus'},
+				дополнительно {$field_value.price|discount:$item.content.discount|price:false} {numeral number=$field_value.price|discount:$item.content.discount|price:false ends=$GLOBS.currency.name}
+				{elseif $field_value.price}
+				, цена {$field_value.price|discount:$item.content.discount|price:false} {numeral number=$field_value.price|discount:$item.content.discount|price:false ends=$GLOBS.currency.name}
+				{else}
 				{/if}
-				{/foreach}
-				</select>
-			</div>
+			</option>
 			{/if}
 			{/foreach}
-		</form>
+			</select>
+		</div>
+		{/if}
+		{/foreach}
+	</form>
 -->*}
 
-	    {if sizeof($item.params)>0}
-	    <p><b>Опции : </b>
-	    <small>
-	    {foreach from=$item.params key=key item=value}
-	    <br />
-	    &mdash;
-	    {$GLOBS.fieldnames[7][$key]}:
-	    {$item.content[$key][$value]['name']}
-	    {if $item.content[$key][$value]['price']} - <b>{$item.content[$key][$value]['price']}{$GLOBS.currency.shortname}</b>{/if}
-	    {/foreach}
-	    </small>
-	    </p>
-	    {/if}
-    </td>
-    <td nowrap="nowrap">
-    	<!--input class="count" type="text" name="count" value="{$item.count}" step="1" data-oid="{$item.oid}" data-href="/basket/?action=set" style="width:40px;" /-->
-    	<span class="count">
-	    	{$item.count} {numeral number=$item.count ends=$item.content.units|default:'шт.,шт.,шт.'}
-    	</span>
-	    {if $item.content.weight}
-	    <br>Вес: <span class="weight">{$item.content.weight} {numeral number=$item.content.weight|price:false ends='грамм,грамма,грамм'}</span>{/if}
-    </td>
-    <!--td>{if $item.content.oldprice}<span class="oldprice">{$item.content.oldprice|price:false}</span>{$GLOBS.currency.shortname}{else}&mdash;{/if}</td-->
-    <!--td>{if $item.content.discount}{$item.content.discount}%{else}&mdash;{/if}</td-->
-    <td nowrap="nowrap">
-    	<span class="price"
-    			data-oldprice="{$item.content.oldprice|price:false}"
-    			data-price="{$item.content.price|price:false}"
-    			data-realprice="{$item.content.realprice|price:false}"
-    			data-count="{$item.count}"
-    			data-quantity="{$item.content.quantity}"
-    			data-units="{$item.content.units|default:'шт.,шт.,шт.'}"
-    			data-currency="{$GLOBS.currency.name}"
-    			data-discount-percent="{$item.content.discount.percent|default:0}"
-    			data-discount-money="{$item.content.discount.money|default:0}"
-    			data-weight="{$item.content.weight}">
-    		{$item.content.price|price:false}
-    	</span>{$GLOBS.currency.shortname}
-    </td>
-    <!--td>{if $item.content.oldprice}<span class="oldtotal">{($item.content.oldprice*$item.count)|price:false}</span>{$GLOBS.currency.shortname}{else}&mdash;{/if}</td-->
-    <td nowrap="nowrap">
-    	<span class="total">
-    		{($item.content.price*$item.count)|price:false}
-	    </span>{$GLOBS.currency.shortname}
-	</td>
-    <td class="nowrap">
-		<a href="/basket/?action=add&oid={$item.oid}&tmpl=mini&time={$smarty.now}" class="btn-increase controls" data-action="increase" data-product="product{$item.oid}"></a>
-		<a href="/basket/?action=del&oid={$item.oid}&tmpl=mini&time={$smarty.now}" class="btn-decrease controls" data-action="reduce" data-product="product{$item.oid}"></a>
-		<a href="/basket/?action=del&oid={$item.oid}&count={$item.count}&tmpl=mini" class="btn-delete controls" data-action="remove" data-product="product{$item.oid}">Удалить</a>
-    </td>
-  </tr>
+    {if sizeof($item.params)>0}
+    <p><b>Опции : </b>
+    <small>
+    {foreach from=$item.params key=key item=value}
+    <br />
+    &mdash;
+    {$GLOBS.fieldnames[7][$key]}:
+    {$item.content[$key][$value]['name']}
+    {if $item.content[$key][$value]['price']} - <b>{$item.content[$key][$value]['price']}{$GLOBS.currency.shortname}</b>{/if}
+    {/foreach}
+    </small>
+    </p>
+    {/if}
+</td>
+<td nowrap="nowrap">
+	<!--input class="count" type="text" name="count" value="{$item.count}" step="1" data-oid="{$item.oid}" data-href="/basket/?action=set" style="width:40px;" /-->
+	<span class="count">
+    	{$item.count} {numeral number=$item.count ends=$item.content.units|default:'шт.,шт.,шт.'}
+	</span>
+    {if $item.content.weight}
+    <br>Вес: <span class="weight">{$item.content.weight} {numeral number=$item.content.weight|price:false ends='грамм,грамма,грамм'}</span>{/if}
+</td>
+<!--td>{if $item.content.oldprice}<span class="oldprice">{$item.content.oldprice|price:false}</span>{$GLOBS.currency.shortname}{else}&mdash;{/if}</td-->
+<!--td>{if $item.content.discount}{$item.content.discount}%{else}&mdash;{/if}</td-->
+<td nowrap="nowrap">
+	<span class="price"
+			data-oldprice="{$item.content.oldprice|price:false}"
+			data-price="{$item.content.price|price:false}"
+			data-realprice="{$item.content.realprice|price:false}"
+			data-count="{$item.count}"
+			data-quantity="{$item.content.quantity}"
+			data-units="{$item.content.units|default:'шт.,шт.,шт.'}"
+			data-currency="{$GLOBS.currency.name}"
+			data-discount-percent="{$item.content.discount.percent|default:0}"
+			data-discount-money="{$item.content.discount.money|default:0}"
+			data-weight="{$item.content.weight}">
+		{$item.content.price|price:false}
+	</span>{$GLOBS.currency.shortname}
+</td>
+<!--td>{if $item.content.oldprice}<span class="oldtotal">{($item.content.oldprice*$item.count)|price:false}</span>{$GLOBS.currency.shortname}{else}&mdash;{/if}</td-->
+<td nowrap="nowrap">
+	<span class="total">
+		{($item.content.price*$item.count)|price:false}
+    </span>{$GLOBS.currency.shortname}
+</td>
+<td class="nowrap">
+	<a href="/basket/?action=add&oid={$item.oid}&tmpl=mini&time={$smarty.now}" class="btn-increase controls" data-action="increase" data-product="product{$item.oid}"></a>
+	<a href="/basket/?action=del&oid={$item.oid}&tmpl=mini&time={$smarty.now}" class="btn-decrease controls" data-action="reduce" data-product="product{$item.oid}"></a>
+	<a href="/basket/?action=del&oid={$item.oid}&count={$item.count}&tmpl=mini" class="btn-delete controls" data-action="remove" data-product="product{$item.oid}">Удалить</a>
+</td>
+</tr>
+{include file="$TMPL_FOLDER/mod/BasketObjectsConnected.html" item_oid=$item.real_oid}

@@ -86,6 +86,7 @@ var duplicateOrder = function (order_id, order_hash)
 	{
 		if($('#merchants{$order_id}').is(':visible')) $('#merchants{$order_id}').slideUp('fast');
 		else $('#merchants{$order_id}').slideDown('fast');
+		return false;
 	});
 	</script>
 {/if}
