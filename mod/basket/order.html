@@ -50,6 +50,21 @@
 				    </small>
 				    </p>
 				    {/if}
+				    {if $order_content.pay_status eq 'FP' && $item.content.args.ProductCouponGenerator}
+				    <p><img src="/adm/extJS/images/discount_coupon.png" align="left" />&nbsp;{if $item.content.args.ProductCouponGenerator.name}{$item.content.args.ProductCouponGenerator.name} действует{else}Действует{/if} с <b>{$item.content.args.ProductCouponGenerator.date_from|date_format:'Y.m.d'}</b> до <b>{$item.content.args.ProductCouponGenerator.date_to|date_format:'Y.m.d'}</b><br />
+				    Код для использования: <b>{$item.code}</b>
+				    </p>
+				    {else if $item.content.args.ProductCouponGenerator}
+				    <p>Код подарочного купона будет доступен сразу после оплаты.</p>
+				    {/if}
+					{if $order_content.pay_status eq 'FP' && $item.content.paid_files}
+					<p>
+					{foreach from=$item.content.paid_files item=paid_file}
+					<a class="btn btn-default" href="?paid_file={$item.oid}|{$paid_file.path}" target="_blank" title="Ссылка будет действовать в течении часа"><i class="icon-download-alt"></i> Скачать &laquo;{$paid_file.name}&raquo;</a>
+					{/foreach}
+					</p>
+					{/if}
+				    
 				</td>
 				<td nowrap="nowrap">{$item.count} {numeral number=$item.count ends=$item.content.units|default:'шт.,шт.,шт.'}{if $item.content.weight}<br>Вес: <span class="weight">{$item.content.weight} {numeral number=$item.content.weight|price:false ends='грамм,грамма,грамм'}</span>{/if}</td>
 				<td nowrap="nowrap">{$item.content.price|price:false} {$GLOBS.currency.shortname}</td>

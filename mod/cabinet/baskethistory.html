@@ -46,8 +46,10 @@ var duplicateOrder = function (order_id, order_hash)
 {
 	if(confirm('Добавить товары из заказа №'+order_id+' в текущий заказ?\nТовары, которых нет в наличии, добавлены не будут.'))
 	{
-		$.basket.to('/basket/?action=duplicate&order_id=' + order_id + '&oh=' + order_hash, 'abs', function(html){
-			$.fancybox(html);
+		$.basket.to('/basket/?action=duplicate&order_id=' + order_id + '&oh=' + order_hash, 'abs', function(html)
+		{
+			$('#absbasket-box').html(html);
+			$('#absbasket-box').modal('show');
 			$('.basket-item').ProductCalculator();
 		});
 	}
@@ -61,7 +63,7 @@ var duplicateOrder = function (order_id, order_hash)
 
 <a name="order_id_{$order_id}"></a>
 <div class="clearfix">
-	<h3>Заказ №{$order_id} <small>от {$order.content.created|date_format:"%d %B %Y"}</small><a class="btn-link pull-right" onclick="duplicateOrder('{$order_id}', '{$order.hash}');return false;" href="/basket/?action=duplicate&order_id={$order_id}&oh={$order.hash}"><i class="glyphicon glyphicon-repeat"></i> Повторить заказ</a></h3>
+	<h3>Заказ <a href="/basket/?{$order_id}|{$order.hash}">№{$order_id}</a> <small>от {$order.content.created|date_format:"%d %B %Y"}</small><a class="btn-link pull-right" onclick="duplicateOrder('{$order_id}', '{$order.hash}');return false;" href="/basket/?action=duplicate&order_id={$order_id}&oh={$order.hash}"><i class="glyphicon glyphicon-repeat"></i> Повторить заказ</a></h3>
 	<p>
 		{if $GLOBS.order_status[$order.content.status]}
 		<span class="label label-orderstatus-{$order.content.status}">{$GLOBS.order_status[$order.content.status]}</span>

@@ -140,6 +140,7 @@
 				{if $item.htmltype eq 'delivery' && sizeof($delivery)>0}
 				<div class="{if $order_fields[$item.name]['error']} has-error{/if}">
 					<select class="form-control" name="delivery" id="select{$item.name|capitalize}">
+						<option value="">Выберите тип доставки</option>
 						{foreach from=$delivery item=delivery_item key=delivery_key}
 						<option value="{$delivery_key}"
 								{if $GLOBS.delivery[$delivery_item.name]}data-value="{$delivery_item.name}"{/if}
@@ -157,7 +158,7 @@
 							</option>
 						{/foreach}
 					</select>
-					{if $order_fields[$item.name]['error']} <span class="help-inline">Обязательно для заполнения</span>{/if}
+					{if $order_fields[$item.name]['error']}<span class="help-block">Обязательно для заполнения</span>{/if}
 					<p class="help-block alert hide" id="deliveryPrice"></p>
 					{if $item.description}<p class="help-block">{$item.description}</p>{/if}
 				</div>

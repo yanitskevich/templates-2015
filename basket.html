@@ -17,7 +17,7 @@
 			<div class="basket-content content wide">
 				{if $coupon.coupon_id}
 				<div class="coupon-alert alert {if !$coupon.status}alert-error{else}hide{/if}">
-					{if !$coupon.statuses.date}<li>Время купона истекло.{/if}
+					{if !$coupon.statuses.date}<li>Ошибочная дата использования купона.{/if}
 					{if !$coupon.statuses.price}<li>Сумма заказа не подходит. {/if}
 					{if !$coupon.statuses.count}<li>Количество товаров слишком мало. {/if}
 					{if !$coupon.statuses.used}<li>Купон уже использовали максимальное количество раз. {/if}
@@ -25,7 +25,7 @@
 				</div>
 				
 				<div class="alert alert-success">
-					Вы активировали купон <b>{$coupon.name}</b> на скидку в {if $coupon.percent} <b>{$coupon.percent}%</b> {if $coupon.money} и {/if}{/if} {if $coupon.money} <b>{$coupon.money} {numeral number=$coupon.money ends=$GLOBS.currency.name}</b>{/if} <br>
+					Вы активировали <b>{$coupon.name}</b> на {if $coupon.percent} <b>{$coupon.percent}%</b> {if $coupon.money} и {/if}{/if} {if $coupon.money} <b>{$coupon.money} {numeral number=$coupon.money ends=$GLOBS.currency.name}</b>{/if} <br>
 					{if $coupon.count_from || $coupon.count_to || $coupon.price_from || $coupon.price_to}
 					При покупке
 					{if $coupon.count_from} <u>от {$coupon.count_from} {numeral number=$coupon.count_from ends="вещи, вещей, вещей"}</u>{/if}
