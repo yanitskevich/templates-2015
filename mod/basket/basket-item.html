@@ -51,7 +51,7 @@
     {foreach from=$item.params key=key item=value}
     <br />
     &mdash;
-    {$GLOBS.fieldnames[7][$key]}:
+    {$GLOBS.fieldnames[$item.type][$key]}:
     {$item.content[$key][$value]['name']}
     {if $item.content[$key][$value]['price']} - <b>{$item.content[$key][$value]['price']}{$GLOBS.currency.shortname}</b>{/if}
     {/foreach}
