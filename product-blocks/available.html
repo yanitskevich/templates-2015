@@ -1,6 +1,7 @@
-{if $available eq 'wait'}<div class="alert alert-info">Товара в данный момент нет на складе, но в ближайшее время ожидается его поступление.</div>{/if}
-{if $available eq 'no'}<div class="alert alert-warning">На данный момент товара нет на складе.</div>{/if}
-{if $available eq 'yes'}<div class="alert alert-success">Товар есть на складе в достаточном количестве.</div>{/if}
-{if $available eq 'never'}<div class="alert alert-error">На данный момент товара нет на складе, ближайших поставок не ожидается.</div>{/if}
-{if $available eq 'phone'}<div class="alert alert-info">Уточняйте наличие товара по телефону: {$GLOBS.PHONE}.</div>{/if}
-{if $available eq 'order'}<div class="alert alert-info">Товар поставляется под заказ.</div>{/if}
+{if $available eq 'wait'}<div class="alert alert-info">Товара в данный момент нет на складе, но в ближайшее время ожидается его поступление.</div>
+{else if $available eq 'no'}<div class="alert alert-warning">На данный момент товара нет на складе.</div>
+{else if $available eq 'yes'}<div class="alert alert-success">Товар есть на складе в достаточном количестве.</div>
+{else if $available eq 'never'}<div class="alert alert-error">На данный момент товара нет на складе, ближайших поставок не ожидается.</div>
+{else if $available eq 'phone'}<div class="alert alert-info">Уточняйте наличие товара по телефону: {$GLOBS.PHONE}.</div>
+{else if $available eq 'order'}<div class="alert alert-info">Товар поставляется под заказ.</div>
+{else if $available}<div class="alert alert-info">Товар поставляется под заказ.</div>{/if}

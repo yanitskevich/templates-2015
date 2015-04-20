@@ -1,0 +1,96 @@
+{if $ext_shopexpresstopbar}
+{if $shopexpresstopbar_font eq 'Philosopher' || $shopexpresstopbar_font eq 'Oranienbaum' || $shopexpresstopbar_font eq 'Lobster'}<link href='http://fonts.googleapis.com/css?family={$shopexpresstopbar_font}' rel='stylesheet' type='text/css'>{/if}
+<style>
+{if $shopexpresstopbar_position eq 'bottom'}
+html { padding-bottom: {($shopexpresstopbar_size*22)|ceil}px; }
+{else}
+html { padding-top: {($shopexpresstopbar_size*22)|ceil}px; }
+{/if}
+.promobar {
+	white-space: normal;
+	min-height: 30px;
+	height: auto;
+	text-align: center;
+	width: 100%;
+	_width: expression(eval(document.body.offsetWidth-20));
+	{if $shopexpresstopbar_position eq 'bottom'}
+	bottom: 0;
+	{else}
+	top: 0;	
+	{/if}
+	left: 0;
+	margin: 0;
+	padding: 0;
+	z-index: 5000;
+	position: absolute;
+	{if $shopexpresstopbar_bg eq 'blue'}
+	background-color:#3daae9;background-image:-moz-linear-gradient(top, #46aeea, #2fa4e7);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#46aeea), to(#2fa4e7));background-image:-webkit-linear-gradient(top, #46aeea, #2fa4e7);background-image:-o-linear-gradient(top, #46aeea, #2fa4e7);background-image:linear-gradient(to bottom, #46aeea, #2fa4e7);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff46aeea', endColorstr='#ff2fa4e7', GradientType=0);border-color:#2fa4e7 #2fa4e7 #157ab5;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*background-color:#2fa4e7;filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);
+	{else if $shopexpresstopbar_bg eq 'red'}
+	background-color:#da4f49;
+	background-image:-moz-linear-gradient(top,#ee5f5b,#bd362f);
+	background-image:-webkit-gradient(linear,0 0,0 100%,from(#ee5f5b),to(#bd362f));
+	background-image:-webkit-linear-gradient(top,#ee5f5b,#bd362f);
+	background-image:-o-linear-gradient(top,#ee5f5b,#bd362f);
+	background-image:linear-gradient(to bottom,#ee5f5b,#bd362f);
+	background-repeat:repeat-x;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee5f5b',endColorstr='#ffbd362f',GradientType=0);
+	{else if $shopexpresstopbar_bg eq 'green'}
+	background-color:#5bb75b;
+	background-image:-moz-linear-gradient(top,#62c462,#51a351);
+	background-image:-webkit-gradient(linear,0 0,0 100%,from(#62c462),to(#51a351));
+	background-image:-webkit-linear-gradient(top,#62c462,#51a351);
+	background-image:-o-linear-gradient(top,#62c462,#51a351);
+	background-image:linear-gradient(to bottom,#62c462,#51a351);
+	{else if $shopexpresstopbar_bg eq 'gray'}
+	background-color: #EEEEEE;
+	background-image: -moz-linear-gradient(top, #d0d0d0, #acacac);
+	background-image: -ms-linear-gradient(top, #d0d0d0, #acacac);
+	background-image: -o-linear-gradient(top, #d0d0d0, #acacac);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#d0d0d0), to(#acacac));
+	background-image: -webkit-linear-gradient(top, #d0d0d0, #acacac);
+	background-image: linear-gradient(top, #d0d0d0, #acacac);
+	{else if $shopexpresstopbar_bg eq 'white'}
+	background-color:#f5f5f5;
+	background-image:-moz-linear-gradient(top,#fff,#e6e6e6);
+	background-image:-webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+	background-image:-webkit-linear-gradient(top,#fff,#e6e6e6);
+	background-image:-o-linear-gradient(top,#fff,#e6e6e6);
+	background-image:linear-gradient(to bottom,#fff,#e6e6e6);
+	background-repeat:repeat-x;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+	{else}background: {$shopexpresstopbar_bg|default:'#E42832'};{/if}
+	z-index: 5000;
+	position: fixed;
+	vertical-align: baseline;
+	box-shadow: 5px 0px 3px rgba(0, 0, 0, 0.5);
+	-webkit-font-smoothing: antialiased;
+}
+.promobar span
+{
+	{if $shopexpresstopbar_font}font-family: "{$shopexpresstopbar_font}";{/if}
+
+	{if $shopexpresstopbar_color eq 'white'}
+	color: white;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+	{else if $shopexpresstopbar_color eq 'black'}
+	color: black;
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3);
+	{else}
+	color: {$shopexpresstopbar_color};
+	{/if}
+	{if $shopexpresstopbar_weight}font-weight: {$shopexpresstopbar_weight};{/if}
+	font-size: {$shopexpresstopbar_size|default:'2.0'}em;
+	display: block;
+	padding: 0.15em 0;
+	
+}
+</style>
+<div class="promobar">
+	<div class="container">
+		<span>
+		{if $shopexpresstopbar_text}{$shopexpresstopbar_text}{else}{$shopexpresstopbar_pub.name}{/if}
+		{if $shopexpresstopbar_pub.vlink}<a href="{$shopexpresstopbar_pub.vlink}" class="btn">{$shopexpresstopbar_anchor|default:'Подробнее'}</a>{/if}
+		</span>
+	</div>
+</div>
+{/if}

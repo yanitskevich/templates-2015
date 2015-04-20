@@ -8,7 +8,7 @@
 	ga('send', 'pageview');
 	ga('set', '&uid', '{$GLOBS.userdata.login}');
 
-{if $order_id && !$order_show}
+{if $order_id && $ordered}
 
 	ga('ecommerce:addTransaction', {
 		'id': '{$order_id}',// Transaction ID. Required.
@@ -57,7 +57,7 @@
 
 {if $GLOBS.YACOUNTER && $GLOBS.YACOUNTER|strpos:'Например' !== 0}
 <script type="text/javascript">
-{if $order_id && !$order_show}
+{if $order_id && $ordered}
 var yaParams = {
 	order_id: "{$order_id}",
 	order_price: {$order_total|replace:',':'.'}, 

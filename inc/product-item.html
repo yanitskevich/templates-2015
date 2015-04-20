@@ -20,7 +20,9 @@
 				{if $content.minprice}
 					<span>{if $content.minprice < $content.maxprice} от{else}{/if} {$content.minprice|discount:$content.discount|price}</span>
 					{if $content.discount}
-					<span class="price-old">{if $content.minprice < $content.maxprice} от {$content.minprice|price}{else}: {$content.old_price|price}{/if}</span>
+					<span class="price-old">{if $content.minprice < $content.maxprice} от {$content.minprice|price}{else} {$content.minprice|price}{/if}</span>
+					{else if $content.old_price}
+					<span class="price-old">{$content.old_price|price}</span>
 					{/if}
 				{else}
 					<span>{$content.price|discount:$content.discount|price}</span>

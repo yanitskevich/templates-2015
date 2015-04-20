@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
 {foreach from=$images item="im" name='itemcounter'}
-	<div class="col-lg-3 col-md-3 col-sm-3 col-sx-6">
+	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 	<a href="{if $watermark[0].path}{watermark src=$im.path watermark=$watermark[0].path}{else}{$im.path}{/if}" itemprop="image" class="thumbnail fancybox" title="{$im.name}" data-image="/{image src=$im.path width=400 folder=".400"}" data-zoom-image="{$im.path}" rel="group">
 		<img src="/{image src=$im.path width=150 height=150 folder=".150x150" crop=true}" alt="{$im.name}">
 		<center class="hide">{$im.name}</center>

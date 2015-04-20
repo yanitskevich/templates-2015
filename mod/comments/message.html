@@ -26,14 +26,14 @@
 		<div class="controls">
 			<div class="controls-group">
 				{if $comment.voted}
-				<a class="btn btn-thumb-up {if $comment.up}active{else}disabled{/if}" rel="tooltip" title="Вы уже проголосовали"><i class="thumb up"></i></a>
-				<a class="btn btn-thumb-down {if $comment.down}active{else}disabled{/if}" rel="tooltip" title="Вы уже проголосовали"><i class="thumb down" /></i></a>
+				<a class="btn btn-thumb-up {if $comment.up}active{else}disabled{/if}" rel="tooltip nofollow" title="Вы уже проголосовали"><i class="thumb up"></i></a>
+				<a class="btn btn-thumb-down {if $comment.down}active{else}disabled{/if}" rel="tooltip nofollow" title="Вы уже проголосовали"><i class="thumb down" /></i></a>
 				{else}
-				<a class="btn btn-thumb-up" rel="thumb" href="?thumb-up={$comment.coid}" data-coid="{$comment.coid}"><i class="thumb up"></i></a>
-				<a class="btn btn-thumb-down" rel="thumb" href="?thumb-down={$comment.coid}" data-coid="{$comment.coid}"><i class="thumb down" /></i></a>
+				<a class="btn btn-thumb-up" rel="thumb nofollow" href="?thumb-up={$comment.coid}" data-coid="{$comment.coid}"><i class="thumb up"></i></a>
+				<a class="btn btn-thumb-down" rel="thumb nofollow" href="?thumb-down={$comment.coid}" data-coid="{$comment.coid}"><i class="thumb down" /></i></a>
 				{/if}
-				<a class="btn-answer" href="#message" rel="answer" data-coid="{$comment.coid}">Ответить</a>
-				{if $GLOBS.group_id eq 2}<a href="#delete" class="btn btn-delete" rel="delete" data-coid="{$comment.coid}">Удалить</a>{/if}
+				<a class="btn-answer" href="#message" rel="answer nofollow" data-coid="{$comment.coid}">Ответить</a>
+				{if $GLOBS.group_id eq 2}<a href="#delete" class="btn btn-delete" rel="delete nofollow" data-coid="{$comment.coid}">Удалить</a>{/if}
 			</div>
 		</div>
 	{/if}

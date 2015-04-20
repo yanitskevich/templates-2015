@@ -3,11 +3,11 @@
 <div class="slider-wrapper theme-default">
     <div id="AnonceSlider" class="nivoSlider">
 	    {foreach from=$anounces_anounces item="item" key=key}
-	    	<a href="{$item.content.vlink}">{foreach from=$item.content.images item="im"}<img src="{$im.path}" alt="{$im.name}" {if $item.content.name|strlen > 1 || $item.content.annotate|strlen > 1} alt="{$im.name}" title="#ImageCaption{$key}"{/if} />{break}{/foreach}</a>
+	    	<a href="{$item.content.vlink}">{foreach from=$item.content.images item="im"}<img src="{$im.path}" alt="{$im.name}" {if $anounces_headers && ($item.content.name|strlen > 1 || $item.content.annotate|strlen > 1)} alt="{$im.name}" title="#ImageCaption{$key}"{/if} />{break}{/foreach}</a>
 		{/foreach}
     </div>
     {foreach from=$anounces_anounces item="item" key=key}
-    {if $item.content.name|strlen > 1 || $item.content.annotate|strlen > 1}
+    {if $anounces_headers && ($item.content.name|strlen > 1 || $item.content.annotate|strlen > 1)}
     <div id="ImageCaption{$key}" class="nivo-html-caption">
 		{if $item.content.name}<h4>{$item.content.name}</h4>{/if}
 		{if $item.content.annotate}<p>{$item.content.annotate}</p>{/if}
@@ -22,7 +22,9 @@ $('#AnonceSlider').nivoSlider(
 		controlNav: false,
 		controlNavThumbs: false,
 		prevText: '&lsaquo;',
-		nextText: '&rsaquo;'
+		nextText: '&rsaquo;',
+		animSpeed: {$anounces_speed|default:500},
+		pauseTime: {$anounces_pause|default:3000}
 	}
 );
 </script>

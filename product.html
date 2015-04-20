@@ -2,6 +2,7 @@
 <html lang="ru">
 {include file="$TMPL_FOLDER/inc/head.html"}
 <body id="productBody">
+	{include file="$TMPL_FOLDER/mod/ShopExpressTopbar.html"}
 	{include file="$TMPL_FOLDER/inc/design-ui.html"}
 	<div class="wrapper">
 		{include file="$TMPL_FOLDER/inc/topnav.html"}
@@ -15,11 +16,12 @@
 				{include file="$TMPL_FOLDER/mod/Anonces.html"}
 				
 				{if $name}<h1 itemprop="name">{$name}</h1>{/if}
+				<hr />
 				<article>
 					{if $annotate}<h2 class="lead" itemprop="description">{$annotate}</h2>{/if}
 				    <div class="row">
-					      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">{include file="$TMPL_FOLDER/product-blocks/images.html"}</div>
-					      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					      <div class="col-xs-6">{include file="$TMPL_FOLDER/product-blocks/images.html"}</div>
+					      <div class="col-xs-6">
 							{include file="$TMPL_FOLDER/product-blocks/table.html"}
 							{include file="$TMPL_FOLDER/product-blocks/available.html"}
 							{include file="$TMPL_FOLDER/product-blocks/price.html"}
