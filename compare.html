@@ -18,9 +18,7 @@
 			<div class="content">
 				{include file="$TMPL_FOLDER/mod/ShopExpressCountDown.html"}
 				{include file="$TMPL_FOLDER/mod/Anonces.html"}
-				<article>
-					{$text}
-				</article>
+				{if $text}<article>{$text}</article>{/if}
 			    {if sizeof($ProductsCompare)>0}
 			    <div class="compare-wrapper">
 				<table class="table table-hover">
@@ -80,26 +78,25 @@
 						<td></td>
 						{foreach from=$ProductsCompare item="item" name="cat"}
 						<td>
-						<p align="center">
-							<a href="/basket/?action=add&oid={$item.oid}&time={$smarty.now}" class="btn-buy inbasket">Купить</a>			
-						</p>
-						<p align="center">
-							{if $ext_bookmarked}
-							{if $bookmarks[$oid]}
-							<li><a class="btn-bookmark active" href="/favorites/?{$oid}&time={$smarty.now}" title="Убрать&nbsp;из избранного" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
-							{else}
-							<li><a class="btn-bookmark" href="/favorites/?{$oid}&time={$smarty.now}" title="Добавить&nbsp;в избранное" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
-							{/if}
-							{/if}
-						
-							{if $ext_productscompared}
-							{if $smarty.session.ProductsCompare[$oid]}
-							<li><a class="btn-compare active" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="Убрать&nbsp;из сравнения" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
-							{else}
-							<li><a class="btn-compare" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="Добавить&nbsp;к сравнению" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
-							{/if}
-							{/if}
-						</p>
+						<a href="/basket/?action=add&oid={$item.oid}&time={$smarty.now}" class="btn-buy inbasket">Купить</a>
+						{if $ext_productscompared || $ext_bookmarked}<ul class="bookmark-list-unstyled">{/if}
+						{if $ext_bookmarked}
+						{if $bookmarks[$oid]}
+						<li><a class="btn-bookmark active" href="/favorites/?{$oid}&time={$smarty.now}" title="Убрать&nbsp;из избранного" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
+						{else}
+						<li><a class="btn-bookmark" href="/favorites/?{$oid}&time={$smarty.now}" title="Добавить&nbsp;в избранное" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
+						{/if}
+						{/if}
+					
+						{if $ext_productscompared}
+						{if $smarty.session.ProductsCompare[$oid]}
+						<li><a class="btn-compare active" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="Убрать&nbsp;из сравнения" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
+						{else}
+						<li><a class="btn-compare" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="Добавить&nbsp;к сравнению" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
+						{/if}
+						{/if}
+						{if $ext_productscompared || $ext_bookmarked}</ul>{/if}
+
 						</td>
 						{/foreach}
 					</tr>

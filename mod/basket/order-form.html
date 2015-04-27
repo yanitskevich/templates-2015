@@ -151,6 +151,7 @@
 				
 								{if $GLOBS.delivery[$delivery_item.name]}
 									{$GLOBS.delivery[$delivery_item.name]}
+									{if $delivery_item.price}( {$delivery_item.price|price:false} {numeral number=$delivery_item.price|price:false ends=$GLOBS.currency.name}){/if}
 								{else}
 									{$delivery_item.name}
 									{if $delivery_item.price}( {$delivery_item.price|price:false} {numeral number=$delivery_item.price|price:false ends=$GLOBS.currency.name}){/if}

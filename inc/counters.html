@@ -8,7 +8,7 @@
 	ga('send', 'pageview');
 	ga('set', '&uid', '{$GLOBS.userdata.login}');
 
-{if $order_id && $ordered}
+{if $order_id && $order_content.views <= 1}
 
 	ga('ecommerce:addTransaction', {
 		'id': '{$order_id}',// Transaction ID. Required.

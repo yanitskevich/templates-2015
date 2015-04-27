@@ -18,9 +18,7 @@
 			<div class="content">
 				{include file="$TMPL_FOLDER/mod/ShopExpressCountDown.html"}
 				{include file="$TMPL_FOLDER/mod/Anonces.html"}
-				<article>
-					{$text}
-				</article>
+				{if $text}<article>{$text}</article>{/if}
 				{if sizeof($cabinetbookmarks_pubs)>0}
 				<section class="products">
 					{foreach from=$cabinetbookmarks_pubs item="item" name="cat"}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{/foreach}

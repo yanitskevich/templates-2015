@@ -40,7 +40,7 @@
 							{if $GLOBS.SITENAME && $GLOBS.PHONE && $GLOBS.MAIL}
 							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
 								<td colspan="2" style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva;">
-									<a href="http://vcard.difocus.ru/?N={$GLOBS.SITENAME|escape:'url'}&ORG={$GLOBS.SITENAME|escape:'url'}&TEL={$GLOBS.PHONE|escape:'url'}&EMAIL={$GLOBS.MAIL|escape:'url'}&URL=http:%2F%2F{$site_host|escape:'url'}&NOTE=Номер%20заказа%20{$order_id},%20Сумма%20заказа%20{$order_total|price|escape:'url'}&item1%2EURL=http:%2F%2F{$site_host|escape}%2Fbasket%2F?{$order_id}%7C{$order_hash}&item1%2EX-ABLabel=Адрес%20заказа%20{$order_id}"><img src="http://vcard.difocus.ru/vcard.png" width="16" height="16" style="float:left; margin-right:5px;" /> Скачать карточку компании и данные заказа в vCard</a>
+									<a href="http://vcard.difocus.ru/?N={$GLOBS.SITENAME|escape:'url'}&ORG={$GLOBS.SITENAME|escape:'url'}&TEL={$GLOBS.PHONE|escape:'url'}&EMAIL={$GLOBS.MAIL|escape:'url'}&URL=http:%2F%2F{$GLOBS.SITE_HOST|escape:'url'}&NOTE=Номер%20заказа%20{$order_id},%20Сумма%20заказа%20{$order_total|price|escape:'url'}&item1%2EURL=http:%2F%2F{$GLOBS.SITE_HOST|escape}%2Fbasket%2F?{$order_id}%7C{$order_hash}&item1%2EX-ABLabel=Адрес%20заказа%20{$order_id}"><img src="http://vcard.difocus.ru/vcard.png" width="16" height="16" style="float:left; margin-right:5px;" /> Скачать карточку компании и данные заказа в vCard</a>
 								</td>
 							</tr>
 							{/if}
@@ -61,9 +61,9 @@
 							{foreach from=$basketdata item=item}
 							<tr bgcolor="{cycle values="#ffffff,#f5f5f5"}">
 								<td style="border-collapse: collapse;border-bottom: 1px solid #DDDDDD;border-left: 1px solid #DDDDDD;border-right: 1px solid #DDDDDD;font-size:14px;font-family: 'trebuchet ms', geneva; min-width:150px;">
-									<a href="http://{$site_host}{$item.vlink}">{assign var="im_showed" value=0}
-									{if sizeof($item.params)>0}{foreach from=$item.params key=key item=value}{foreach from=$item.content.images item="im"}{if $item.content[$key][$value]['name'] eq $im.name}<img src="http://{$site_host}/{image src=$im.path width=180 folder=".180"}" width="100%;" style="min-width:80px;max-width:180px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;float:left; margin-right:10px;" />{assign var="im_showed" value="1"}{break}{/if}{/foreach}{/foreach}{/if}{if empty($im_showed)}{foreach from=$item.content.images item="im"}<img src="http://{$site_host}/{image src=$im.path width=180 folder=".180"}" width="100%;" style="min-width:80px;max-width:180px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;float:left; margin-right:10px;" />{break}{/foreach}{/if}</a>
-									<h3 style="font-size:16px;font-family: 'trebuchet ms', geneva;min-width:100px;display:inline-block;"><a href="http://{$site_host}{$item.vlink}">{$item.content.name}</a></h3>
+									<a href="http://{$GLOBS.SITE_HOST}{$item.vlink}">{assign var="im_showed" value=0}
+									{if sizeof($item.params)>0}{foreach from=$item.params key=key item=value}{foreach from=$item.content.images item="im"}{if $item.content[$key][$value]['name'] eq $im.name}<img src="http://{$GLOBS.SITE_HOST}/{image src=$im.path width=180 folder=".180"}" width="100%;" style="min-width:80px;max-width:180px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;float:left; margin-right:10px;" />{assign var="im_showed" value="1"}{break}{/if}{/foreach}{/foreach}{/if}{if empty($im_showed)}{foreach from=$item.content.images item="im"}<img src="http://{$GLOBS.SITE_HOST}/{image src=$im.path width=180 folder=".180"}" width="100%;" style="min-width:80px;max-width:180px;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;float:left; margin-right:10px;" />{break}{/foreach}{/if}</a>
+									<h3 style="font-size:16px;font-family: 'trebuchet ms', geneva;min-width:100px;display:inline-block;"><a href="http://{$GLOBS.SITE_HOST}{$item.vlink}">{$item.content.name}</a></h3>
 									{if $item.content.articul}<p><b>Артикул: </b> {$item.content.articul}</p>{/if}
 								    {if sizeof($item.params)>0}
 							        <p><b>Опции : </b>
@@ -140,14 +140,14 @@
 							{*<tr>
 								<td style="border-collapse: collapse;border: none; font-size:14px;font-family: 'trebuchet ms', geneva;text-align:center;" colspan="7">
 									<p style="font-size:24px;font-family: 'trebuchet ms', geneva;">
-										<a href="http://{$site_host}/basket/?action=showorder&id={$order_id}&oh={$order_hash}" style="display:inline-block;width:410px;line-height:80px;background:#23a9eb;color:white;text-decoration:none;border-radius:5px;border:1px solid #2288cc; background-image: -moz-linear-gradient(top, #27b9f4, #209ae4); background-image: -ms-linear-gradient(top, #27b9f4, #209ae4); background-image: -o-linear-gradient(top, #27b9f4, #209ae4); background-image: -webkit-gradient(linear, center top, center bottom, from(#27b9f4), to(#209ae4)); background-image: -webkit-linear-gradient(top, #27b9f4, #209ae4); background-image: linear-gradient(top, #27b9f4, #209ae4); "> Оплатить заказ</a>
+										<a href="http://{$GLOBS.SITE_HOST}/basket/?action=showorder&id={$order_id}&oh={$order_hash}" style="display:inline-block;width:410px;line-height:80px;background:#23a9eb;color:white;text-decoration:none;border-radius:5px;border:1px solid #2288cc; background-image: -moz-linear-gradient(top, #27b9f4, #209ae4); background-image: -ms-linear-gradient(top, #27b9f4, #209ae4); background-image: -o-linear-gradient(top, #27b9f4, #209ae4); background-image: -webkit-gradient(linear, center top, center bottom, from(#27b9f4), to(#209ae4)); background-image: -webkit-linear-gradient(top, #27b9f4, #209ae4); background-image: linear-gradient(top, #27b9f4, #209ae4); "> Оплатить заказ</a>
 									</p>
 								</td>
 							</tr>
 							*}
 							<tr>
 								<td style="border-collapse: collapse;border: none; font-size:14px;font-family: 'trebuchet ms', geneva;text-align:right;" colspan="7">
-									<p style="font-size:14px;font-family: 'trebuchet ms', geneva;"><a href="http://{$site_host}/basket/?{$order_id}%7C{$order_hash}">Постоянный адрес заказа</a></p>
+									<p style="font-size:14px;font-family: 'trebuchet ms', geneva;"><a href="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}">Постоянный адрес заказа</a></p>
 								</td>
 							</tr>
 							</table>

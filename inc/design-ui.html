@@ -14,9 +14,9 @@
 	<a href="#" rel="toggler" class="design-ui-uho" data-hidden="0" data-align="vertical" data-cookie="design-ui">Дизайн</a>
 	<div class="design-ui-inner">
 	<fieldset>
-		<legend class="collapsed">Дизайны</legend>
+		<legend>Готовые наборы</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['product-set']}">
-		Дизайн: <span class="selected">изменить</span>
+		Набор: <span class="selected">изменить</span>
 		<ul id="css_settings_sets" class="settings_sets">
 			{foreach from=$GLOBS.css_settings_sets item=css_settings key=css_settings_name}
 			<li><a href="#-&all=clean{foreach from=$css_settings item=item key=key}&{$key}={$item}{/foreach}" rel="product-set" class="{$css_settings_name}">{$css_settings_name}</a></li>
@@ -25,7 +25,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Весь сайт</legend>
+		<legend>Весь сайт</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['common-site-lib']}">
 		Библиотека: <span class="selected">изменить</span>
 		<ul>
@@ -215,7 +215,7 @@
 		
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Форма поиска</legend>
+		<legend>Форма поиска</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-search-style']}">
 		Стиль: <span class="selected">изменить</span>
 		<ul>
@@ -236,7 +236,7 @@
 		*}
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Верхнее меню</legend>
+		<legend>Верхнее меню</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-topbar-style']}">
 		Расположение: <span class="selected">изменить</span>
 		<ul>
@@ -381,7 +381,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Шапка</legend>
+		<legend>Шапка</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['header-style']}">
 		Общий стиль: <span class="selected">изменить</span>
 		<ul>
@@ -393,7 +393,7 @@
 		</ul>
 		</div>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['header-colors']}">
-		Цветовая гамма: <span class="selected">изменить</span>
+		Цветовая схема: <span class="selected">изменить</span>
 		<ul>
 			<li><a href="#first" rel="header-colors">first</a></li>
 			<li><a href="#origin" rel="header-colors">origin</a></li>
@@ -404,7 +404,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Основное меню</legend>
+		<legend>Основное меню</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-style']}">
 		Набор: <span class="selected">изменить</span>
 		<ul>
@@ -459,11 +459,12 @@
 		</ul>
 		</div>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-border']}">
-		Граница пунктов: <span class="selected">изменить</span>
+		Разделитель пунктов меню: <span class="selected">изменить</span>
 		<ul>
 			<li><a href="#slate" rel="nav-navbar-border">Двойная</a></li>
 			<li><a href="#first" rel="nav-navbar-border">Одинарная</a></li>
 			<li><a href="#line" rel="nav-navbar-border">Маленькая</a></li>
+			<li><a href="#dots" rel="nav-navbar-border">Точки</a></li>
 		</ul>
 		</div>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-position']}">
@@ -476,7 +477,7 @@
 		</ul>
 		</div>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['nav-navbar-bg']}">
-		Гамма: <span class="selected">изменить</span>
+		Цветовая схема: <span class="selected">изменить</span>
 		<ul>
 			<li><a href="#amelia" rel="nav-navbar-bg">amelia</a></li>
 			<li><a href="#origin" rel="nav-navbar-bg">origin</a></li>
@@ -591,7 +592,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Меню каталога</legend>
+		<legend>Меню каталога</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-location']}">
 		Позиция: <span class="selected">изменить</span>
 		<ul>
@@ -753,8 +754,11 @@
 -->
 		</ul>
 		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Фильтры</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-filters-bg']}">
-		Гамма фильтров: <span class="selected">изменить</span>
+		Цветовая схема: <span class="selected">изменить</span>
 		<ul>
 			<li><a href="#first" rel="aside-filters-bg">first</a></li>
 			<li><a href="#origin" rel="aside-filters-bg">origin</a></li>
@@ -764,7 +768,7 @@
 		</ul>
 		</div>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-filters-style']}">
-		Отступ фильтров: <span class="selected">изменить</span>
+		Отступы: <span class="selected">изменить</span>
 		<ul>
 			<li><a href="#first" rel="aside-filters-style">first</a></li>
 			<li><a href="#origin" rel="aside-filters-style">origin</a></li>
@@ -772,7 +776,7 @@
 		</ul>
 		</div>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['aside-filters-headers']}">
-		Шрифты фильтров: <span class="selected">изменить</span>
+		Шрифт: <span class="selected">изменить</span>
 		<ul>
 			<li><a href="#first" rel="aside-filters-headers">first</a></li>
 			<li><a href="#origin" rel="aside-filters-headers">origin</a></li>
@@ -782,7 +786,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Навигационная строка</legend>
+		<legend>Навигационная строка</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['breadcrumbs-bg']}">
 		Фон: <span class="selected">изменить</span>
 		<ul>
@@ -840,7 +844,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Разделы</legend>
+		<legend>Разделы</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['catalog-sections-col']}">
 		Кол-во на строке: <span class="selected">изменить</span>
 		<ul>
@@ -854,7 +858,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Статьи</legend>
+		<legend>Статьи</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['articles-item-col']}">
 		Кол-во на строке: <span class="selected">изменить</span>
 		<ul>
@@ -866,7 +870,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Фотогалереи</legend>
+		<legend>Фотогалереи</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['galleries-item-col']}">
 		Кол-во на строке: <span class="selected">изменить</span>
 		<ul>
@@ -878,7 +882,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Товарный блок</legend>
+		<legend>Товарный блок</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['product-item-col']}">
 		Кол-во на строке: <span class="selected">изменить</span>
 		<ul>
@@ -991,7 +995,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Подвал</legend>
+		<legend>Подвал</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['footer-style']}">
 		Общий стиль: <span class="selected">изменить</span>
 		<ul>
@@ -1003,7 +1007,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Пейджинг</legend>
+		<legend>Пейджинг</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['paging-style']}">
 		Стиль: <span class="selected">изменить</span>
 		<ul>
@@ -1060,7 +1064,7 @@
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend class="collapsed">Кнопки</legend>
+		<legend>Кнопки</legend>
 		<div class="dropdown" data-value="{$GLOBS.css_settings['button-style']}">
 		Общий стиль: <span class="selected">изменить</span>
 		<ul>

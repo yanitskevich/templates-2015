@@ -21,9 +21,7 @@
 				{include file="$TMPL_FOLDER/mod/cabinet/menu.html"}
 			</aside>
 			<div class="content">
-				<article>
-					{$text}
-				</article>
+				{if $text}<article>{$text}</article>{/if}
 				{if $inner_tpl}{include file="$TMPL_FOLDER/mod/cabinet/$inner_tpl"}{/if}
 			</div>
 		</div>

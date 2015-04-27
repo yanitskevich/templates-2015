@@ -1,7 +1,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>{if $title}{$title}{elseif $name}{$name}{elseif $GLOBS.SITENAME}{$GLOBS.SITENAME}{/if}</title>
+<title>{if $order_id}Заказ {$order_id}{elseif $title}{$title}{elseif $name}{$name}{elseif $GLOBS.SITENAME}{$GLOBS.SITENAME}{/if}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 {foreach from=$GLOBS.metatags item=tag}
