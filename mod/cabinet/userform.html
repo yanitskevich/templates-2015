@@ -101,14 +101,14 @@
             <label class="control-label col-sm-3">Ваш уровень активности</label>
             <div class="col-sm-9">
             	{if $GLOBS.userdata.carma}
-				<div class="{if $GLOBS.userdata.discount}pull-left {/if}">
+				<div class="{if $GLOBS.userdata.discount}pull-left{/if}">
 					<div class="progress" style="margin-bottom:0;">
 					  <div class="progress-bar progress-bar-success" style="width: {math x=$GLOBS.userdata.nextlevel y=$GLOBS.userdata.carma equation="floor((y/x)*100)-floor((y/x)*100)%20"}%;" rel="tooltip" title="У вас {$GLOBS.userdata.level} уровень" data-container="body">{$GLOBS.userdata.carma}</div>
 					  <div class="progress-bar progress-bar-warning" style="width: {math x=$GLOBS.userdata.nextlevel y=$GLOBS.userdata.carma equation="100-(floor((y/x)*100)-floor((y/x)*100)%20)"}%;" rel="tooltip" title="До {$GLOBS.userdata.level+1} уровня осталось" data-container="body">{$GLOBS.userdata.nextlevel-$GLOBS.userdata.carma}</div>
 					</div>
 				</div>
 				{/if}
-				{if $GLOBS.userdata.discount}<span class="help-inline" style="line-height:22px;">Скидка <b>{$GLOBS.userdata.discount.human}</b></span>{/if}
+				{if $GLOBS.userdata.discount}<span class="help-inline" style="line-height:22px;margin-left: 10px;">Скидка <b>{$GLOBS.userdata.discount.human}</b></span>{/if}
 				<p class="help-block">Ваша активность на сайте определяется количеством комментариев, статей и покупок. Чем выше Ваш уровень активности, тем выше скидка, которую вы получите при покупке. </p>
             </div>
           </div>
