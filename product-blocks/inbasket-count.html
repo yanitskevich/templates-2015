@@ -8,7 +8,13 @@
 			<select class="form-control" name="params[{$oid}][{$name}]" id="selectParams_{$name}">
 			{foreach from=$field.values item=item key=key}
 			{if $item.editable eq 'true'}
-			<option value="{$key}" data-price="{$item.price|discount:$discount}" data-oldprice="{$item.price}" data-type="{$item.type}" data-name="{$item.name}" {if $smarty.get.$name eq $item.name}selected{/if}>
+			<option value="{$key}"
+			{if $item.quantity != ''} data-quantity="{$item.quantity}" {if $item.quantity <=0}disabled{/if}{/if}
+			data-price="{$item.price|discount:$discount}"
+			data-oldprice="{$item.price}"
+			data-type="{$item.type}"
+			data-name="{$item.name}" {if $smarty.get.$field_name eq $item.name}selected{/if}>
+			
 				{$item.name}
 				
 				{if $item.price && $item.type eq 'plus'},
@@ -17,6 +23,7 @@
 				, цена {$item.price|discount:$discount|price:false} {numeral number=$item.price|discount:$discount|price:false ends=$GLOBS.currency.name}
 				{else}
 				{/if}
+				{if $item.quantity === 0}, нет в наличии {/if}
 			</option>
 			{/if}
 			{/foreach}

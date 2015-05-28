@@ -8,6 +8,7 @@
 					<p>
 					{if $GLOBS.PHONE}Телефон: {$GLOBS.PHONE}<br />{/if}
 					{if $GLOBS.PHONES}{$GLOBS.PHONES}<br />{/if}
+					{if $ext_shopexpresscallback}<a href="{$shopexpresscallback_url|default:'/contacts/order.html'}?from={$oid}" rel="nofollow" data-toggle="modal" data-target="#feedback-box" class="btn btn-xs"><i class="glyphicon glyphicon-phone"></i> {$shopexpresscallback_text|default:'Заказать обратный звонок'}</a><br />{/if}
 					{if $GLOBS.MAIL}Электронная почта: <a href="mailto:{$GLOBS.MAIL}">{$GLOBS.MAIL}</a><br />{/if}
 					</p>
 					{if $GLOBS.ADRES|nl2br}<p><b>Адрес:</b> {$GLOBS.ADRES|nl2br}</p>{/if}
@@ -60,6 +61,6 @@
 	</div>
 </footer>
 {if $GLOBS.group_id eq 2}
-<a href="/adm/#!{$oid}" target="_admin_panel" style="background: url(/adm/extJS/images/_admin_panel.png) 0 0 no-repeat;position: fixed;top:0;right:0;display: block;width: 55px;height: 55px;" title="Открыть страницу в панеле управления" data-toggle="tooltip" data-placement="bottom"></a>
+<a href="/adm/#!{$oid}" target="_admin_panel" class="design-ui-edit" title="Открыть страницу в панеле управления" data-toggle="tooltip" data-placement="bottom"><span class="icon-lj"></span></a>
 {/if}
 {if $ext_shopexpresssocialtabs}{include file="$TMPL_FOLDER/mod/ShopExpressSocialTabs.html"}{/if}

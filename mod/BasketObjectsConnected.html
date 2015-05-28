@@ -1,4 +1,4 @@
-{if $ext_basketobjectsconnected && sizeof($basketobjectsconnected_objects)}
+{if $ext_basketobjectsconnected && sizeof($basketobjectsconnected_objects[$item_oid]['objects'])}
 <tr class="basket-item">
 	<td colspan="6">
 	{if $basketobjectsconnected_objects[$item_oid]['name']}
@@ -7,9 +7,9 @@
 	<div class="row">
 	{foreach from=$basketobjectsconnected_objects[$item_oid]['objects'] item="content" key="key" name=cat}
 		<div class="col-md-2">
-			<a href="{$item.vlink}" class="thumbnail">{if sizeof($content.images)>0}{foreach from=$content.images item="im"}<img src="/{image src=$im.path height=$GLOBS.img_height|default:150 folder=$GLOBS.img_height|default:"150" crop=true}" alt="{$im.name}" height="150" /><noscript><img src="/{image src=$im.path height=$GLOBS.img_height|default:150 folder=$GLOBS.img_height|default:"150" crop=true}" alt="{$im.name}" height="150" /></noscript>{break}{/foreach}{else}<img src="/media0/img/no-image.png" alt="Нет изображения" />{/if}</a>
+			<a href="{$content.vlink}" class="thumbnail">{if sizeof($content.images)>0}{foreach from=$content.images item="im"}<img src="/{image src=$im.path height=$GLOBS.img_height|default:150 folder=$GLOBS.img_height|default:"150" crop=true}" alt="{$im.name}" height="150" /><noscript><img src="/{image src=$im.path height=$GLOBS.img_height|default:150 folder=$GLOBS.img_height|default:"150" crop=true}" alt="{$im.name}" height="150" /></noscript>{break}{/foreach}{else}<img src="/media0/img/no-image.png" alt="Нет изображения" />{/if}</a>
 			<div class="text-center">
-				<h6><a href="{$item.vlink}">{$content.name}</a></h6>
+				<h6><a href="{$content.vlink}">{$content.name}</a></h6>
 				<div class="price-block">
 				{if $content.minprice}
 					<span>{if $content.minprice < $content.maxprice} от{else}{/if} {$content.minprice|discount:$content.discount|price}</span>
