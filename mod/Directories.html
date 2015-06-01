@@ -1,3 +1,24 @@
+{if $directories_onlyopened}
+<script>
+!function ($) {
+	$(function(){
+		$('aside .nav.nav-list a').on('click', function()
+		{
+			if($(this).parent().children('ul').is(':hidden'))
+			{
+				$(this).parent().children('ul').slideDown('fast');
+				return false;
+			}
+			if($(this).parent().children('ul').is(':visible'))
+			{
+				$(this).parent().children('ul').slideUp('fast');
+				return false;				
+			}
+		});
+	})
+}(window.jQuery)
+</script>
+{/if}
 {if sizeof($directories_folders)>0}
 {foreach from=$directories_folders item=item}
 	{if $item.level>=$directories_prevlevel}</li>{/if}

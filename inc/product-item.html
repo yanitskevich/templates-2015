@@ -12,7 +12,7 @@
 			<p class="product-rating">{section name=poprank loop=$content.ratingaverage step=1}<i class="star-rating star-rating-on"></i>{/section}{section name=poprank loop=5-$content.ratingaverage step=1}<i class="star-rating"></i>{/section}</p>
 			{/if}
 			
-			{if $content.available eq 'no' || isset($content.quantity) && $content.quantity <= 0}<p class="label label-danger">Продано</p>{/if}
+			{if $content.available eq 'no' || $content.available eq 'never' || isset($content.quantity) && $content.quantity <= 0}<p class="label label-danger">Продано</p>{/if}
 			<p class="description">{$content.annotate}</p>
 
 			{if $content.price}

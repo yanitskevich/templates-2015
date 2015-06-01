@@ -34,61 +34,8 @@
 		{/foreach}
 	</fieldset>
 	{/if}
-	<script>
-		$(document).ready(function ()
-		{
-		    $("#mimage").elevateZoom(
-		    	{
-		    		cursor: 'pointer',
-		    		imageCrossfade: true,
-		    		borderSize:1,
-		    		zoomWindowWidth: 350,
-		    		zoomWindowHeight: 350,
-		    		loadingIcon: '/media0/img/loading.gif'
-		    	}
-		    );
-		    var $elevate = $('#mimage').data('elevateZoom');
+	<script type="text/javascript" src="/libs/js/product.js"></script>
 
-			var params_images = [];
-			$('article .thumbnail.fancybox').each(function()
-			{
-				if($(this).children('img').attr('alt'))
-					params_images.push({
-						'name' : $(this).children('img').attr('alt'),
-						'image' : $(this).data('image'),
-						'zoom-image' : $(this).data('zoom-image')
-					});
-			});
-
-			var SelectImage = function(param_name)
-			{
-				for(var i=0;i<params_images.length;i++)
-				{
-					if( params_images[i]['name'] == param_name )
-					{
-						$elevate.zoomImagePre = params_images[i]['zoom-image'];
-						$elevate.swaptheimage(params_images[i]['image'], $elevate.zoomImagePre, $elevate);
-						break;
-					}
-				}
-			};
-			
-			$(".inbasket select").change(function()
-			{
-				var param_name = $(this).children(":selected").data('name');
-				SelectImage(param_name);
-				
-			});
-			
-			$(".inbasket select option:selected").each(function()
-			{
-				var param_name = $(this).data('name');
-				SelectImage(param_name);
-			});
-
-		});
-	</script>
-	
 	{*
 	<!-- Раскомментировать, чтобы указать количество товаров до добавления в корзину -->
 	Сумма товара со скидкой <span class="total"></span> р.<br>
@@ -106,13 +53,13 @@
 	{if $price}
 	{if $ext_basketextendedhelpers && $basketextendedhelpers_pageBtn}
 	{if $basketextendedhelpers_pageBtn eq 1}
-	<button type="submit" class="btn-buy" {if isset($quantity) && $quantity <= 0}disabled{/if}>В корзину</button> или 
-	<button type="button" class="btn-buyoneclick inbasket" {if isset($quantity) && $quantity <= 0}disabled{/if}>Купить в один клик</button>
+	<button type="submit" class="btn-buy" {if (isset($quantity) && $quantity <= 0) || $available eq 'no' || $available eq 'never'}disabled{/if}>В корзину</button> или 
+	<button type="button" class="btn-buyoneclick inbasket" {if (isset($quantity) && $quantity <= 0) || $available eq 'no' || $available eq 'never'}disabled{/if}>Купить в один клик</button>
 	{elseif $basketextendedhelpers_pageBtn eq 2}
-	<button type="button" class="btn-buyoneclick inbasket" {if isset($quantity) && $quantity <= 0}disabled{/if}>Купить в один клик</button>
+	<button type="button" class="btn-buyoneclick inbasket" {if (isset($quantity) && $quantity <= 0) || $available eq 'no' || $available eq 'never'}disabled{/if}>Купить в один клик</button>
 	{/if}
 	{else}
-	<button type="submit" class="btn-buy" {if isset($quantity) && $quantity <= 0}disabled{/if}>Купить</button>
+	<button type="submit" class="btn-buy" {if (isset($quantity) && $quantity <= 0) || $available eq 'no' || $available eq 'never'}disabled{/if}>Купить</button>
 	{/if}
 	{/if}
 		
