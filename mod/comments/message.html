@@ -1,5 +1,6 @@
-<div class="comment-item" style="margin-left:{$comment.level*20}px;" data-level="{$comment.level}" data-coid="{$comment.coid}">
+<div class="comment-item{if $comment.visible == '0'} alert alert-warning{/if}" style="margin-left:{$comment.level*20}px;" data-level="{$comment.level}" data-visible="{$comment.visible}" data-coid="{$comment.coid}">
 	<a name="message{$comment.coid}"></a>
+	{if $comment.visible == '0'}<p align="center" class="approve-message"><em>Комментарий требует одобрения администратором</em></p>{/if}
 	<p class="head">
 		{if $comment.userdata.userpic}<img src="{$comment.userdata.userpic}" width=16 height=16 class="userpic" />{/if}
 		<a href="#message" rel="answer" data-coid="{$comment.coid}">{$comment.login}</a> <small>{$comment.created|date_format:" %d %b %Y в %H:%M"|lower}</small>
@@ -19,7 +20,6 @@
 	{/if}
 	
 	<p>{$comment.txt}</p>
-	
 	{if $authOnly && $GLOBS.user_id eq 6}
 		{*<a href="/cabinet/?tmpl=short&r={$vpath|escape:url}" class="btn btn-success" class="btn btn-primary" rel="nofollow" data-toggle="modal" data-target="#login-box"><i class="glyphicon glyphicon-user"></i> Войти</a>*}
 	{else}
@@ -32,8 +32,14 @@
 				<a class="btn btn-thumb-up" rel="thumb nofollow" href="?thumb-up={$comment.coid}" data-coid="{$comment.coid}"><i class="thumb up"></i></a>
 				<a class="btn btn-thumb-down" rel="thumb nofollow" href="?thumb-down={$comment.coid}" data-coid="{$comment.coid}"><i class="thumb down" /></i></a>
 				{/if}
+				{if $GLOBS.group_id eq 2 && $comment.visible == '0'}
+				<a href="#approve" class="btn btn-simple" rel="approve nofollow" data-coid="{$comment.coid}">Опубликовать</a>
+				{/if}
 				<a class="btn-answer" href="#message" rel="answer nofollow" data-coid="{$comment.coid}">Ответить</a>
-				{if $GLOBS.group_id eq 2}<a href="#delete" class="btn btn-delete" rel="delete nofollow" data-coid="{$comment.coid}">Удалить</a>{/if}
+				
+				{if $GLOBS.group_id eq 2}
+				<a href="#delete" class="btn btn-delete" rel="delete nofollow" data-coid="{$comment.coid}">Удалить</a>
+				{/if}
 			</div>
 		</div>
 	{/if}

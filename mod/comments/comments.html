@@ -2,6 +2,7 @@
 {include file="$TMPL_FOLDER/mod/comments/hypercomments.html"}
 {include file="$TMPL_FOLDER/mod/comments/vkcomments.html"}
 {if $ext_comments}
+<input type="hidden" id="Moderation" value="{$Moderation}">
 <h3>{$comments_name|default:'Комментарии'}</h3>
 <a name="comments"></a>
 <div class="comments">
