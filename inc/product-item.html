@@ -49,7 +49,7 @@
 				{/if}
 			</div>
 			{/if}
-			{if isset($content.quantity) && $content.quantity <= 0}
+			{if $content.available eq 'no' || $content.available eq 'never' || isset($content.quantity) && $content.quantity <= 0}
 				<!-- продано, поэтому кнопку нет -->
 			{else}
 			

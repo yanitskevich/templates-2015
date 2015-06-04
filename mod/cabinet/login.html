@@ -51,6 +51,7 @@
 				});
 				
 				$('#loginBox form').on('submit', function(){
+					var Mask = $('#loginBox').Mask();
 					$.ajax(
 					{
 						type: "POST",
@@ -59,10 +60,12 @@
 
 						success : function(res)
 						{
+							Mask.RemoveMask();
 							location.reload();
 						},
 						error : function()
 						{
+							Mask.RemoveMask();
 							$('#loginBox').slideUp();//.delay(2000).show();
 							$('#loginBoxError').slideDown();//.delay(2000).hide();
 						}
