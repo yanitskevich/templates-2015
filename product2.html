@@ -9,12 +9,12 @@
 		{include file="$TMPL_FOLDER/inc/header.html"}
 		{include file="$TMPL_FOLDER/mod/Menu.html"}
 
-		<div class="container">
+		<div class="container" itemscope itemtype="http://schema.org/Product">
 			{include file="$TMPL_FOLDER/mod/Pathline.html"}
-			<div class="content wide" itemscope itemtype="http://schema.org/Product">
+			<h1 itemprop="name">{$name}</h1>
+			<div class="content wide">
 				{include file="$TMPL_FOLDER/mod/ShopExpressCountDown.html"}
 				{include file="$TMPL_FOLDER/mod/Anonces.html"}
-				<h1 itemprop="name">{$name}</h1>
 				<article>
 					{if $annotate}<h2 class="lead" itemprop="description">{$annotate}</h2>{/if}
 				    <div class="row">

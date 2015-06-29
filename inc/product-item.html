@@ -5,14 +5,25 @@
 		{if $content.discount.money}<span class="discount-block">-{$content.discount.money|price}</span>{/if}
 		
 		<a href="{$item.vlink}">{if sizeof($content.images)>0}{foreach from=$content.images item="im"}<img data-original="/{image src=$im.path height=$GLOBS.img_height|default:150 folder=$GLOBS.img_height|default:"150" crop=true}" src="/media0/img/loading.gif" alt="{$im.name}" height="150" /><noscript><img src="/{image src=$im.path height=$GLOBS.img_height|default:150 folder=$GLOBS.img_height|default:"150" crop=true}" alt="{$im.name}" height="150" /></noscript>{break}{/foreach}{else}<img src="/media0/img/no-image.png" alt="Нет изображения" />{/if}</a>
+
+		{*if sizeof($content.images)>1}
+		<ul class="product-thumb-list hidden">
+			{foreach from=$content.images item="im"}
+			<li class="product-thumb-image">
+				<a href="{$item.vlink}" data-href="/{image src=$im.path height=$GLOBS.img_height|default:150 folder=$GLOBS.img_height|default:"150" crop=true}" title="{$content.name|escape} {$im.name|escape}"><img class="img-responsive" src="/{image src=$im.path width=55 height=70 folder=".small-thumb" crop=true}" alt="{$content.name|escape} {$im.name|escape}" title="{$content.name|escape} {$im.name|escape}" itemprop="image"></a>
+			</li>
+			{/foreach}
+		</ul>
+		{/if*}
 		<div class="caption">
 			<h5><a href="{$item.vlink}">{$content.name}</a></h5>
 			
 			{if $content.ratingaverage}
-			<p class="product-rating">{section name=poprank loop=$content.ratingaverage step=1}<i class="star-rating star-rating-on"></i>{/section}{section name=poprank loop=5-$content.ratingaverage step=1}<i class="star-rating"></i>{/section}</p>
+			<p class="product-rating" rel="tooltip" title="Пользовательский рейтинг товара">{section name=poprank loop=$content.ratingaverage step=1}<i class="star-rating star-rating-on"></i>{/section}{section name=poprank loop=5-$content.ratingaverage step=1}<i class="star-rating"></i>{/section}</p>
 			{/if}
 			
-			{if $content.available eq 'no' || $content.available eq 'never' || isset($content.quantity) && $content.quantity <= 0}<p class="label label-danger">Продано</p>{/if}
+			{if $content.available eq 'no' || $content.available eq 'never' || isset($content.quantity) && $content.quantity <= 0}<span class="label label-danger">Продано</span>{/if}
+			
 			<p class="description">{$content.annotate}</p>
 
 			{if $content.price}

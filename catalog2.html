@@ -10,11 +10,13 @@
 		{include file="$TMPL_FOLDER/mod/Menu.html"}
 
 		<div class="container">
+			{include file="$TMPL_FOLDER/mod/Pathline.html"}
+			{if $name}<h1>{$name}{if $ext_tags && $tags_word}: {$tags_word}{/if}</h1>{/if}
 			<div class="content wide">
-				{include file="$TMPL_FOLDER/mod/Pathline.html"}
+
 				{include file="$TMPL_FOLDER/mod/ShopExpressCountDown.html"}
 				{include file="$TMPL_FOLDER/mod/Anonces.html"}
-				{if $name}<h1>{$name}{if $ext_tags && $tags_word}: {$tags_word}{/if}</h1>{/if}
+
 				{if $annotate}<p class="lead">{$annotate}</p>{/if}
 
 				{include file="$TMPL_FOLDER/inc/catalog-sections.html"}

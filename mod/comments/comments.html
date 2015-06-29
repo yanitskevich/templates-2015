@@ -2,9 +2,9 @@
 {include file="$TMPL_FOLDER/mod/comments/hypercomments.html"}
 {include file="$TMPL_FOLDER/mod/comments/vkcomments.html"}
 {if $ext_comments}
+<a name="comments"></a>
 <input type="hidden" id="Moderation" value="{$Moderation}">
 <h3>{$comments_name|default:'Комментарии'}</h3>
-<a name="comments"></a>
 <div class="comments">
 		{if $authOnly && $GLOBS.user_id eq 6}
 		<p class="alert alert-warning text-center">

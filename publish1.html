@@ -1,3 +1,8 @@
+{if $smarty.get.tmpl eq 'abs'}
+	{if $name}<h3>{$name}</h3>{/if}
+	{$text}
+	{if $tags}<p>Теги: {tags value=$tags}</p>{/if}
+{else}
 <!DOCTYPE html>
 <html lang="ru">
 {include file="$TMPL_FOLDER/inc/head.html"}
@@ -15,6 +20,7 @@
 			<aside>
 				{include file="$TMPL_FOLDER/mod/Directories.html"}
 				{include file="$TMPL_FOLDER/mod/Filters.html"}
+				{include file="$TMPL_FOLDER/mod/Tags.html"}
 				{include file="$TMPL_FOLDER/mod/NewsLine.html"}
 				{include file="$TMPL_FOLDER/mod/LastPublish.html"}
 				{include file="$TMPL_FOLDER/mod/LastPhotos.html"}
@@ -51,3 +57,4 @@
 	{include file="$TMPL_FOLDER/inc/scripts.html"}
 </body>
 </html>
+{/if}

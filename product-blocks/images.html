@@ -1,9 +1,10 @@
 {if sizeof($images)>0}
 <div class="thumbnails">
-	<a class="thumbnail col-sm-12">
-		{foreach from=$images item="first_image"}
-		<img src="/{image src=$first_image.path width=400 folder=".400"}" data-zoom-image="{if $watermark[0].path}{watermark src=$first_image.path watermark=$watermark[0].path}{else}{$first_image.path}{/if}" id="mimage" itemprop="image" alt="{$first_image.name}" />{break}{/foreach}
+	{foreach from=$images item="first_image"}
+	<a class="thumbnail col-sm-12 fancybox" href="{if $watermark[0].path}{watermark src=$first_image.path watermark=$watermark[0].path}{else}{$first_image.path}{/if}">
+		<img src="/{image src=$first_image.path width=400 folder=".400"}" data-zoom-image="{if $watermark[0].path}{watermark src=$first_image.path watermark=$watermark[0].path}{else}{$first_image.path}{/if}" id="mimage" itemprop="image" alt="{$first_image.name}" />
 	</a>
+	{break}{/foreach}
 </div>
 {/if}
 {if sizeof($images)>1}

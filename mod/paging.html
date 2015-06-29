@@ -5,12 +5,13 @@
 {if $pages>1}
 <ul class="pagination">
 {if $page!=0}<li><a href="?{$pagekey}={$page-1}{if $directories_order_pubs}&amp;orderby={$directories_order_pubs}{/if}{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">&larr;</a></li>{else}<li class="disabled"><a href="#">&larr;</a></li>{/if}
+
 {section name=paging loop=$pages}
 	{if abs($smarty.section.paging.index-$page)<2 || $smarty.section.paging.index<4 || ($pages-$smarty.section.paging.index)<3}
 	{if $smarty.section.paging.index==$page}
 	<li class="active"><a href="#">{$smarty.section.paging.index+1}</a></li>
 	{else}
-	<li>{if $smarty.section.paging.index!=0}<a href="?{$pagekey}={$smarty.section.paging.index}{if $directories_order_pubs}&amp;orderby={$directories_order_pubs}{/if}{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">{$smarty.section.paging.index+1}</a>{else}<a href=".">{$smarty.section.paging.index+1}</a>{/if}</li>
+	<li><a href="?{$pagekey}={$smarty.section.paging.index}{if $directories_order_pubs}&amp;orderby={$directories_order_pubs}{/if}{if $directories_filters_query_url}&amp;{$directories_filters_query_url}{/if}{if $tags_word}&amp;value={$tags_word}{/if}{if $searchquery}&amp;q={$searchquery}{/if}">{$smarty.section.paging.index+1}</a></li>
 	{/if}
 	{else}
 	{/if}
