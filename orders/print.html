@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<style>
+body{
+    font-family: "Trebuchet MS",Tahoma;
+    font-size: 12px;
+}
+hr {
+	border: 0;
+	border-bottom: 1px dashed black;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+.table {
+	border-collapse: collapse;
+	width: 100%;
+    font-size: 12px;
+}
+.table th, .table td {
+	border: 1px solid black;
+	padding:8px;
+}
+.noborder  th, .noborder td
+{
+	border: none !important;
+}
+
+</style>
+</head>
+<body onload="print();">
+{foreach from=$orders item=order name=ordersfor}
+<p>
+	{if $GLOBS.SITENAME} Поставщик: {$GLOBS.SITENAME}<br />{/if}
+	{if $order.fio}Покупатель: {$order.fio}<br />{/if}
+	{if $order.phone}Телефон: {$order.phone}<br />{/if}
+	{if $order.email}Электронная почта: {$order.email}<br />{/if}
+	{if $order.pay_method neq 'NON'}Способ оплаты: {$GLOBS.pay_methods[$order.pay_method]}<br />{/if}
+	{if $order.address}Адрес доставки: {$order.address}<br />{/if}
+	{if $order.comment}Комментарий пользователя: {$order.comment}<br />{/if}
+	{foreach from=$order.fields item=field}
+	{if $field.value}{$field.runame}: {if $GLOBS[$field.name][$field.value]}{$GLOBS[$field.name][$field.value]}{else}{$field.value}{/if}<br />{/if}
+	{/foreach}
+</p>
+<h3 align="center">Товарный чек №{$order.order_id} от {$order.created|date_format:'%Y.%m.%d'}</h3>
+<table class="table">
+<thead>
+  <tr>
+    <th>№</th>
+    <th>Артикул</th>
+    <th>Наименование</th>
+    <th>Кол-во</th>
+    <th>Цена без скидки</th>
+    <th>Скидка (%)</th>
+    <th>Цена со скидкой</th>
+    <th>Всего без скидки</th>
+    <th>Всего со скидкой</th>
+  </tr>
+</thead>
+{foreach from=$order.ordercontent item=item name="products"}
+<tr>
+	<td>{$smarty.foreach.products.iteration}</td>
+	<td>{$item.content.articul}</td>
+	<td>
+		<p>{$item.content.name}</p>
+	    {if sizeof($item.params_human)>0}
+        <p><b>Опции : </b>
+        {foreach from=$item.params_human item=param}
+        {if $param.name}
+        <br />&mdash;{$param.articul} {$param.name}{if $param.price} ({$param.price|price:false}{$GLOBS.allcurrencies[$order.currency].shortname}){/if}
+        {/if}
+        {/foreach}
+        </p>
+        {/if}
+	</td>
+    <td nowrap="nowrap">{$item.count} {numeral number=$item.count ends=$item.content.units|default:'шт.,шт.,шт.'}</td>
+    <td nowrap="nowrap">{if $item.oldprice} {$item.oldprice|price:false}{$GLOBS.allcurrencies[$order.currency].shortname}{else}&mdash;{/if}</td>
+    <td nowrap="nowrap">{if $item.discount}{$item.discount.human}{else}&mdash;{/if}</td>
+    <td nowrap="nowrap">{$item.price|price:false}{$GLOBS.allcurrencies[$order.currency].shortname}</td>
+    <td nowrap="nowrap">{if $item.oldprice}{($item.oldprice*$item.count)|price:false}{$GLOBS.allcurrencies[$order.currency].shortname}{else}&mdash;{/if}</td>
+    <td nowrap="nowrap">{($item.price*$item.count)|price:false}{$GLOBS.allcurrencies[$order.currency].shortname}</td>
+</tr>
+{/foreach}
+{if $order.coupon}
+<tr>
+	<td></td>
+	<td colspan=8>Скидка по купону "{$order.coupon.name}" - {$order.coupon.human}, код: {$order.coupon.coupon_id} </td>
+</tr>
+{/if}
+{if $order.discount}
+<tr>
+	<td></td>
+	<td colspan=8>Скидка {$order.discount.human}</td>
+</tr>
+{/if}
+{if $order.delivery}
+<tr>
+	<td></td>
+	<td colspan=7>Доставка: {if $GLOBS.delivery[$order.delivery]}{$GLOBS.delivery[$order.delivery]}{else}{$order.delivery}{/if}</td>
+    <td nowrap="nowrap">{if $order.delivery_price}{$order.delivery_price|price:false} {numeral number=$order.delivery_price ends=$GLOBS.allcurrencies[$order.currency].name}{else}бесплатно{/if}</td>
+</tr>
+{/if}
+</table>
+<table class="table noborder">
+	<tr>
+		<td align="left" valign="top">Общее количество {$order.countUnits} шт.{if $order.weight}, общий вес {$order.weight} г{/if}</td>
+		<td align="right" valign="top"><h2>Итого: {$order.summ|price:false} {numeral number=$order.summ ends=$GLOBS.allcurrencies[$order.currency].name}</h2></td>
+	</tr>
+</table>
+<table class="table noborder">
+	<tr>
+		<td style="width:50%;">Отпустил _______________________________________</td>
+		<td style="width:50%;">Принял _______________________________________</td>
+	</tr>
+</table>
+{if $smarty.foreach.ordersfor.iteration neq $smarty.foreach.ordersfor.last}<hr style="page-break-after: always;" />{/if}
+{/foreach}
+</body>
+</html>

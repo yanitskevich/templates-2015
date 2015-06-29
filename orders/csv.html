@@ -1,0 +1,3 @@
+Номер заказа;Дата;Номер телефона;Почта;Адрес;ФИО;Статус;Скидка;Доставка;Количество;Вес;Cумма;Оплачено
+{foreach from=$orders item=order name=ordersfor}{$order.order_id};{$order.created|date_format:'%Y-%m-%d %H:%M:%S'};{$order.phone|iconv:'UTF-8':'CP1251'};{$order.email|iconv:'UTF-8':'CP1251'};{$order.address|iconv:'UTF-8':'CP1251'};{$order.fio|iconv:'UTF-8':'CP1251'};{$order.status|iconv:'UTF-8':'CP1251'};{$order.discount.human|iconv:'UTF-8':'CP1251'}{$order.coupon.human|iconv:'UTF-8':'CP1251'};{if $GLOBS.delivery[$order.delivery]}{$GLOBS.delivery[$order.delivery]|iconv:'UTF-8':'CP1251'}{else}{$order.delivery|iconv:'UTF-8':'CP1251'}{/if};{$item.countUnits|iconv:'UTF-8':'CP1251'};{$order.weight};{$order.summ};{$order.paid}
+{/foreach}
