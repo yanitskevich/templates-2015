@@ -10,7 +10,7 @@
 	
 	<span itemprop="price" class="price" data-price="{$price|discount:$discount}" data-discount-percent="{$discount.percent|default:0}" data-discount-money="{$discount.money|default:0}" data-oldprice="{if $discount}{$price}{else if $old_price}{$old_price}{else}{$price}{/if}">{$price|discount:$discount|price:false}</span> {$GLOBS.currency.shortname} {if $units}за {numeral ends=$units number=1}{/if}
 	{if $discount}<sup class="label label-success">Скидка {$discount.human}</sup>{/if}
-	{if $points && $GLOBS.user_id neq 6}<span class="label label-success" title="При покупке добавляет {$points} бонусных баллов на ваш счёт" rel="tooltip"><i class="glyphicon glyphicon-gift"></i> {$points} бонусов</span>{/if}
+	{if $points && $GLOBS.user_id neq 6}<span class="label label-success" title="При покупке добавляет {$points} бонусных {numeral ends='балл, балла, баллов' number=$points} на ваш счёт" rel="tooltip"><i class="glyphicon glyphicon-gift"></i> {$points} бонусов</span>{/if}
 	{if $discount.date_to_days < 30}<span class="countdown" data-date="{$discount.date_to}"></span><script src="/media0/js/jquery.countdown.js"></script><script>$('.price-block .countdown').countdown();</script>{/if}
 	<meta itemprop="priceCurrency" content="{$GLOBS.currency.code}">
 	

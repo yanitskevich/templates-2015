@@ -17,6 +17,6 @@
 {/if}
 {if $type eq 'option'}
 {if $GLOBS.userdata.points >= $GLOBS.merchants.points.min}
-<option value="POINTS">{$GLOBS.merchants.points.btn|default:'Оплатить баллами'}, у вас {$GLOBS.userdata.points}{if $GLOBS.merchants.points.max}.Максимальная сумма {$GLOBS.merchants.points.max}% от стоимости заказа.{/if}</option>
+<option value="POINTS">{$GLOBS.merchants.points.btn|default:'Оплатить баллами'}, у вас {$GLOBS.userdata.points}{if $GLOBS.merchants.points.max}. Максимальная сумма {$GLOBS.merchants.points.max}% от стоимости заказа.{/if}</option>
 {/if}
 {/if}

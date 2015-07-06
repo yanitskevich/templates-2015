@@ -313,7 +313,26 @@
 	          </div>
 	          {/if}
           {/if}
-         
+	      {if $ext_userdeleteme && $GLOBS.user_id neq 6}
+			<div class="form-group{if $register_fields.name.error} has-error{/if}">
+				<label class="control-label col-sm-3" for="inputName">Удалить аккаунт</label>
+				<div class="col-sm-9">
+				<script>
+				var confirm_userdelete = function()
+				{
+					var ret = prompt("Если Вы действительно хотите удалить свой аккаунт с сайта, пожалуйста, скопируйте и введите код {$userdeleteme_antispamkey} в поле ввода, чтобы подтвердить удаление.");
+					if(ret == '{$userdeleteme_antispamkey}')
+					{
+						location.href = '/cabinet/?deleteme=1&antispamkey=' + ret;
+						return false;
+					}
+					return false;
+				}
+				</script>
+				<a href="#" class="btn-submit" {if $userdeleteme_approve}onclick="javascript:confirm_userdelete();"{/if}>Удалить все данные "{$register_fields.name.value}"</a>
+				</div>
+			</div>
+	      {/if}
           {if $ext_authsocial}
           {if !$GLOBS.userdata.facebook || !$GLOBS.userdata.twitter || !$GLOBS.userdata.vkontakte || !$GLOBS.userdata.yandex || !$GLOBS.userdata.mailru || !$GLOBS.userdata.google}
           <div class="form-group">

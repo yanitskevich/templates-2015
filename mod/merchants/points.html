@@ -5,6 +5,6 @@
 {else if $GLOBS.userdata.points}
 <form method="post" action="/cabinet/pay.html?provider=points" class="payment-form">
 	<input type="hidden" value="{$order_id}" name="order_id" />
-	<button type=submit class="btn btn-simple" rel=tooltip title="У вас {$GLOBS.userdata.points|price:false} бонусных баллов.{if $GLOBS.merchants.points.max}Максимальная сумма списания {$GLOBS.merchants.points.max}% от стоимости заказа. {/if}{$GLOBS.merchants.points.btn|default:'Оплатить баллами'}."><img src="/media0/img/merchants/points.png" alt="Бонусные баллы" width="150" /></button>
+	<button type=submit class="btn btn-simple" rel=tooltip title="У вас {$GLOBS.userdata.points} бонусных {numeral ends='балл,балла,баллов' number=$GLOBS.userdata.points}.{if $GLOBS.merchants.points.max} Максимальная сумма списания {$GLOBS.merchants.points.max}% от стоимости заказа ({($order_total*($GLOBS.merchants.points.max/100))|price}). {/if}{$GLOBS.merchants.points.btn|default:'Оплатить баллами'}."><img src="/media0/img/merchants/points.png" alt="Бонусные баллы" width="150" /></button>
 </form>
 {/if}
