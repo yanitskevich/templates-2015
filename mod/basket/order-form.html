@@ -9,8 +9,7 @@
 			<label class="control-label col-sm-3" for="{$item.htmltype}{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
 			<div class="col-sm-9">
 				{assign var=datepicker value=1}
-				<input class="form-control"
-						type="text" class="datefield" id="{$item.htmltype}{$item.name|capitalize}" name="{$item.name}" value="{$order_fields[$item.name]['value']|default:$GLOBS.userdata[$item.name]}" placeholder="{$item.description}" data-date-format="dd.mm.yyyy" data-date="01.01.2014" />
+				<input class="form-control" type="text" class="datefield" id="{$item.htmltype}{$item.name|capitalize}" name="{$item.name}" value="{$order_fields[$item.name]['value']|default:$GLOBS.userdata[$item.name]}" placeholder="{$item.description}" data-date-format="dd.mm.yyyy" data-date="01.01.2014" />
 				{if $order_fields[$item.name]['error']}<p class="help-block">Обязательно для заполнения</p>{/if}
 			</div>
 		</div>

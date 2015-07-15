@@ -118,7 +118,7 @@
           <div class="form-group">
             <label class="control-label col-sm-3">Ваши бонусы</label>
             <div class="col-sm-9">
-              <big><i class="glyphicon glyphicon-gift"></i> {$GLOBS.userdata.points}</big>
+              <big><i class="glyphicon glyphicon-gift"></i> {$GLOBS.userdata.points|default:'нет бонусов'}</big>
               <p class="help-block">Бонусы можно заработать, оставляя комментарии или покупая определенные товары. </p>
             </div>
           </div>

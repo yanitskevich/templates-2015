@@ -12,7 +12,45 @@
 			{include file="$TMPL_FOLDER/mod/Pathline.html"}
 			{include file="$TMPL_FOLDER/mod/Anonces.html"}
 			<a name="order-form"></a>
-			<h1 align="center">Номер вашего заказа <a href="/basket/?{$order_id}%7C{$order_hash}" title="Постоянный адрес заказа №{$order_id}" rel="tooltip">{$order_id}</a></h1>
+			<h1 align="center">Номер вашего заказа <a href="/basket/?{$order_id}%7C{$order_hash}" title="Постоянный адрес заказа №{$order_id}" rel="tooltip">{$order_id}</a></h1>			
+			{if $ext_register && $GLOBS.user_id eq 6}
+			{if $reg_userdata.info.actkey && $reg_userdata.info.name && !$reg_userdata.info.visible}
+			{* был зарегистрирован, он еще не активен *}
+			<div class="well" align="center">
+				<h4 align="center">Предлагаем Вам получить преимущества постоянного покупателя:</h4>
+				<ul style="display: inline-block;text-align: left;">	
+					<li>Персональная накопительная система скидок;</li>
+					<li>Бонусные баллы за покупки и оставленные комментарии;</li>
+					<li>История заказов в личном кабинете покупателя;</li>
+					<li>Распродажи и акции в нашем интернет-магазине;</li>
+					<li>Быстрое оформление заказов.</li>
+				</ul>
+				<p align="center"><a href="/cabinet/?login={$reg_userdata.info.name}&actkey={$reg_userdata.info.actkey}" class="btn-submit btn-lg">Хочу статус постоянного покупателя</a></p>
+			</div>
+			{else if $reg_userdata.info.actkey && $reg_userdata.info.name && $reg_userdata.info.visible}
+			{* когда регистрация еще не была подключена и в заказе который открыли еще раз *}
+			<div class="well" align="center">
+				<h4 align="center">Ранее Вы делали заказ в нашем интернет-магазине<br>и зарегистрировались, сейчас Вы можете авторизоваться:</h4>
+				<ul style="display: inline-block;text-align: left;">	
+					<li>Персональная накопительная система скидок;</li>
+					<li>Бонусные баллы за покупки и оставленные комментарии;</li>
+					<li>История заказов в личном кабинете покупателя;</li>
+					<li>Распродажи и акции в нашем интернет-магазине;</li>
+					<li>Быстрое оформление заказов.</li>
+				</ul>
+				<p align="center"><a href="/cabinet/?login={$reg_userdata.info.name}&actkey={$reg_userdata.info.actkey}" class="btn-submit btn-lg">Перейти в личный кабинет постоянного покупателя</a></p>
+			</div>
+			{/if}
+			{/if}
+			
+			{*if sizeof($discounts)}
+			{foreach from=$discounts item=discount}
+			{$discount.percent}
+			{$discount.money}
+			{$discount.type}
+			{/foreach}
+			{/if*}
+			
 			{$text}
 			<div class="content wide">
 			<table class="table table-striped">
