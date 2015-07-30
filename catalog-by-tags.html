@@ -8,23 +8,39 @@
 		{include file="$TMPL_FOLDER/inc/topnav.html"}
 		{include file="$TMPL_FOLDER/inc/header.html"}
 		{include file="$TMPL_FOLDER/mod/Menu.html"}
+
 		<div class="container">
+			{include file="$TMPL_FOLDER/mod/Pathline.html"}
+			{if $name}<h1>{$name}{if $ext_tags && $tags_word}: {$tags_word}{/if}</h1>{/if}
 			<aside>
 				{include file="$TMPL_FOLDER/mod/Directories.html"}
 				{include file="$TMPL_FOLDER/mod/Filters.html"}
-				{include file="$TMPL_FOLDER/mod/Tags.html"}
 				{include file="$TMPL_FOLDER/mod/NewsLine.html"}
 				{include file="$TMPL_FOLDER/mod/LastPublish.html"}
 				{include file="$TMPL_FOLDER/mod/LastPhotos.html"}
 				{include file="$TMPL_FOLDER/mod/LastComments.html"}
 			</aside>
 			<div class="content">
-				{include file="$TMPL_FOLDER/mod/Pathline.html"}
 				{include file="$TMPL_FOLDER/mod/ShopExpressCountDown.html"}
 				{include file="$TMPL_FOLDER/mod/Anonces.html"}
-				{include file="$TMPL_FOLDER/mod/SlideShow.html"}
-
 				{if $annotate}<p class="lead">{$annotate}</p>{/if}
+				{if sizeof($directories_pubs)>0}
+				{include file="$TMPL_FOLDER/mod/paging.html" pagekey="page" pages=$directories_paging page=$directories_current perpage=$directories_perpage total=$directories_total}
+				<section class="products">
+					{foreach from=$directories_pubs item="item" name="cat"}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{/foreach}
+				</section>
+				{include file="$TMPL_FOLDER/mod/paging.html" pagekey="page" pages=$directories_paging page=$directories_current perpage=$directories_perpage total=$directories_total}
+				{else}
+				<article>
+					{if $smarty.get.filter || $smarty.post.filter}
+		    		<h3>Нет результатов</h3>
+			    	<p class="alert alert-info text-center">По заданным параметрам товаров не найдено.</p>
+					{else}
+		    		<h3>Раздел пуст</h3>
+			    	<p class="alert alert-info text-center">Текущий раздел, пока не заполнен.</p>
+			    	{/if}
+				</article>
+				{/if}
 				
 				{include file="$TMPL_FOLDER/mod/ObjectsConnected.html"}
 				{include file="$TMPL_FOLDER/mod/ObjectsAttached.html"}
@@ -37,14 +53,7 @@
 				{include file="$TMPL_FOLDER/mod/ProductBuyedWith.html"}
 				{include file="$TMPL_FOLDER/mod/ProductSimilar.html"}
 				{include file="$TMPL_FOLDER/mod/ProductLast.html"}
-				{if $name}<h1>{$name}</h1>{/if}				
-				{if $text}<article>{$text}</article>{/if}
-				
-				{*include file="$TMPL_FOLDER/mod/paging.html" pagekey="page" pages=$directories_paging page=$directories_current perpage=$directories_perpage total=$directories_total}
-				<section class="products">
-					{foreach from=$directories_pubs item="item" name="cat"}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{/foreach}
-				</section>
-				*}
+				<article>{$text}</article>
 			</div>
 		</div>
 	</div>

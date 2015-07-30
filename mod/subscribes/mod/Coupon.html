@@ -1,0 +1,22 @@
+{if $coupon}
+<p style="font-family: 'trebuchet ms', geneva; font-size: 14px;">Чтобы Вам было проще приобрести любые товары, мы приготовили для Вас подарок.&nbsp;</p>
+<table style="margin: 0px auto; padding: 0px; width: 320px !important; font-family: 'trebuchet ms', geneva; font-size: 14px;" border="0" cellspacing="0" cellpadding="10" align="center">
+<tbody>
+<tr>
+<td style="border-collapse: collapse; text-align: center; background: #fafafa; border-radius: 6px 6px 0 0;" valign="top"><span style="font-size: large;">{$coupon.name}: {$coupon.coupon_id}</span></td>
+</tr>
+<tr>
+<td style="border-collapse: collapse; background: #e05361; text-align: center; color: white; border-radius: 0 0 6px 6px;" valign="top"><span style="font-size: large;">Скидка: {$coupon.human}</span></td>
+</tr>
+</tbody>
+</table>
+<p style="font-family: 'trebuchet ms', geneva; font-size: 14px;color: #e05361;font-weight: bold;">{if $coupon.count_from || $coupon.count_to || $coupon.price_from || $coupon.price_to} При покупке {if $coupon.count_from} от {$coupon.count_from} {numeral number=$coupon.count_from ends="вещи, вещей, вещей"}{/if}{if $coupon.count_to} до {$coupon.count_to} {numeral number=$coupon.count_from ends="вещи, вещей, вещей"}{/if}{if $coupon.price_from || $coupon.price_to} на общую сумму {/if}{if $coupon.price_from} от {$coupon.price_from} {numeral number=$coupon.price_from|price:false ends=$GLOBS.currency.name}{/if}{if $coupon.price_to} до {$coupon.price_to} {numeral number=$coupon.price_to|price:false ends=$GLOBS.currency.name}{/if}. Срок действия купона ограничен. Вы можете воспользоваться купоном c <span>{$coupon.date_from|date_format:"%d %B %Y"}&nbsp;</span>до {$coupon.date_to|date_format:"%d %B %Y"}.</p> {else}Нет ограничений на минимальную и максимальную сумму покупки.{/if}
+<table style="margin: 0px auto; padding: 0px; width: 320px !important; font-family: 'trebuchet ms', geneva; font-size: 14px;" border="0" cellspacing="0" cellpadding="10" align="center">
+<tbody>
+<tr>
+<td style="border-collapse: collapse; font-family: 'trebuchet ms', geneva; font-weight: bold; text-align: center; background: white; border-radius: 6px; border: 1px solid #d6d6d6;" valign="top"><a href="http://{$GLOBS.SITE_HOST}/" target="_blank" style="color: #504f56;">Приходите и выбирайте!</a></td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: left; font-size: small; font-family: 'trebuchet ms', geneva;">P.S. Чтобы воспользоваться купоном, введите его код в поле "Использовать купон" в <a href="http://{$GLOBS.SITEHOST}/basket/" target="_blank">корзине</a> во время заказа.</p>
+{/if}

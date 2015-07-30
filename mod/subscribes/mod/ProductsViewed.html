@@ -1,0 +1,41 @@
+{if $ProductsViewed}
+<h2 style="font-family: 'trebuchet ms', geneva; text-align: center;">{$ProductsViewedName}</h2>
+
+<table border="0" cellspacing="0" cellpadding="0" >
+    <tbody>
+        <tr>
+            {foreach from=$ProductsViewed item="item" key="oid" name=cat}
+            <td valign="top" style="font-family: 'trebuchet ms', geneva; text-align: center;width: 33% !important;" width="33%">
+                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="5" style="height: 100% !important;">
+                    <tbody>
+                        <tr>
+                            <td style="height: 220px; border-bottom: 5px solid #e05361; overflow: hidden;"><a href="http://{$GLOBS.SITE_HOST}{$item.vlink}"><img src="{image src=$item.content.images[0].path width=300 height=300 folder=".300x300"}" style="max-width: 100%;"></a></td>
+                        </tr>
+
+                        <tr>
+                            <td align="center">
+                                <p style="font-family: 'trebuchet ms', geneva; text-align: center;font-size: 14px; height: 30px; overflow: hidden; display: block; font-weight: bold;"><a href="http://{$GLOBS.SITE_HOST}{$item.vlink}" style="text-decoration: none;color:#504f56;">{$item.content.name}</a></p>
+
+                                <table width="100%" align="center" border="0" cellspacing="0" cellpadding="5">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 24px;background: #e05361; mso-line-height-rule: exactly; line-height: 24px; font-weight: 400;color: #ffffff;">{$item.content.price|discount:$item.content.discount|price}<br /> <small>{if $item.content.discount}<s>{$item.content.price|price}</s>{else if $item.content.old_price}<s>{$item.content.old_price|price}</s>{/if} {if $content.product_flags}<span class="productflag-block">{$GLOBS.product_flags[$content.product_flags]}</span>{/if} {if $content.discount.percent}<span class="discount-block">-{$content.discount.percent}%</span>{/if} {if $content.discount.money}<span class="discount-block">-{$content.discount.money|price}</span>{/if}</small></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td height="8" style="height: 8px; line-height:8px;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            {if $smarty.foreach.cat.iteration%3 == 0}
+            </tr><tr>{/if}
+            {/foreach}
+        </tr>
+    </tbody>
+</table>
+{/if}

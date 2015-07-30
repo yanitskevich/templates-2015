@@ -3,26 +3,7 @@
 <section class="filters">
 	<div class="filters-inner">
 {foreach from=$directories_filters item=filter_field key=filter_name}
-{if $directories_filters_query[$filter_name]}<p class="filter-selected"><span class="filter-name">{$directories_filters_name[$filter_name]}</span>
-	{foreach from=$directories_filters_query[$filter_name] item=item key=key}
-		<span class="filter-value">
-		{if $key === 'from'} с{/if}
-		{if $key === 'to'} по{/if}
-		{if $item}
-			{if isset($GLOBS[$filter_name][$item])}
-			{$GLOBS[$filter_name][$item]}
-			{else}
-				{if $key === 'from' || $key === 'to'}
-				{$item|price}
-				{else}
-				{$item}
-				{/if}
-			{/if}
-		{/if}
-		</span>
-	{/foreach}
-{/if}
-{/foreach}
+{if $directories_filters_query[$filter_name]}<p class="filter-selected"><span class="filter-name">{$directories_filters_name[$filter_name]}</span>{foreach from=$directories_filters_query[$filter_name] item=item key=key}<span class="filter-value">{if $key === 'from' && $item} с{/if} {if $key === 'to' && $item} по{/if}{if $item}{if isset($GLOBS[$filter_name][$item])}{$GLOBS[$filter_name][$item]}{else}{if $key === 'from' || $key === 'to'}{$item|price}{else}{$item}{/if}{/if}{/if}</span>{/foreach}{/if}{/foreach}
 	</div>
 </section>
 {/if*}

@@ -1,0 +1,11 @@
+<table width="100%" align="center" border="0" cellspacing="1" cellpadding="5">
+    <tbody>
+        <tr>
+            {foreach from=$Menu item=item}
+            <td align="center" valign="top" style="font-family: Arial, sans-serif; background: #e05361; mso-line-height-rule: exactly; line-height: 24px; font-weight: 400;color: #ffffff;">
+				<a href="http://{$GLOBS.SITE_HOST}{$item.vlink}" style="font-size: 14px; color: white;">{$item.content.name}</a> 
+            </td>
+            {/foreach}
+        </tr>
+    </tbody>
+</table>
