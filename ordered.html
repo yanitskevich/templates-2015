@@ -1,8 +1,25 @@
-<div class="modal-dialog">
-	<div class="modal-content">
-		<div class="modal-body">
+	<style>
+		.dialog-main { height: 100%; width: 100%;display: table;position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 1031; }
+		.dialog-inner { display: table-cell;vertical-align: middle; }
+		.dialog-form { margin: 0 auto; width: 440px; color: white; }
+		.dialog-form h2, .dialog-form h3 { text-transform: uppercase; color: white; font-size: 52px; text-align: center; border: none;}
+		.dialog-form h2 small { color: white; font-size: 24px; display: block; text-transform: none;}
+		.btn-order-form { padding: 10px 30px; font-size: 24px; }
+		.modal-backdrop.in { opacity: 0.9; filter: alpha(opacity=90); }
+		.modal button.close { background: rgba(255, 255, 255, 0.5); border-radius: 50%; font-size: 14px; width: 30px; height: 30px; line-height: 30px; opacity: 1;}
+		.modal button.close:hover { background: rgba(255, 255, 255, 0.8); }
+		.loading-mask { background: none; border-radius: 0; }
+	</style>
+	<div class="dialog-main">
+		<div class="dialog-inner">
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
-			{if $order_errors.spam}Извините, система посчитала Ваше сообщение спамом. Если это не так, пожалуйста, обратитесь по почте <a href="mailto:{$GLOBS.MAIL}">{$GLOBS.MAIL}</a>.{/if}
+			<div class="dialog-form">
+				<h2>{$name|default:"Закажите звонок"}
+					<small>{$annotate|default:"И менеджеры свяжутся с Вами<br> в течении 30 минут"}</small>
+				</h2>
+				{$text}
+				
+			{if $order_errors.spam}<p align="center">Извините, система посчитала Ваше сообщение спамом. Если это не так, пожалуйста, обратитесь по почте <a href="mailto:{$GLOBS.MAIL}">{$GLOBS.MAIL}</a>.</p>{/if}
 			{if $order_ok}<h3 align="center">{$order_answer|default:'Спасибо,<br /> Ваш вопрос отправлен.'}</h3>{/if}
 			{if !$order_ok}
 
@@ -14,39 +31,39 @@
 				
 				{if $field.htmltype eq 'textfield'}
 				<div class="form-group {if $field.error}has-error{/if}">
-					<label class="control-label col-sm-3" for="input{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
-					<div class="col-sm-9"><input class="form-control" type="text" id="input{$field.name|capitalize}" name="{$field.name}" value="{$field.value}" placeholder="{$field.description}" /></div>
+					<label class="control-label" for="input{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div><input class="form-control" type="text" id="input{$field.name|capitalize}" name="{$field.name}" value="{$field.value}" placeholder="{$field.description}" /></div>
 				</div>
 				{/if}
 				{if $field.htmltype eq 'files'}
 				<div class="form-group {if $field.error}has-error{/if}">
-					<label class="control-label col-sm-3" for="input{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
-					<div class="col-sm-9"><input class="form-control" type="file" id="input{$field.name|capitalize}" name="files[{$field.name}]" placeholder="{$field.description}" /></div>
+					<label class="control-label" for="input{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div><input class="form-control" type="file" id="input{$field.name|capitalize}" name="files[{$field.name}]" placeholder="{$field.description}" /></div>
 				</div>
 				{/if}
 				{if $field.htmltype eq 'datefield'}
 				{assign var=datepicker value=1}
 				<div class="form-group {if $field.error}has-error{/if}">
-					<label class="control-label col-sm-3" for="input{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
-					<div class="col-sm-9"><input class="form-control" type="text" class="datefield" data-date-format="dd.mm.yyyy" data-date="01.01.2014" id="input{$field.name|capitalize}" name="{$field.name}" value="{$field.value}" placeholder="{$field.description}" autocomplete=off /></div>
+					<label class="control-label" for="input{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div><input class="form-control" type="text" class="datefield" data-date-format="dd.mm.yyyy" data-date="01.01.2014" id="input{$field.name|capitalize}" name="{$field.name}" value="{$field.value}" placeholder="{$field.description}" autocomplete=off /></div>
 				</div>
 				{/if}
 				{if $field.htmltype eq 'textarea'}
 				<div class="form-group {if $field.error}has-error{/if}">
-					<label class="control-label col-sm-3" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
-					<div class="col-sm-9"><textarea class="form-control" class="input-xlarge" id="textarea{$field.name|capitalize}" rows="3" name="{$field.name}" placeholder="{$field.description}">{$field.value}</textarea></div>
+					<label class="control-label" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div><textarea class="form-control" class="input-xlarge" id="textarea{$field.name|capitalize}" rows="3" name="{$field.name}" placeholder="{$field.description}">{$field.value}</textarea></div>
 				</div>
 				{/if}
 				{if $field.htmltype eq 'adresfield'}
 				<div class="form-group {if $field.error}has-error{/if}">
-					<label class="control-label col-sm-3" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
-					<div class="col-sm-9"><textarea class="form-control" class="input-xlarge" id="textarea{$field.name|capitalize}" rows="3" name="{$field.name}" placeholder="{$field.description}">{$field.value}</textarea></div>
+					<label class="control-label" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div><textarea class="form-control" class="input-xlarge" id="textarea{$field.name|capitalize}" rows="3" name="{$field.name}" placeholder="{$field.description}">{$field.value}</textarea></div>
 				</div>
 				{/if}
 				{if $field.htmltype eq 'combostore'}
 				<div class="form-group {if $field.error}has-error{/if}">
-					<label class="control-label col-sm-3" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
-					<div class="col-sm-9"><select class="form-control" name="{$field.name}" id="select{$field.name|capitalize}">
+					<label class="control-label" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<div><select class="form-control" name="{$field.name}" id="select{$field.name|capitalize}">
 					{foreach from=$GLOBS[$field.name] item=field_item key=field_item_key}
 						<option value="{$field_item_key}">{$field_item}</option>
 					{/foreach}
@@ -57,34 +74,36 @@
 				{/if}
 				{if $field.htmltype eq 'delivery'}
 				<div class="form-group {if $field.error}has-error{/if}">
-					<label class="control-label col-sm-3" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
+					<label class="control-label" for="textarea{$field.name|capitalize}">{$field.runame}{if $field.necessary eq 'true'} <span style="color:#9F305F;">*</span> {/if}</label>
 					<span class="help-inline">Поле этого типа можно использовать только в корзине.</span>
 				</div>
 				{/if}
 				{/if}
 				{/foreach}
-				<div class="modal-footer">
-				  	<p align="center">
-					  	<input type="hidden" name="antispam" value="" />
-					  	<input type="hidden" name="from" value="{$order_from}" />
-					    <button type="submit" class="btn-submit">Отправить форму</button>
-					    <button class="btn" type="reset">Очистить</button>
-				  	</p>
-				</div>
+			  	<p align="center">
+				  	<input type="hidden" name="antispam" value="" />
+				  	<input type="hidden" name="from" value="{$order_from}" />
+				    <button type="submit" class="btn-submit btn-order-form">{$button|default:'Отправить'}</button><br />
+				    <br />
+				    <br />
+				    <i>Ваши данные будут защищены условиями конфиденциальности и не<br> будут переданы третьим лицам</i>
+			  	</p>
 			</form>
 			{if $datepicker}<link rel="stylesheet" type="text/css" href="/media0/css/datepicker.css" media="screen" /><script type="text/javascript" src="/media0/js/bootstrap-datepicker.js"></script>{/if}
 			<script>
 			$(document).ready(function()
 			{
-				$("input[name*=antispam]").val('{$antispam}');
+				$("input[name*=antispam]").val('{$GLOBS.USER_ANTISPAM_KEY}');
 				{if $datepicker} $('.datefield').datepicker(); {/if}
 				$('#order_form').on('submit', function()
 				{
-				    $(this).ajaxSubmit(
+					var Mask = $(this).Mask();
+					$(this).ajaxSubmit(
 				    {
 				    	success: function(responseText)
 				    	{
 							$('#feedback-box').html(responseText);
+							Mask.RemoveMask();
 				    	}
 				    });
 				    return false;

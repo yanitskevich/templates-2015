@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Заказ №{$order_id} в {$GLOBS.SITENAME}</title>
+<title>{if $title}{$title}{else}Заказ №{$order_id} в {$GLOBS.SITENAME}{/if}</title>
 </head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="-webkit-text-size-adjust: none;margin: 0;padding: 0;background-color: #FAFAFA;width: 100% !important;">
     	<center>
@@ -8,8 +8,9 @@
             	<tr>
                 	<td align="center" valign="top" style="border-collapse: collapse;">
                         	<!-- // Begin Template Preheader \\ -->
-							<h1 style="font-family: 'trebuchet ms', geneva;font-size:24px;text-align:left;">Номер вашего заказа <u>№{$order_id}</u></h1>
-							<p style="font-family: 'trebuchet ms', geneva;font-size:18px;text-align:left;">Мы всегда рады ответить на ваши вопросы по телефону<b> {$GLOBS.PHONE}</b>.</p>
+							<h1 style="font-family: 'trebuchet ms', geneva;font-size:24px;text-align:left;">{if $hello}{$hello}{else}Номер вашего заказа <u>№{$order_id}</u>{/if}</h1>
+							<p style="font-family: 'trebuchet ms', geneva;font-size:18px;text-align:left;">{if $first_text}{$first_text}{else}Мы всегда рады ответить на ваши вопросы по телефону<b> {$GLOBS.PHONE}</b>.{/if}</p>
+							{if $Contacts}
 							<table cellpadding="10" cellspacing="0" border="0" width=100% style="background-color: #FAFAFA;border: 0px solid #DDDDDD;">
 							<thead>
 							  <tr>
@@ -46,6 +47,7 @@
 							{/if}
 							</table>
 							<br />
+							{/if}
 							<table cellpadding="10" cellspacing="0" border="0" width=100% style="background-color: #FAFAFA;border: 0px solid #DDDDDD;">
 							<thead>
 							  <tr>
@@ -253,6 +255,7 @@
 							{/foreach}
 							{/if}
 							</table>
+							{$bottom_text}
                     </td>
                 </tr>
             </table>

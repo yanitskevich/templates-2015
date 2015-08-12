@@ -3,7 +3,7 @@
 <div class="radio">
 	<label>
 		<input type="radio" name="pay_method" value="POINTS" disabled="disabled"> Оплатить часть заказа баллами
-		<p class="help-block">Минимальная сумма оплаты {$GLOBS.merchants.points.min} {numeral number=$GLOBS.merchants.points.min ends="бонус, бонуса, бонусов"}. У вас {$GLOBS.userdata.points} бонусных баллов.</p>
+		{if $GLOBS.user_id eq 6}<p class="help-block">Минимальная сумма оплаты {$GLOBS.merchants.points.min} {numeral number=$GLOBS.merchants.points.min ends="бонус, бонуса, бонусов"}. Чтобы получить бонусные баллы и использовать для покупок в магазине <a  href="/cabinet/?tmpl=short&amp;r={$vpath|escape:url}" rel="nofollow" data-toggle="modal" data-target="#login-box">зарегиструйтесь или войдите</a> под своим аккаунтом.</p>{else}<p class="help-block">Минимальная сумма оплаты {$GLOBS.merchants.points.min} {numeral number=$GLOBS.merchants.points.min ends="бонус, бонуса, бонусов"}. У вас {$GLOBS.userdata.points} бонусных баллов.</p>{/if}
 	</label>
 </div>
 {else}

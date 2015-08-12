@@ -32,23 +32,23 @@
 				<input class="form-control" type="text" id="{$item.htmltype}{$item.name|capitalize}" name="{$item.name}" value="{$order_fields[$item.name]['value']|default:$GLOBS.userdata[$item.name]}" placeholder="{$item.description}">
 				{if $order_fields[$item.name]['error']} <p class="help-inline">Обязательно для заполнения</p>{/if}
 				<link href="/media0/css/suggestions.css" type="text/css" rel="stylesheet" />
-				<!--[if lt IE 10]>
-				<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
-				<![endif]-->
-				<script type="text/javascript" src="https://dadata.ru/static/js/lib/jquery.suggestions-4.8.min.js"></script>
 				<script type="text/javascript">
-				    $("#{$item.htmltype}{$item.name|capitalize}").suggestions({
-				        serviceUrl: "https://dadata.ru/api/v2",
-				        type: "ADDRESS",
-				        token: "b94c274fc11fbd3fa9f26c57047e57d0287ab91f",
-				        geoLocation: true,
-				        onSelect: function(suggestion)
-				        {
-				            $('[name=postindex]').val(suggestion.data.postal_code).change();
-				            $('#hiddenCity').val(suggestion.data.city?suggestion.data.city:suggestion.data.region).change();
-				            $('#hiddenRegion').val(suggestion.data.region).change();
-				        }
-				    });
+				!function ($) {
+					$(function(){
+					    $("#{$item.htmltype}{$item.name|capitalize}").suggestions({
+					        serviceUrl: "https://dadata.ru/api/v2",
+					        type: "ADDRESS",
+					        token: "b94c274fc11fbd3fa9f26c57047e57d0287ab91f",
+					        geoLocation: true,
+					        onSelect: function(suggestion)
+					        {
+					            $('[name=postindex]').val(suggestion.data.postal_code).change();
+					            $('#hiddenCity').val(suggestion.data.city?suggestion.data.city:suggestion.data.region).change();
+					            $('#hiddenRegion').val(suggestion.data.region).change();
+					        }
+					    });
+					})
+				}(window.jQuery)
 				</script>
 			</div>
 		</div>
@@ -87,8 +87,12 @@
 		<div class="form-group {if $order_fields[$item.name]['error']} has-error{/if}">
 			<div class="form-group {if $item.error} has-error{/if}">
 				<div class="col-sm-offset-3 col-sm-9">
-		            {if $item.description}<p class="help-block"><label><input type="checkbox" id="checkbox{$item.name|capitalize}" name="{$item.fieldname}" value="1" {if $item.value}checked{/if} /> {$item.description}</label></p>{else}
-		            <input type="checkbox" id="checkbox{$item.name|capitalize}" name="{$item.name}" value="{$item.value}" {if $item.value}checked{/if} />
+		            {if $item.description}
+		            <p class="help-block">
+			        	<label><input type="checkbox" id="checkbox{$item.name|capitalize}" name="{$item.fieldname}" value="1" {if $item.value}checked{/if} /> {$item.description}</label>
+					</p>
+		            {else}
+		            <input type="checkbox" id="checkbox{$item.name|capitalize}" name="{$item.name}" value="1" {if $item.value}checked{/if} />
 		            <label for="checkbox{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
 		            {/if}
 					{if $item.error}<span class="help-block">{$reg_errors[$item.checked]}</span>{/if}

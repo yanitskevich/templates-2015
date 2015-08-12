@@ -7,7 +7,7 @@
 		    <p class="lead">{$shopexpresspopup_text}</p>
 		    <div style="margin-top:18px; margin-bottom: 18px;">
 				<form class="form-search" role="gift" action="">
-					<div class="input-group"><input type="email" placeholder="Введите ваш email" name="email" value="" class="form-control"><span class="input-group-btn"><button type="submit" class="btn btn-submit">{$shopexpresspopup_button|default:"Получить подарок"}</button></span></div><input type="hidden" name="antispam" value="123" /><input type="hidden" name="from" value="{$oid}" />
+					<div class="input-group"><input type="email" placeholder="Введите ваш email" name="shopexpresspopup[email]" value="" class="form-control"><span class="input-group-btn"><button type="submit" class="btn btn-submit">{$shopexpresspopup_button|default:"Получить подарок"}</button></span></div><input type="hidden" name="antispam" value="123" /><input type="hidden" name="shopexpresspopup[from]" value="{$oid}" />
 				</form>
 		        <div style="clear:both"></div>
 		</div>
@@ -17,26 +17,31 @@
 <script type="text/javascript">
 $(document).ready(function()
 {
-	var shopexpresspopup_hide = $.cookie('shopexpresspopup_hide');
+	var shopexpresspopup_hide = $.cookie('shopexpresspopup_hide') || 0;
     {if $shopexpresspopup_handler eq '15second'}
     setTimeout(function(){
-	    $('#getgift-box').modal( );
-    }, 100);
+	    if(!shopexpresspopup_hide)
+		    $('#getgift-box').modal( );
+    }, 15000);
 	{/if}
 	{if $shopexpresspopup_handler eq 'outwindow'}
 	$(document).mousemove(function(e) {
-		if(e.clientY <= 5)
-			$('#getgift-box').modal( );
+		if(!shopexpresspopup_hide)
+			if(e.clientY <= 5)
+				$('#getgift-box').modal( );
 	});
 	{/if}
 	{if $shopexpresspopup_handler eq '3pages'}
+
 	var shopexpresspopup_views = $.cookie('shopexpresspopup_views')||0;
 	$.cookie( 'shopexpresspopup_views', shopexpresspopup_views*1 + 1 , { expires: 62, path : '/' } );
+
 	if($.cookie('shopexpresspopup_views') >= 3)
 	{
-	    setTimeout(function(){
-		    $('#getgift-box').modal( );
-	    }, 3000);
+	    if(!shopexpresspopup_hide)
+		    setTimeout(function(){
+			    $('#getgift-box').modal( );
+		    }, 3000);
 	}
     {/if}
 

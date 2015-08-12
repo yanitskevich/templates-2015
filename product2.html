@@ -30,7 +30,51 @@
 					{$text}
 					{if $tags}<p>Теги: {tags value=$tags}</p>{/if}
 				</article>
+				{*include file="$TMPL_FOLDER/mod/ContactForm.html"*}
+				{*
+				<link rel="stylesheet" type="text/css" href="/media0/css/datepicker.css" media="screen" />
+				<script type="text/javascript" src="/media0/js/bootstrap-datepicker.js"></script>
+				<div class="contact-form" style="min-height: 50px;"></div>
+				<script>
+				$(document).ready(function()
+				{
+					var Mask = $('.contact-form').Mask();
+					$.ajax({
+						type: 'GET',
+						url: '/contacts/order.html',
+						async: true,
+						cache: true,
+						success: function(response)
+						{
+							var $form = $(response).find('#order_form');
+							$('.contact-form').append($form);
 
+							$form.find("input[name*=antispam]").val('{$GLOBS.USER_ANTISPAM_KEY}');
+							$form.find('.datefield').datepicker();
+							
+							$form.on('submit', function()
+							{
+							    var Mask = $('.contact-form').Mask();
+							    $(this).ajaxSubmit(
+							    {
+							    	success: function(response)
+							    	{
+										$('.contact-form').html($(response).find('h3'));
+										Mask.RemoveMask();
+							    	}
+							    });
+							    return false;
+							});
+							
+							Mask.RemoveMask();
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown) {
+							$('.contact-form').remove();
+						}
+					});
+				});
+				</script>
+				*}
 				{include file="$TMPL_FOLDER/inc/catalog-sections.html"}
 				{include file="$TMPL_FOLDER/product-blocks/includes.html"}
 				{include file="$TMPL_FOLDER/mod/NewsLine.html"}
