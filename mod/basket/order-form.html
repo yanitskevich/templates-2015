@@ -62,7 +62,7 @@
 		<div class="form-group {if $order_fields[$item.name]['error']} has-error{/if}">
 			<label class="control-label col-sm-3" for="{$item.htmltype}{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
 			<div class="col-sm-9">
-				<select class="form-control" name="{$item.name}" id="{$item.htmltype}{$item.name|capitalize}">
+				<select class="form-control" name="{$item.name}" id="select{$item.name|capitalize}">
 				{foreach from=$GLOBS[$item.name] item=field_item key=field_item_key}
 					<option value="{$field_item_key}" {if $order_fields[$item.name]['value'] eq $field_item_key}selected{/if}>{$field_item}</option>
 				{/foreach}

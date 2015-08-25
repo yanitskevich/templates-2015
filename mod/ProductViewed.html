@@ -1,0 +1,8 @@
+{if $ext_productsviewed && sizeof($productsviewed_products)}
+
+<!-- productsimilar -->
+{if $productsviewed_name}
+<h3>{$productsviewed_name}</h3>
+{/if}
+<section class="products products-viewed">{foreach from=$productsviewed_products item="item" key="oid" name=cat}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$oid}{/foreach}</section>
+{/if}
