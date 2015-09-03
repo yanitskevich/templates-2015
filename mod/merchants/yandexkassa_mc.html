@@ -1,8 +1,3 @@
-{if $GLOBS.currency.code neq 'RUR' && $GLOBS.currency.code neq 'RUB'}
-{assign var=summ value=ceil($summ/$GLOBS.allcurrencies.RUB.course)}
-{/if}
-{if $GLOBS.merchants.yandexmoney_ur['MC']}
-<!-- Со счета мобильного телефона -->
 <form action="https://{if $GLOBS.merchants.yandexmoney_ur['test'] eq 'true'}demomoney{else}money{/if}.yandex.ru/eshop.xml" method="post" class="payment-form">
 <input type="hidden" name="cms_name" value="difocus">
 <input name="shopId" value="{$GLOBS.merchants.yandexmoney_ur.uid}" type="hidden"/> 
@@ -10,8 +5,8 @@
 <input name="sum" value="{$summ}" type="hidden"> 
 <input name="customerNumber" value="{if $GLOBS.userdata.login neq 'guest'}{$GLOBS.userdata.login}{else}{$order_id}{/if}" type="hidden"/>
 
-<input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
-<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/basket/? {$order_id}%7C{$order_hash}" type="hidden"/> 
+<input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden"/> 
+<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden"/> 
 
 <input name="paymentType" value="MC" type="hidden"/> 
 <input name="orderNumber" value="{$order_id}" type="hidden"/>
@@ -20,4 +15,3 @@
 <input name="orderDetails" value="{$GLOBS.SITENAME|escape}: {$GLOBS.merchants.yandexmoney_ur.serviceName|default:'Оплата заказа №'}{$order_id}" type="hidden"/>
 <button type="submit" name="submit-button" class="btn btn-simple" title="Со счета мобильного телефона" rel="tooltip"><img src="/media0/img/merchants/Mobile.png" width="150" /></button>
 </form>
-{/if}

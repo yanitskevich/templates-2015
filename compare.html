@@ -81,18 +81,18 @@
 						<a href="/basket/?action=add&oid={$item.oid}&time={$smarty.now}" class="btn-buy inbasket">Купить</a>
 						{if $ext_productscompared || $ext_bookmarked}<ul class="bookmark-list-unstyled">{/if}
 						{if $ext_bookmarked}
-						{if $bookmarks[$oid]}
-						<li><a class="btn-bookmark active" href="/favorites/?{$oid}&time={$smarty.now}" title="Убрать&nbsp;из избранного" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
+						{if $bookmarks[$item.oid]}
+						<li><a class="btn-bookmark active" href="/favorites/?{$item.oid}&time={$smarty.now}" title="Убрать&nbsp;из избранного" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
 						{else}
-						<li><a class="btn-bookmark" href="/favorites/?{$oid}&time={$smarty.now}" title="Добавить&nbsp;в избранное" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
+						<li><a class="btn-bookmark" href="/favorites/?{$item.oid}&time={$smarty.now}" title="Добавить&nbsp;в избранное" rel="tooltip"><i class="glyphicon glyphicon-heart"></i></a></li>
 						{/if}
 						{/if}
 					
 						{if $ext_productscompared}
-						{if $smarty.session.ProductsCompare[$oid]}
-						<li><a class="btn-compare active" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="Убрать&nbsp;из сравнения" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
+						{if $smarty.session.ProductsCompare[$item.oid]}
+						<li><a class="btn-compare active" href="/compare/?{$item.oid}&r=1&time={$smarty.now}" title="Убрать&nbsp;из сравнения" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
 						{else}
-						<li><a class="btn-compare" href="/compare/?{$oid}&r=1&time={$smarty.now}" title="Добавить&nbsp;к сравнению" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
+						<li><a class="btn-compare" href="/compare/?{$item.oid}&r=1&time={$smarty.now}" title="Добавить&nbsp;к сравнению" rel="tooltip"><i class="glyphicon glyphicon-retweet"></i></a></li>
 						{/if}
 						{/if}
 						{if $ext_productscompared || $ext_bookmarked}</ul>{/if}

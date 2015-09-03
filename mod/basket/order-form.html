@@ -95,7 +95,7 @@
 		            <input type="checkbox" id="checkbox{$item.name|capitalize}" name="{$item.name}" value="1" {if $item.value}checked{/if} />
 		            <label for="checkbox{$item.name|capitalize}">{$item.runame}{if $item.necessary eq 'true'} <sup style="color:red;">!</sup> {/if}</label>
 		            {/if}
-					{if $item.error}<span class="help-block">{$reg_errors[$item.checked]}</span>{/if}
+					{if $order_fields[$item.name]['error']}<p class="help-block">Обязательно для заполнения</p>{/if}
 				</div>
 			</div>
 		</div>
@@ -104,39 +104,9 @@
 	{/foreach}
 	</div>
 	<div class="col-md-6">
-		{if sizeof($delivery)>0}
+		{if sizeof($GLOBS.deliveries)>0}
 		<h4>Тип доставки</h4>
 		<div class="row">
-			{*foreach from=$orderfields item=item name=fieldscounter}
-	{if $item.editable eq 'true'}
-		{if $item.htmltype eq 'delivery' && sizeof($delivery)>0}
-		<div class="{if $order_fields[$item.name]['error']} has-error{/if}">
-			{foreach from=$delivery item=delivery_item key=delivery_key}
-			<div class="radio">
-			<label>
-				<input type="radio" name="delivery" value="{$delivery_key}"
-					{if $GLOBS.delivery[$delivery_item.name]}data-value="{$delivery_item.name}"{/if}
-					data-total-from="{$delivery_item.total_from|default:0}"
-					data-total-to="{$delivery_item.total_to|default:0}"
-					data-price="{$delivery_item.price|default:0}"
-					{if $delivery_item.disabled} disabled {/if}>
-	
-					{if $GLOBS.delivery[$delivery_item.name]}
-						{$GLOBS.delivery[$delivery_item.name]}
-					{else}
-						{$delivery_item.name}
-						{if $delivery_item.price}( {$delivery_item.price|price:false} {numeral number=$delivery_item.price|price:false ends=$GLOBS.currency.name}){/if}
-					{/if}
-			</label>
-			</div>
-			{/foreach}
-			{if $order_fields[$item.name]['error']} <span class="help-inline">Обязательно для заполнения</span>{/if}
-			<p class="help-block alert hide" id="deliveryPrice" style="padding-right:14px;"></p>
-			{if $item.description}<p class="help-block">{$item.description}</p>{/if}
-		</div>
-		{/if}
-	{/if}
-	{/foreach*}
 			<div class="col-sm-offset-3 col-md-offset-0 col-md-12 col-sm-9">
 			{foreach from=$orderfields item=item name=fieldscounter}
 			{if $item.editable eq 'true'}

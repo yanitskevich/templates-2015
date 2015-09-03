@@ -1,17 +1,17 @@
 <form action="https://{if $GLOBS.merchants.yandexmoney_ur['test'] eq 'true'}demomoney{else}money{/if}.yandex.ru/eshop.xml" method="post" class="payment-form">
 <input type="hidden" name="cms_name" value="difocus">
 <input name="shopId" value="{$GLOBS.merchants.yandexmoney_ur.uid}" type="hidden"/> 
-<input name="scid" value="{$GLOBS.merchants.yandexmoney_ur.scid}" type="hidden"/> 
+<input name="scid" value="{$GLOBS.merchants.yandexmoney_ur.scid}" type="hidden"/>
 <input name="sum" value="{$summ}" type="hidden"> 
 <input name="customerNumber" value="{if $GLOBS.userdata.login neq 'guest'}{$GLOBS.userdata.login}{else}{$order_id}{/if}" type="hidden"/>
 
-<input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden"/> 
-<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/cabinet/history.html" type="hidden"/> 
+<input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden"/>
+<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden"/> 
 
-<input name="paymentType" value="GP" type="hidden"/> 
+<input name="paymentType" value="QW" type="hidden"/> 
 <input name="orderNumber" value="{$order_id}" type="hidden"/>
 <input name="cps_phone" value="{$order_content.phone}" type="hidden"/> 
 <input name="cps_email" value="{$order_content.email}" type="hidden"/>
 <input name="orderDetails" value="{$GLOBS.SITENAME|escape}: {$GLOBS.merchants.yandexmoney_ur.serviceName|default:'Оплата заказа №'}{$order_id}" type="hidden"/>
-<button type="submit" name="submit-button" class="btn btn-simple" title="Наличными через кассы и терминалы" rel="tooltip"><img src="/media0/img/merchants/Kassa.png" width="150" /></button>
+<button type="submit" name="submit-button" class="btn btn-simple" title="Оплатить через QIWI Wallet" rel="tooltip"><img src="/media0/img/merchants/QIWI.png" width="150" /></button>
 </form>

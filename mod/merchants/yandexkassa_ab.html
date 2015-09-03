@@ -6,12 +6,12 @@
 <input name="customerNumber" value="{if $GLOBS.userdata.login neq 'guest'}{$GLOBS.userdata.login}{else}{$order_id}{/if}" type="hidden"/>
 
 <input name="shopSuccessURL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden"/> 
-<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/cabinet/history.html" type="hidden"/> 
+<input name="shopFailURL" value="http://{$GLOBS.SITE_HOST}/basket/?{$order_id}%7C{$order_hash}" type="hidden"/> 
 
-<input name="paymentType" value="GP" type="hidden"/> 
+<input name="paymentType" value="AB" type="hidden"/> 
 <input name="orderNumber" value="{$order_id}" type="hidden"/>
 <input name="cps_phone" value="{$order_content.phone}" type="hidden"/> 
 <input name="cps_email" value="{$order_content.email}" type="hidden"/>
 <input name="orderDetails" value="{$GLOBS.SITENAME|escape}: {$GLOBS.merchants.yandexmoney_ur.serviceName|default:'Оплата заказа №'}{$order_id}" type="hidden"/>
-<button type="submit" name="submit-button" class="btn btn-simple" title="Наличными через кассы и терминалы" rel="tooltip"><img src="/media0/img/merchants/Kassa.png" width="150" /></button>
+<button type="submit" name="submit-button" class="btn btn-simple" title="Оплата через Альфа-Клик" rel="tooltip"><img src="/media0/img/merchants/Alfaclick.png" alt="Alfa click" width="150" /></button>
 </form>
