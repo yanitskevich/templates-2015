@@ -97,11 +97,20 @@
 				{if $datepicker} $('.datefield').datepicker(); {/if}
 				$('#order_form').on('submit', function()
 				{
+					{if $GLOBS.YACOUNTER}
+						try { yaCounter{$GLOBS.YACOUNTER}.reachGoal('ClickForm'); }
+						catch(e) { console.log('Счетчик Яндекс.Метрика не установлен.'); }
+					{/if}
+					
 					var Mask = $(this).Mask();
 					$(this).ajaxSubmit(
 				    {
 				    	success: function(responseText)
 				    	{
+							{if $GLOBS.YACOUNTER}
+								try { yaCounter{$GLOBS.YACOUNTER}.reachGoal('ClickFormSubmit'); }
+								catch(e) { console.log('Счетчик Яндекс.Метрика не установлен.'); }
+							{/if}
 							$('#feedback-box').html(responseText);
 							Mask.RemoveMask();
 				    	}
