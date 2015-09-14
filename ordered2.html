@@ -1,0 +1,45 @@
+{*
+<style>
+	.backdrop { opacity: 0.9;position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 1030;background-color: #000000;height: 100%; width: 100%;display: table; }
+	.dialog-main { height: 100%; width: 100%;display: table;position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 1031; }
+	.dialog-inner { display: table-cell;vertical-align: middle; }
+	.dialog-form { margin: 0 auto; width: 440px; color: white; }
+	.dialog-form h2 { text-transform: uppercase; color: white; font-size: 52px; text-align: center; border: none;}
+	.dialog-form h2 small { color: white; font-size: 24px; display: block; text-transform: none;}
+	.btn-yellow { background: #F3CE33; border-bottom: 5px solid #E2BE2D; border-radius: 6px; padding: 10px 30px; color: #4F4949; font-size: 24px; text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3); /*font-weight: normal;*/}
+	.btn-yellow:hover { background: #E2BE2D; color: #4F4949; font-size: 24px; text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3);}
+</style>
+<div class="backdrop"></div>
+<div class="dialog-main">
+	<div class="dialog-inner">
+		<div class="dialog-form">
+			<h2>Закажите звонок
+				<small>И менеджеры свяжутся с Вами<br> в течении 30 минут</small>
+			</h2>
+			<form role="form" id="order_form" method="post" enctype="multipart/form-data" action="/contacts/order.html" style="margin:20px auto; width: 350px;">
+															
+			<div class="form-group ">
+				<label class="control-label" for="inputName">Имя</label>
+				<input class="form-control" type="text" id="inputName" name="name" value="" placeholder="">
+			</div>
+			<div class="form-group ">
+				<label class="control-label" for="inputName">Ваша почта</label>
+				<input class="form-control" type="text" id="inputName" name="email" value="" placeholder="">
+			</div>																																												
+			<div class="form-group">
+				<label class="control-label" for="inputPhone">Номер телефона </label>
+				<input class="form-control" type="text" id="inputPhone" name="phone" value="" placeholder="">
+			</div>
+		  	<p align="center">
+			  	<input type="hidden" name="antispam" value="3a158b46a219951e9e40d867b485ae46">
+			  	<input type="hidden" name="from" value="{$oid}">
+			    <button type="submit" class="btn btn-yellow">Бесплатная консультация</button>
+			    <br />
+			    <br />
+			    <i>Ваши данные будут защищены условиями конфиденциальности и не<br> будут переданы третьим лицам</i>
+		  	</p>
+		</form>
+		</div>
+	</div>
+</div>
+*}

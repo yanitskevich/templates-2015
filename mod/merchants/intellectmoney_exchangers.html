@@ -1,0 +1,20 @@
+<form method="post" action="https://merchant.intellectmoney.ru/ru/" class="payment-form">
+	<input type="hidden" value="{$order_id}" name="orderId"/>
+	<input type="hidden" value="{$GLOBS.merchants.intellectmoney.id}" name="eshopId"/>
+
+	<input type="hidden" value="{$GLOBS.merchants.intellectmoney.serviceName|default:'Оплата заказа №'}{$order_id}" name="serviceName"/>
+	{if $GLOBS.merchants.intellectmoney.test eq 'true'}
+	<input type="hidden" value="TST" name="recipientCurrency"/>
+	{else}
+	<input type="hidden" value="{$GLOBS.currency.code}" name="recipientCurrency"/>
+	{/if}
+	<input type="hidden" value="http://{$smarty.server.SERVER_NAME}/cabinet/history.html" name="successUrl" />
+	<input type="hidden" value="http://{$smarty.server.SERVER_NAME}/cabinet/history.html" name="failUrl" />
+	
+	<input type="hidden" value="exchangers" name="preference"/>
+	
+	<input type="hidden" value="{$order_content.fio}" name="userName"/>
+	<input type="hidden" value="{$order_content.email}" name="userEmail"/>
+	<input type="hidden" value="{$summ}" name="recipientAmount"/>
+	<button type="submit" name="submit-button" class="btn btn-simple" title="В салонах связи, Webmoney, Яндекс.Деньги, Деньги@Mail.ru, QBank" rel="tooltip"><img src="/media0/img/merchants/Webmoney.png" width="150" /></button>
+</form>

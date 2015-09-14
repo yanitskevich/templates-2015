@@ -1,3 +1,4 @@
+{if empty($GLOBS.merchants.intellectmoney['type'])}
 <form method="post" action="https://merchant.intellectmoney.ru/ru/" class="payment-form">
 	<input type="hidden" value="{$order_id}" name="orderId"/>
 	<input type="hidden" value="{$GLOBS.merchants.intellectmoney.id}" name="eshopId"/>
@@ -6,7 +7,7 @@
 	{if $GLOBS.merchants.intellectmoney.test eq 'true'}
 	<input type="hidden" value="TST" name="recipientCurrency"/>
 	{else}
-	<input type="hidden" value="{$currency.code}" name="recipientCurrency"/>
+	<input type="hidden" value="{$GLOBS.currency.code}" name="recipientCurrency"/>
 	{/if}
 	<input type="hidden" value="http://{$smarty.server.SERVER_NAME}/cabinet/history.html" name="successUrl" />
 	<input type="hidden" value="http://{$smarty.server.SERVER_NAME}/cabinet/history.html" name="failUrl" />
@@ -17,3 +18,49 @@
 	<!-- button type=submit class="btn">{$GLOBS.merchants.intellectmoney.btn|default:'Оплатить через IntellectMoney'}</button-->
 	<button type=submit class="btn btn-simple" title="{$GLOBS.merchants.intellectmoney.btn|default:'Оплатить через IntellectMoney'}" rel="tooltip"><img src="/media0/img/merchants/intellectmoney.png" alt="intellectmoney" width="150" /></button>
 </form>
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['inner']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_inner.html"}
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['bankcard']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_bankcard.html"}
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['bankomats']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_bankomats.html"}
+{/if}
+{if $GLOBS.merchants.intellectmoney['type']['RapidaOnline']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_rapidaonline.html"}
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['yandex']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_yandex.html"}
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['exchangers']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_exchangers.html"}
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['PostPay']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_postpay.html"}
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['mvideo']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_mvideo.html"}
+{/if}
+{if $GLOBS.merchants.intellectmoney['type']['terminals']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_terminals.html"}
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['ibank']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_ibank.html"}
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['sberbank']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_sberbank.html"}
+{/if}
+{if $GLOBS.merchants.intellectmoney['type']['alfaclick']}
+{include file="$TMPL_FOLDER/mod/merchants/intellectmoney_alfaclick.html"}
+{/if}

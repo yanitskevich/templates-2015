@@ -19,7 +19,7 @@
 			<h5><a href="{$item.vlink}">{$content.name}</a></h5>
 			
 			{if $content.ratingaverage}
-			<p class="product-rating" rel="tooltip" title="Пользовательский рейтинг товара">{section name=poprank loop=$content.ratingaverage step=1}<i class="star-rating star-rating-on"></i>{/section}{section name=poprank loop=5-$content.ratingaverage step=1}<i class="star-rating"></i>{/section}</p>
+			<p class="product-rating" rel="tooltip" title="Пользовательский рейтинг товара &mdash; {$content.ratingaverage|string_format:"%.1f"}">{section name=poprank loop=$content.ratingaverage step=1}<i class="star-rating star-rating-on"></i>{/section}{if ceil($content.ratingaverage)-$content.ratingaverage > 0}<i class="star-rating star-rating-half star-rating-on"></i>{/if}{section name=poprank loop=5-$content.ratingaverage step=1}<i class="star-rating"></i>{/section}</p>
 			{/if}
 			
 			{if $content.available eq 'no' || $content.available eq 'never' || isset($content.quantity) && $content.quantity <= 0}<span class="label label-danger">Продано</span>{/if}

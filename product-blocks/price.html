@@ -1,6 +1,6 @@
 {if $ext_comments}
 <p class="product-rating" property="v:rating" content="{$ratingaverage}">
-	<a href="#comments" title="Поставить свою оценку" rel="tooltip">{section name=poprank loop=$ratingaverage step=1}<i class="star-rating star-rating-on"></i>{/section}{section name=poprank loop=5-$ratingaverage step=1}<i class="star-rating"></i>{/section}</a>
+	<a href="#comments" title="Поставить свою оценку" rel="tooltip">{section name=poprank loop=$ratingaverage step=1}<i class="star-rating star-rating-on"></i>{/section}{if ceil($ratingaverage)-$ratingaverage > 0}<i class="star-rating star-rating-half star-rating-on"></i>{/if}{section name=poprank loop=5-$ratingaverage step=1}<i class="star-rating"></i>{/section}</a>
 </p>
 {/if}
 {if $price}

@@ -95,12 +95,13 @@
 			{
 				$("input[name*=antispam]").val('{$GLOBS.USER_ANTISPAM_KEY}');
 				{if $datepicker} $('.datefield').datepicker(); {/if}
-				{if $GLOBS.YACOUNTER}
-				try { yaCounter{$GLOBS.YACOUNTER}.reachGoal('ClickForm'); }
-				catch(e) { console.log('Счетчик Яндекс.Метрика не установлен.'); }
-				{/if}
 				$('#order_form').on('submit', function()
 				{
+					{if $GLOBS.YACOUNTER}
+						try { yaCounter{$GLOBS.YACOUNTER}.reachGoal('ClickForm'); }
+						catch(e) { console.log('Счетчик Яндекс.Метрика не установлен.'); }
+					{/if}
+					
 					var Mask = $(this).Mask();
 					$(this).ajaxSubmit(
 				    {

@@ -1,4 +1,5 @@
 {if $type eq 'radio'}
+{if empty($GLOBS.merchants.intellectmoney['type'])}
 <div class="radio">
 	<label>
 		<input type="radio" name="pay_method" value="INTELLECTMONEY"> {$GLOBS.merchants.intellectmoney.btn|default:'Оплатить через IntellectMoney'}
@@ -6,6 +7,116 @@
 	</label>
 </div>
 {/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['inner']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_inner"> {$GLOBS.merchants.intellectmoney.btn|default:'Оплатить через IntellectMoney'}
+		<p class="help-block">Оплата заказа через внутренний платеж со счета IntellectMoney.</p>
+	</label>
+</div>
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['bankcard']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_BANKCARD"> Банковская карта
+		<p class="help-block">Оплата заказа картой Visa (включая Electron), MasterCard или Maestro.</p>
+	</label>
+</div>
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['bankomats']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_BANKOMATS"> Через банкоматы
+		<p class="help-block">Оплата заказа в банкоматах.</p>
+	</label>
+</div>
+{/if}
+{if $GLOBS.merchants.intellectmoney['type']['RapidaOnline']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_RAPIDAONLINE"> Rapida Online
+		<p class="help-block">Оплата заказа через платежную систему Rapida Online.</p>
+	</label>
+</div>
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['yandex']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_YANDEX"> Яндекс.Деньги
+		<p class="help-block">Оплата заказа Яндекс.Деньгами со своего счета.</p>
+	</label>
+</div>
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['exchangers']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_EXCHANGERS"> Электронные валюты
+		<p class="help-block">В салонах связи, webmoney, Яндекс.Денги, Деньги@Mail.ru, QBank.</p>
+	</label>
+</div>
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['PostPay']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_POSTPAY"> Почта России
+		<p class="help-block">Оплата заказа в отделениях почты России.</p>
+	</label>
+</div>
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['mvideo']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY"> В М.Видео
+		<p class="help-block">Оплата заказа в магазинах М.Видео.</p>
+	</label>
+</div>
+{/if}
+{if $GLOBS.merchants.intellectmoney['type']['terminals']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_TERMINALS"> Наличными через кассы и терминалы
+		<p class="help-block">Оплата заказа через терминалы.</p>
+	</label>
+</div>
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['ibank']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_IBANK"> Через интернет-банк
+		<p class="help-block"></p>
+	</label>
+</div>
+{/if}
+
+{if $GLOBS.merchants.intellectmoney['type']['sberbank']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_SBERBANK"> Через Сбербанк Онлайн
+		<p class="help-block">Необходим номер телефона, подключенный к сервису «Мобильный банк»</p>
+	</label>
+</div>
+{/if}
+{if $GLOBS.merchants.intellectmoney['type']['alfaclick']}
+<div class="radio">
+	<label>
+		<input type="radio" name="pay_method" value="INTELLECTMONEY_ALFACLICK"> Через Альфа-Клик
+		<p class="help-block">Оплата заказа через платеж на сайте интернет-банка Альфа-Клик, потребуются логин для выставления счета.</p>
+	</label>
+</div>
+{/if}
+
+
+{/if}
+
+
 {if $type eq 'option'}
 <option value="INTELLECTMONEY">{$GLOBS.merchants.intellectmoney.btn|default:'Оплатить через IntellectMoney'}</option>
 {/if}
