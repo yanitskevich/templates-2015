@@ -12,8 +12,8 @@
 			{if $item.editable eq 'true'}
 			<option value="{$key}"
 			{if $item.quantity != ''} data-quantity="{$item.quantity}" {if $item.quantity <=0}disabled{/if}{/if}
-			data-price="{$item.price|discount:$discount}"
-			data-oldprice="{$item.price}"
+			data-price="{$item.price|discount:$discount|price:false:false}"
+			data-oldprice="{$item.price|price:false:false}"
 			data-type="{$item.type}"
 			data-name="{$item.name}" {if $smarty.get.$field_name eq $item.name}selected{/if}>
 				{$item.name}

@@ -80,7 +80,8 @@
             <label class="control-label col-sm-3" for="inputName">Желаемый логин <sup style="color:red;">!</sup></label>
             <div class="col-sm-9">
               <input type="text" class="form-control" id="inputName" name="regdata[login]" value="{$register_fields.login.value}" autocomplete=off />
-              {if $register_fields.login.error}<span class="help-block"><b>{$reg_errors[$register_fields.login.checked]}.</b> Если вы забыли свой пароль для входа в личный кабинет нажмите на <a href="/cabinet/reg.html?fog_login={$register_fields.login.value|escape}">эту ссылку</a>, чтобы получить инструкции по восстановлению пароля.</span>{/if}
+              {if $register_fields.login.error}<p class="help-block"><b>{$reg_errors[$register_fields.login.checked]}.</b><br /><a href="/cabinet/reg.html?fog_login={$register_fields.login.value|escape}" class="btn btn-sm btn-buyoneclick">Восстановить пароль</a></p>{/if}
+              
               <p class="help-block">В качестве логина можно использовать электронный адрес, сменить логин нельзя.</p>
             </div>
           </div>
@@ -128,7 +129,7 @@
             <label class="control-label col-sm-3" for="inputEmail">Электронный адрес <sup style="color:red;">!</sup></label>
             <div class="col-sm-9">
               <input type="text" class="form-control" id="inputEmail" name="regdata[email]" value="{$register_fields.email.value}" autocomplete=off />
-              {if $register_fields.email.error}<span class="help-block"><b>{$reg_errors[$register_fields.email.checked]}.</b> Если вы забыли свой пароль для входа в личный кабинет нажмите на <a href="/cabinet/reg.html?fog_login={$register_fields.email.value|escape}">эту ссылку</a>, чтобы получить инструкции по восстановлению пароля.</span>{/if}
+              {if $register_fields.email.error}<p class="help-block"><b>{$reg_errors[$register_fields.email.checked]}.</b><br /><a href="/cabinet/reg.html?fog_login={$register_fields.login.value|escape}" class="btn btn-sm btn-buyoneclick">Восстановить пароль</a></p>{/if}
               <p class="help-block">На указанный адрес придет ссылка с подтверждением регистрации, указывайте существующий адрес.</p>
             </div>
           </div>

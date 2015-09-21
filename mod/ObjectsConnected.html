@@ -6,3 +6,12 @@
 
 <section class="products objectsconnected">{foreach from=$objectsconnected_objects item="item" name=cat}{if $item.type eq 7}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{else}{include file="$TMPL_FOLDER/inc/article-item.html" content=$item.content oid=$oid}{/if}{/foreach}</section>
 {/if}
+
+{if $ext_objectsconnected1 && sizeof($objectsconnected1_objects)}
+
+{if $objectsconnected1_name}
+<h3>{$objectsconnected1_name}</h3>
+{/if}
+
+<section class="products objectsconnected1">{foreach from=$objectsconnected1_objects item="item" name=cat}{if $item.type eq 7}{include file="$TMPL_FOLDER/inc/product-item.html" content=$item.content oid=$item.oid}{else}{include file="$TMPL_FOLDER/inc/article-item.html" content=$item.content oid=$oid}{/if}{/foreach}</section>
+{/if}
